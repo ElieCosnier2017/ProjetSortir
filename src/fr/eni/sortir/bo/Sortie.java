@@ -8,17 +8,17 @@ public class Sortie implements Serializable {
     private int idSortie;
     private String nom;
     private Date dateHeureDebut;
-    private int durée;
+    private int duree;
     private Date dateLimiteInscription;
     private int nbInscriptionsMax;
     private String infosSortie;
     private String etat;
 
-    public Sortie(int idSortie, String nom, Date dateHeureDebut, int durée, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat) {
+    public Sortie(int idSortie, String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat) {
         this.idSortie = idSortie;
         this.nom = nom;
         this.dateHeureDebut = dateHeureDebut;
-        this.durée = durée;
+        this.duree = duree;
         this.dateLimiteInscription = dateLimiteInscription;
         this.nbInscriptionsMax = nbInscriptionsMax;
         this.infosSortie = infosSortie;
@@ -49,12 +49,12 @@ public class Sortie implements Serializable {
         this.dateHeureDebut = dateHeureDebut;
     }
 
-    public int getDurée() {
-        return durée;
+    public int getDuree() {
+        return duree;
     }
 
-    public void setDurée(int durée) {
-        this.durée = durée;
+    public void setDuree(int duree) {
+        this.duree = duree;
     }
 
     public Date getDateLimiteInscription() {
