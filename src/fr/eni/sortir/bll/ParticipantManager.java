@@ -17,7 +17,7 @@ public class ParticipantManager {
 	
 	public Participant selectById(int id) throws BusinessException, SQLException
 	{
-		return this.participantDAO.selectById(id);
+		 return this.participantDAO.selectById(id);
 	}
 	
 	public Participant ajouter(String nom, String prenom, String telephone, String email, boolean administrateur, boolean actif) throws BusinessException
