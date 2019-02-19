@@ -1,4 +1,4 @@
-package fr.eni.sortir.servlets;
+package fr.eni.sortir.servlets.participant;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -35,7 +35,7 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inscritpion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inscription.jsp");
 		rd.forward(request, response);
 	}
 
