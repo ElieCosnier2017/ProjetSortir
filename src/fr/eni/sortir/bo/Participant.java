@@ -15,14 +15,11 @@ public class Participant implements Serializable {
 	public Participant() {		
 	}
 	
-    public Participant(String nom, String prenom, String telephone, String mail, boolean administrateur,
-			boolean actif) {
+    public Participant(String nom, String prenom, String telephone, String mail) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
 		this.mail = mail;
-		this.administrateur = administrateur;
-		this.actif = actif;
 	}
 
 	public static long getSerialVersionUID() {

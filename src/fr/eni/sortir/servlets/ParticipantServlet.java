@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.sortir.bll.ParticipantManager;
+import fr.eni.sortir.bo.Participant;
+
 /**
  * Servlet implementation class ParticipantServlet
  */
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ParticipantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ParticipantManager participantManager = new ParticipantManager();
+	Participant participant;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,8 +40,17 @@ public class ParticipantServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			String nom = request.getParameter("nom");
+			String prenom = request.getParameter("prenom");
+			String mail = request.getParameter("mail");
+			String telephone = request.getParameter("telephone");
+			participant = participantManager.ajouter(nom, prenom, telephone, mail);			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
