@@ -15,7 +15,7 @@ import java.net.URLEncoder;
  * Servlet implementation class ParticipantServlet
  */
 @WebServlet("/ParticipantServlet")
-public class GestionParticipanntServlet extends HttpServlet {
+public class GestionParticipantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	ParticipantManager participantManager = new ParticipantManager();
@@ -24,7 +24,7 @@ public class GestionParticipanntServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GestionParticipanntServlet() {
+    public GestionParticipantServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
