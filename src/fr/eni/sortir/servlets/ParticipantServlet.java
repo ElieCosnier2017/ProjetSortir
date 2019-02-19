@@ -1,6 +1,8 @@
 package fr.eni.sortir.servlets;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,12 +42,22 @@ public class ParticipantServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String message = "Tous les champs ne sont pas remplis";
+		
 		try {
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
 			String mail = request.getParameter("mail");
 			String telephone = request.getParameter("telephone");
-			participant = participantManager.ajouter(nom, prenom, telephone, mail);			
+			
+			if (!telephone.isEmpty() || !nom.isEmpty() || !prenom.isEmpty() || !mail.isEmpty()) {
+				participant = participantManager.ajouter(nom, prenom, telephone, mail);
+			}
+			else {
+				response.sendRedirect("/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
+			}
+			
+						
 		}
 		catch (Exception e) {
 			e.printStackTrace();
