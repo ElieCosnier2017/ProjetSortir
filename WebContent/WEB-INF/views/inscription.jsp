@@ -15,7 +15,7 @@
 			</div>
 		</c:if>
 
-		<form method="post" action="inscrire" class="col-md-8">
+		<form method="post" action="InscriptionServlet" class="col-md-8">
 			<input type="text" placeholder="Votre nom" name="nom"> 
 			<input type="text" placeholder="Votre prénom" name="prenom">
 			<input type="text" placeholder="Votre téléphone" name="telephone">
