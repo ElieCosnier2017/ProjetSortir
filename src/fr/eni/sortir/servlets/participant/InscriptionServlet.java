@@ -56,9 +56,7 @@ public class InscriptionServlet extends HttpServlet {
 			}
 			else {
 				response.sendRedirect("/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
-			}
-			
-						
+			}								
 		}
 		catch (Exception e) {
 			e.printStackTrace();
