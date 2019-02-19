@@ -52,7 +52,7 @@ public class Sortie implements Serializable {
     public int getDuree() {
         return duree;
     }
-    
+
     public void setDuree(int duree) {
         this.duree = duree;
     }
