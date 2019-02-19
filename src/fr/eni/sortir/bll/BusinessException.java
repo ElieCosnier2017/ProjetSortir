@@ -13,7 +13,7 @@ public class BusinessException extends Exception {
 	
 	/**
 	 * 
-	 * @param code Code de l'erreur. Doit avoir un message associé dans un fichier properties.
+	 *  @param code Code de l'erreur. Doit avoir un message associé dans un fichier properties.
 	 */
 	public void ajouterErreur(int code)
 	{

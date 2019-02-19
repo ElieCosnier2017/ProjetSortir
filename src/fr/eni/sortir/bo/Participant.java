@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Participant implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private int idparticipant;
     private String nom;
     private String prenom;

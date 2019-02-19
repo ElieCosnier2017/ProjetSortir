@@ -8,7 +8,7 @@ import fr.eni.sortir.dal.ParticipantDAO;
 
 public class ParticipantManager {
 	
-	private ParticipantDAO participantDAO;
+	 private ParticipantDAO participantDAO;
 	
 	public ParticipantManager() 
 	{

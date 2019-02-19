@@ -7,7 +7,7 @@ public abstract class DAOFactory {
 		return new ListeSortieDAOJdbcImpl();
 	}
 	
-	public static ParticipantDAO getParticipantDAO()
+	 public static ParticipantDAO getParticipantDAO()
 	{
 		return new ParticipantDAOJdbcImpl();
 	}

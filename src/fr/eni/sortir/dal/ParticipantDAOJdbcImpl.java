@@ -145,7 +145,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/**
 	 * 
-	 * @param rs
+	 *  @param rs
 	 * @return participantCourant
 	 * @throws SQLException
 	 */
