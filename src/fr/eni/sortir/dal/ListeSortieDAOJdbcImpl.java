@@ -8,8 +8,8 @@ import java.util.List;
 
 import fr.eni.sortir.bo.Sortie;
 
-public class ListeSortieDAOJdbcImpl extends listeSortieDAO {
-	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
+public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
+	private static final String SELECT_ALL = "SELECT * FROM ETATS";
 
 	@Override
 	public List<Sortie> selectAll() {
