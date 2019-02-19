@@ -13,7 +13,7 @@ public class SortieManager {
         this.listeSortieDAO= DAOFactory.getListeSortieDAO();
     }
 
-    public List<Sortie> selectionnerListes()
+    public List<Sortie> selectionnerListes() throws BusinessException
     {
         return this.listeSortieDAO.selectAll();
     }

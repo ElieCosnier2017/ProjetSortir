@@ -52,8 +52,10 @@ public class InscriptionServlet extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			String pseudo = request.getParameter("pseudo");
 			String password = request.getParameter("password");
+			String admin = request.getParameter("admin");
+			String actif = request.getParameter("actif");
 			
-			participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password);
+			participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password, Boolean.valueOf(admin), Boolean.valueOf(actif));
 			
 			response.sendRedirect("/WEB-INF/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
 										

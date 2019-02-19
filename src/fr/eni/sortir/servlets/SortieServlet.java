@@ -1,5 +1,6 @@
 package fr.eni.sortir.servlets;
 
+import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.SortieManager;
 
 import java.io.IOException;
@@ -29,7 +30,12 @@ public class SortieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SortieManager sortieManager = new SortieManager();
-		sortieManager.selectionnerListes();
+		try {
+			sortieManager.selectionnerListes();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
