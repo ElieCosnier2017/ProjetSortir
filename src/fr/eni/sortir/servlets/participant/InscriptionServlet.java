@@ -50,13 +50,13 @@ public class InscriptionServlet extends HttpServlet {
 			String prenom = request.getParameter("prenom");
 			String mail = request.getParameter("mail");
 			String telephone = request.getParameter("telephone");
+			String pseudo = request.getParameter("pseudo");
+			String password = request.getParameter("password");
 			
-			if (!telephone.isEmpty() || !nom.isEmpty() || !prenom.isEmpty() || !mail.isEmpty()) {
-				participant = participantManager.ajouter(nom, prenom, telephone, mail);
-			}
-			else {
-				response.sendRedirect("/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
-			}								
+			participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password);
+			
+			response.sendRedirect("/WEB-INF/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
+										
 		}
 		catch (Exception e) {
 			e.printStackTrace();

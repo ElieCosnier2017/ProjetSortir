@@ -50,7 +50,7 @@ public class GestionParticipantServlet extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			
 			if (!telephone.isEmpty() || !nom.isEmpty() || !prenom.isEmpty() || !mail.isEmpty()) {
-				participant = participantManager.ajouter(nom, prenom, telephone, mail);
+				participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password);
 			}
 			else {
 				response.sendRedirect("/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
