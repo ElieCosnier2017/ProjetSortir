@@ -21,6 +21,9 @@ public class SortieServlet extends HttpServlet {
      */
     public SortieServlet() {
         super();
+        System.out.println("toto");
+		SortieManager sortieManager = new SortieManager();
+		sortieManager.selectionnerListes();
         // TODO Auto-generated constructor stub
     }
 
@@ -28,8 +31,7 @@ public class SortieServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SortieManager sortieManager = new SortieManager();
-		sortieManager.selectionnerListes();
+
 	}
 
 	/**

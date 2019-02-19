@@ -7,6 +7,6 @@
 <title>Insert title here toyo</title>
 </head>
 <body>
-
+    <a class="button" href="/connexion"> Connexion </a>
 </body>
 </html>

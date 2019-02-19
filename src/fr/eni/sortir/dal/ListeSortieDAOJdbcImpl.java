@@ -20,7 +20,7 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{
-				System.out.println(rs.getString("nom"));
+				System.out.println(rs.getString("libelle"));
 			}
 		}
 		catch(Exception e)

@@ -9,7 +9,9 @@ import fr.eni.sortir.bo.Participant;
 public interface ParticipantDAO {
 	
 	List<Participant> selectAll() throws BusinessException;
-	
+
+	Participant selectByEmailAndPassword(String email, String mdp) throws BusinessException;
+
 	void insert(Participant participant) throws BusinessException;
 	
 	Participant update(Participant participant) throws SQLException;

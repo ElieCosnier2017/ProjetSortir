@@ -19,6 +19,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, email, administrateur, actif, FROM PARTICIPANTS" ;
 	private static final String SELECT_ONE_BY_ID="SELECT idParticipant, nom, prenom, telephone, email, administrateur, actif FROM PARTICIPANTS WHERE idParticipant=?";
+	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE mail= ? AND mot_de_passe= ?";
 
 	/**
 	 * Méthode qui permet d'ajouter un participant.
@@ -68,9 +69,9 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
 			pstmt.setString(1, participant.getNom());
 			pstmt.setString(2, participant.getPrenom());
-			pstmt.setString(5, participant.getTelephone());
-			pstmt.setString(6, participant.getMail());
-			pstmt.setInt(8, participant.getIdparticipant());
+			pstmt.setString(3, participant.getTelephone());
+			pstmt.setString(4, participant.getMail());
+			pstmt.setInt(5, participant.getIdparticipant());
 			pstmt.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -119,7 +120,27 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		return listesParticipants;
 	}
 
-	/**
+	@Override
+	public Participant selectByEmailAndPassword(String email, String mdp) throws BusinessException {
+		Participant participant = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_EMAIL_AND_PASSWORD);
+			pstmt.setString(1, email);
+			pstmt.setString(2, mdp);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				participant = this.participantBuilder(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return participant;
+	}
+
+		/**
 	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un ID donné
 	 */
 	@Override
@@ -152,7 +173,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	public Participant participantBuilder(ResultSet rs) throws SQLException {
 		Participant participant;
 		participant = new Participant();
-		participant.setIdparticipant(rs.getInt("idParticipant"));
+		participant.setIdparticipant(rs.getInt("no_participant"));
 		participant.setNom(rs.getString("nom"));
 		participant.setPrenom(rs.getString("prenom"));
 		participant.setTelephone(rs.getString("telephone"));
