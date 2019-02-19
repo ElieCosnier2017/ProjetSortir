@@ -16,10 +16,18 @@
 		</c:if>
 
 		<form method="post" action="InscriptionServlet" class="col-md-8">
-			<input type="text" placeholder="Votre nom" name="nom"> 
-			<input type="text" placeholder="Votre prénom" name="prenom">
-			<input type="text" placeholder="Votre téléphone" name="telephone">
-			<input type="text" placeholder="Votre mail" name="mail">						
+			<label>Nom :</label>
+			<input type="text" placeholder="Votre nom" name="nom"><br />
+			<label>Prénom :</label> 
+			<input type="text" placeholder="Votre prénom" name="prenom"><br />
+			<label>Pseudo :</label>
+			<input type="text" placeholder="Votre pseudo" name="mail"><br />
+			<label>Téléphone :</label>
+			<input type="text" placeholder="Votre téléphone" name="telephone"><br />
+			<label>email :</label>
+			<input type="text" placeholder="Votre mail" name="mail"><br />
+			<label>Mot de passe :</label>
+			<input type="password" placeholder="Votre mot de passe" name="password"><br />						
 			<input type="submit" value="inscrire"><br />
 		</form>
 	</div>

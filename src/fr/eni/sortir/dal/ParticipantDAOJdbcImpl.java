@@ -14,7 +14,7 @@ import fr.eni.sortir.bo.Participant;
 public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/* REQUETES */
-	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, email, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, email, pseudo, password, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
 	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, email=? WHERE idParticipant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, email, administrateur, actif, FROM PARTICIPANTS" ;
@@ -22,7 +22,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE mail= ? AND mot_de_passe= ?";
 
 	/**
-	 * Méthode qui permet d'ajouter un participant.
+	 * Methode qui permet d'ajouter un participant.
 	 */
 	@Override
 	public void insert(Participant participant) throws BusinessException {
@@ -38,10 +38,10 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, participant.getNom());
 			pstmt.setString(2, participant.getPrenom());
-			pstmt.setString(5, participant.getTelephone());
-			pstmt.setString(6, participant.getMail());
-			pstmt.setBoolean(7, participant.isAdministrateur());
-			pstmt.setBoolean(8, participant.isActif());
+			pstmt.setString(3, participant.getTelephone());
+			pstmt.setString(4, participant.getMail());
+			pstmt.setString(5, participant.getPseudo());
+			pstmt.setString(6, participant.getPassword());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
@@ -60,7 +60,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	}
 	
 	/**
-	 * Méthode qui permet de modifier un participant.
+	 * Methode qui permet de modifier un participant.
 	 */
 	@Override
 	public Participant update(Participant participant) throws SQLException {
@@ -81,7 +81,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	}
 	
 	/**
-	 * Méthode qui permet de supprimer un élément.
+	 * Methode qui permet de supprimer un ï¿½lï¿½ment.
 	 */
 	@Override
 	public void delete(int idParticipant) throws BusinessException {
@@ -98,7 +98,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	}
 	
 	/**
-	 * Méthode qui sélectionne tous les éléments.
+	 * Methode qui selectionne tous les elements.
 	 */
 	@Override
 	public List<Participant> selectAll() throws BusinessException {

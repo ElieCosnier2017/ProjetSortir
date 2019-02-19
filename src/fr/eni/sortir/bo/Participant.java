@@ -9,17 +9,21 @@ public class Participant implements Serializable {
     private String prenom;
     private String telephone;
     private String mail;
+    private String pseudo;
+    private String password;
     private boolean administrateur;
     private boolean actif;
     
 	public Participant() {		
 	}
 	
-    public Participant(String nom, String prenom, String telephone, String mail) {
+    public Participant(String nom, String prenom, String telephone, String mail, String pseudo, String password) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
 		this.mail = mail;
+		this.pseudo = pseudo;
+		this.password = password;
 	}
 
 	public static long getSerialVersionUID() {
@@ -42,6 +46,22 @@ public class Participant implements Serializable {
         this.nom = nom;
     }
 
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public String getPrenom() {
         return prenom;
     }
