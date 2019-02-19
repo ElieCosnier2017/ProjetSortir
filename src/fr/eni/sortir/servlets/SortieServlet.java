@@ -1,5 +1,6 @@
 package fr.eni.sortir.servlets;
 
+import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.SortieManager;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class SortieServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortieServlet() {
+    public SortieServlet() throws BusinessException {
         super();
         System.out.println("toto");
 		SortieManager sortieManager = new SortieManager();
@@ -31,6 +32,13 @@ public class SortieServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SortieManager sortieManager = new SortieManager();
+		try {
+			sortieManager.selectionnerListes();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

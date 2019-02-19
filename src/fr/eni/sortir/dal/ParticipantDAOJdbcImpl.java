@@ -14,11 +14,11 @@ import fr.eni.sortir.bo.Participant;
 public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/* REQUETES */
-	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, email, pseudo, password, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
+	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, password, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
 	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, email=? WHERE idParticipant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
-	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, email, administrateur, actif, FROM PARTICIPANTS" ;
-	private static final String SELECT_ONE_BY_ID="SELECT idParticipant, nom, prenom, telephone, email, administrateur, actif FROM PARTICIPANTS WHERE idParticipant=?";
+	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
+	private static final String SELECT_ONE_BY_ID="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE mail= ? AND mot_de_passe= ?";
 
 	/**
@@ -178,6 +178,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		participant.setPrenom(rs.getString("prenom"));
 		participant.setTelephone(rs.getString("telephone"));
 		participant.setMail(rs.getString("mail"));
+		participant.setPseudo(rs.getString("pseudo"));
+		participant.setPassword(rs.getString("password"));
 		participant.setAdministrateur(rs.getBoolean("administrateur"));
 		participant.setActif(rs.getBoolean("actif"));
 

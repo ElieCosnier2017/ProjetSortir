@@ -20,11 +20,11 @@ public class ParticipantManager {
 		 return this.participantDAO.selectById(id);
 	}
 	
-	public Participant ajouter(String nom, String prenom, String telephone, String mail, String pseudo, String password) throws BusinessException
+	public Participant ajouter(String nom, String prenom, String telephone, String mail, String pseudo, String password, boolean admin, boolean actif) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 
-		Participant participant = new Participant( nom, prenom, telephone, mail, pseudo, password);
+		Participant participant = new Participant( nom, prenom, telephone, mail, pseudo, password, admin, actif);
 
 
 		if(!exception.hasErreurs())

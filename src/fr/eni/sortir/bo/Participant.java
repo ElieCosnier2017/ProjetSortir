@@ -17,13 +17,15 @@ public class Participant implements Serializable {
 	public Participant() {		
 	}
 	
-    public Participant(String nom, String prenom, String telephone, String mail, String pseudo, String password) {
+    public Participant(String nom, String prenom, String telephone, String mail, String pseudo, String password, boolean administrateur, boolean actif) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
 		this.mail = mail;
 		this.pseudo = pseudo;
 		this.password = password;
+		this.administrateur = administrateur;
+		this.actif = actif;
 	}
 
 	public static long getSerialVersionUID() {
