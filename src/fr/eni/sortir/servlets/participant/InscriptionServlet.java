@@ -67,3 +67,5 @@ public class InscriptionServlet extends HttpServlet {
 	}
 
 }
+
+

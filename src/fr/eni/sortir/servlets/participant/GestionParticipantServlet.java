@@ -3,6 +3,7 @@ package fr.eni.sortir.servlets.participant;
 import fr.eni.sortir.bll.ParticipantManager;
 import fr.eni.sortir.bo.Participant;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import java.net.URLEncoder;
 /**
  * Servlet implementation class ParticipantServlet
  */
-@WebServlet("/ParticipantServlet")
+@WebServlet("/profil")
 public class GestionParticipantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +34,8 @@ public class GestionParticipantServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class GestionParticipantServlet extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			
 			if (!telephone.isEmpty() || !nom.isEmpty() || !prenom.isEmpty() || !mail.isEmpty()) {
-				participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password);
+				participant = participantManager.modifier(participant);
 			}
 			else {
 				response.sendRedirect("/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
