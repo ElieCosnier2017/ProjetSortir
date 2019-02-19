@@ -12,7 +12,7 @@ abstract class ConnectionProvider {
 	private static DataSource dataSource;
 	
 	/**
-	 * Au chargement de la classe, la DataSource est recherchée dans l'arbre JNDI
+	 * Au chargement de la classe, la DataSource est recherchee dans l'arbre JNDI
 	 */
 	static
 	{
@@ -27,8 +27,8 @@ abstract class ConnectionProvider {
 	}
 	
 	/**
-	 * Cette méthode retourne une connection opérationnelle issue du pool de connexion
-	 * vers la base de données. 
+	 * Cette methode retourne une connection operationnelle issue du pool de connexion
+	 * vers la base de donnees. 
 	 * @return
 	 * @throws SQLException
 	 */

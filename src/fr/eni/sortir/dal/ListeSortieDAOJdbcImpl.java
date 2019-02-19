@@ -20,16 +20,13 @@ public class ListeSortieDAOJdbcImpl extends listeSortieDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{
-				listeSortie.add(new Sortie(rs.getInt("idSortie")));
+				System.out.println(rs.getString("nom"));
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_LISTES_ECHEC);
-			throw businessException;
 		}
-		return listesCourse;
+		return listeSortie;
 	}
 }

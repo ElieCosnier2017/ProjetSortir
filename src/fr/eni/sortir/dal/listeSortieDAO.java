@@ -6,5 +6,4 @@ import fr.eni.sortir.bo.Sortie;
 
 public class listeSortieDAO {
 	public List<Sortie> selectAll();
-
 }

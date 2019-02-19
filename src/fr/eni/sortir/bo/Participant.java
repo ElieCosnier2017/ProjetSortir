@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Participant implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private int idparticipant;
     private String nom;
     private String prenom;
@@ -12,8 +11,21 @@ public class Participant implements Serializable {
     private String mail;
     private boolean administrateur;
     private boolean actif;
+    
+	public Participant() {		
+	}
+	
+    public Participant(String nom, String prenom, String telephone, String mail, boolean administrateur,
+			boolean actif) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.telephone = telephone;
+		this.mail = mail;
+		this.administrateur = administrateur;
+		this.actif = actif;
+	}
 
-    public static long getSerialVersionUID() {
+	public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
