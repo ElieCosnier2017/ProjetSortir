@@ -8,7 +8,14 @@
 			<span>Sortir.com</span>
 		</div>
 
-		<form method="post" action="inscrire" class="col-md-8">
+		<c:if test="${param.message != null}">
+			<div class="col-md-6 mb-2 alert alert-danger"
+				role="alert">
+				<strong>${param.message}</strong>
+			</div>
+		</c:if>
+
+		<form method="post" action="InscriptionServlet" class="col-md-8">
 			<input type="text" placeholder="Votre nom" name="nom"> 
 			<input type="text" placeholder="Votre prénom" name="prenom">
 			<input type="text" placeholder="Votre téléphone" name="telephone">
