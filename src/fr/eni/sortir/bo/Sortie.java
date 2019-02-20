@@ -1,28 +1,32 @@
 package fr.eni.sortir.bo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Sortie implements Serializable {
 
     private int idSortie;
     private String nom;
-    private Date dateHeureDebut;
+    private Date dateDebut;
     private int duree;
     private Date dateLimiteInscription;
     private int nbInscriptionsMax;
     private String infosSortie;
     private String etat;
+    private String photo;
+    private String organisateur;
+    private int idLieu;
+    private int idEtat;
 
-    public Sortie(int idSortie, String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat) {
-        this.idSortie = idSortie;
+    public Sortie(String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat, String photo) {
         this.nom = nom;
-        this.dateHeureDebut = dateHeureDebut;
+        this.dateDebut = dateHeureDebut;
         this.duree = duree;
         this.dateLimiteInscription = dateLimiteInscription;
         this.nbInscriptionsMax = nbInscriptionsMax;
         this.infosSortie = infosSortie;
         this.etat = etat;
+        this.photo = photo;
     }
 
     public int getIdSortie() {
@@ -41,12 +45,12 @@ public class Sortie implements Serializable {
         this.nom = nom;
     }
 
-    public Date getDateHeureDebut() {
-        return dateHeureDebut;
+    public Date getDateDebut() {
+        return dateDebut;
     }
 
-    public void setDateHeureDebut(Date dateHeureDebut) {
-        this.dateHeureDebut = dateHeureDebut;
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
     public int getDuree() {
@@ -87,5 +91,37 @@ public class Sortie implements Serializable {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+    
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+    
+    public String getOrganisateur() {
+        return organisateur;
+    }
+
+    public void setOrganisateur(String organisateur) {
+        this.organisateur = organisateur;
+    }
+    
+    public int getIdLieu() {
+        return idLieu;
+    }
+
+    public void setIdLieu(int idLieu) {
+        this.idLieu = idLieu;
+    }
+    
+    public int getIdEtat() {
+        return idEtat;
+    }
+
+    public void setidEtat(int idEtat) {
+        this.idEtat = idEtat;
     }
 }
