@@ -37,29 +37,29 @@
 									<div class="col-6">
 										<div class="form-group">
 											<label>Nom</label>
-											<input class="form-control" name="nom" placeholder="Nom" type="text">
+											<input class="form-control" name="nom" placeholder="Nom" type="text" required>
 										</div>
 										<div class="form-group">
 											<label>Téléphone</label>
-											<input class="form-control" name="telephone" placeholder="Téléphone" type="tel">
+											<input class="form-control" name="telephone" placeholder="Téléphone" type="tel" >
 										</div>
 										<div class="form-group">
 											<label>Pseudo</label>
-											<input class="form-control" name="pseudo" placeholder="Pseudo" type="text">
+											<input class="form-control" name="pseudo" placeholder="Pseudo" type="text"required>
 										</div>
 									</div>
 									<div class="col-6">
 										<div class="form-group">
 											<label>Prénom</label>
-											<input class="form-control" name="prenom" placeholder="Prénom" type="text">
+											<input class="form-control" name="prenom" placeholder="Prénom" type="text" required>
 										</div>
 										<div class="form-group">
 											<label>Email</label>
-											<input class="form-control" name="email" placeholder="Email" type="email">
+											<input class="form-control" name="email" placeholder="Email" type="email" required>
 										</div>
 										<div class="form-group">
 											<label>Mot de passe</label>
-											<input class="form-control" name="password" placeholder="*********" type="password">
+											<input class="form-control" name="password" placeholder="*********" type="password" required>
 										</div>
 									</div>
 								</div>

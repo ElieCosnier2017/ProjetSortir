@@ -51,7 +51,7 @@ public class InscriptionServlet extends HttpServlet {
 		Boolean admin = false;
 		Boolean actif = true;
 			
-		if(nom!= null && prenom!=null && mail !=null && telephone!=null && pseudo!=null && password!=null) {
+		if(nom!= null && prenom!=null && mail !=null && pseudo!=null && password!=null) {
 			ParticipantManager participantManager = new ParticipantManager();
 			Participant participant = null;
 			try {
