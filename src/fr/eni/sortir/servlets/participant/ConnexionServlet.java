@@ -20,12 +20,11 @@ public class ConnexionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
         String email = request.getParameter("email");
         String mdp = request.getParameter("mdp");
-        if(email!=null && mdp !=null )
-        {
+        if(email != null && mdp != null) {
             ConnexionManager connexionManager = new ConnexionManager();
             try {
                Participant participant =  connexionManager.getParticipant(email, mdp);
-               if(null != participant){
+               if(participant != null){
                    HttpSession session = request.getSession();
                    session.setAttribute("idParticipant", participant.getIdparticipant());
                    response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
