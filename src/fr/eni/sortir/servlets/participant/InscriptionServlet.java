@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ParticipantManager;
 import fr.eni.sortir.bo.Participant;
 
@@ -19,9 +20,6 @@ import fr.eni.sortir.bo.Participant;
 @WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	ParticipantManager participantManager = new ParticipantManager();
-	Participant participant;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +33,7 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inscription.jsp");
 		rd.forward(request, response);
 	}
 
@@ -43,31 +41,35 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = "Tous les champs ne sont pas remplis";
-		
-		try {
-			String nom = request.getParameter("nom");
-			String prenom = request.getParameter("prenom");
-			String mail = request.getParameter("mail");
-			String telephone = request.getParameter("telephone");
-			String pseudo = request.getParameter("pseudo");
-			String password = request.getParameter("password");
-			String admin = "0";
-			String actif = "1";
+
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String mail = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String pseudo = request.getParameter("pseudo");
+		String password = request.getParameter("password");
+		Boolean admin = false;
+		Boolean actif = true;
 			
-			if(nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || telephone.isEmpty() || pseudo.isEmpty() || password.isEmpty() || admin.isEmpty() || actif.isEmpty()) {
-				response.sendRedirect("/WEB-INF/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
+		if(nom!= null && prenom!=null && mail !=null && telephone!=null && pseudo!=null && password!=null) {
+			ParticipantManager participantManager = new ParticipantManager();
+			Participant participant = null;
+			try {
+				participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password, admin, actif);
+			} catch (BusinessException e) {
+				e.printStackTrace();
 			}
-			else {
-				participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password, Boolean.valueOf(admin), Boolean.valueOf(actif));	
-			}			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+			if(participant != null){
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 
+				// a changer
+				response.setHeader("Location", "/");
+
+			} else {
+				//TODO afficher message si pas de resultat
+			}
+		}
 	}
-
 }
 
 

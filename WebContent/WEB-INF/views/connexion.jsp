@@ -34,8 +34,8 @@
                             <h4 class="card-title mb-4 mt-1">Connexion</h4>
                             <form method="post">
                                 <div class="form-group">
-                                    <label>Votre email</label>
-                                    <input class="form-control" name="email" placeholder="Email" type="email">
+                                    <label>Votre email ou votre pseudo</label>
+                                    <input class="form-control" name="email" placeholder="Email ou Pseudo" type="text">
                                 </div>
                                 <div class="form-group">
                                     <label>Ton mot de passe</label>
