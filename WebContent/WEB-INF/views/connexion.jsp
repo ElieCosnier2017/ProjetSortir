@@ -32,7 +32,7 @@
                         <article class="card-body">
                             <a href="/inscription" class="float-right btn btn-outline-primary">Inscription</a>
                             <h4 class="card-title mb-4 mt-1">Connexion</h4>
-                            <form>
+                            <form method="post">
                                 <div class="form-group">
                                     <label>Votre email</label>
                                     <input class="form-control" name="email" placeholder="Email" type="email">

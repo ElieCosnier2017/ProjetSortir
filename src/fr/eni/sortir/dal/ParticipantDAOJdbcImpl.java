@@ -19,7 +19,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
 	private static final String SELECT_ONE_BY_ID="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif FROM PARTICIPANTS WHERE idParticipant=?";
-	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE mail= ? AND mot_de_passe= ?";
+	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE (mail=? OR pseudo=?) AND mot_de_passe= ?";
 
 	/**
 	 * Methode qui permet d'ajouter un participant.
@@ -123,13 +123,14 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	}
 
 	@Override
-	public Participant selectByEmailAndPassword(String email, String mdp) throws BusinessException {
+	public Participant selectByEmailAndPassword(String emailOrPseudo, String mdp) throws BusinessException {
 		Participant participant = null;
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_EMAIL_AND_PASSWORD);
-			pstmt.setString(1, email);
-			pstmt.setString(2, mdp);
+			pstmt.setString(1, emailOrPseudo);
+			pstmt.setString(2, emailOrPseudo);
+			pstmt.setString(3, mdp);
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -138,7 +139,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("after builder" +  participant);
 		return participant;
 	}
 
@@ -168,9 +169,9 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/**
 	 * 
-	 *  @param rs
+	 * @param rs rs
 	 * @return participantCourant
-	 * @throws SQLException
+	 * @throws SQLException SQLException
 	 */
 	public Participant participantBuilder(ResultSet rs) throws SQLException {
 		Participant participant;
@@ -181,7 +182,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		participant.setTelephone(rs.getString("telephone"));
 		participant.setMail(rs.getString("mail"));
 		participant.setPseudo(rs.getString("pseudo"));
-		participant.setPassword(rs.getString("password"));
+		participant.setPassword(rs.getString("mot_de_passe"));
 		participant.setAdministrateur(rs.getBoolean("administrateur"));
 		participant.setActif(rs.getBoolean("actif"));
 
