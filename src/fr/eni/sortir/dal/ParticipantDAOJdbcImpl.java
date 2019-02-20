@@ -14,7 +14,7 @@ import fr.eni.sortir.bo.Participant;
 public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/* REQUETES */
-	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, password, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
+	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, mot_de_passe, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, email=? WHERE idParticipant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
@@ -42,6 +42,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(4, participant.getMail());
 			pstmt.setString(5, participant.getPseudo());
 			pstmt.setString(6, participant.getPassword());
+			pstmt.setBoolean(7, participant.isAdministrateur());
+			pstmt.setBoolean(8, participant.isActif());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
@@ -141,7 +143,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	}
 
 		/**
-	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un ID donné
+	 * Mï¿½thode qui rï¿½cupï¿½re tous les ï¿½lï¿½ments de la table PARTICIPANTS pour un ID donnï¿½
 	 */
 	@Override
 	public Participant selectById(int idParticipant) throws SQLException {

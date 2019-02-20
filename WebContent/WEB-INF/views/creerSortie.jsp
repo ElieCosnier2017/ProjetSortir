@@ -1,6 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
 		<title>Sortir.com - Créer sortie</title>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffffbd">
@@ -28,17 +35,9 @@
 		<div class="container">
 			<div class="row justify-content-md-center" style="margin-top: 5%;">
 				<div class="col-sm-10">
-
-					<c:if test="${param.message != null}">
-						<%--<div class="col-md-6 mb-2 alert alert-danger"--%>
-							<%--role="alert">--%>
-							<%--<strong>${param.message}</strong>--%>
-						<%--</div>--%>
-					</c:if>
-
 					<div class="card">
 						<article class="card-body">
-							<h4 class="card-title mb-4 mt-1">Inscription</h4>
+							<h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
 							<form>
 								<div class="row">
 									<div class="col-6">
@@ -47,26 +46,31 @@
 											<input class="form-control" name="nom" placeholder="Nom" type="text">
 										</div>
 										<div class="form-group">
-											<label>Téléphone</label>
-											<input class="form-control" name="telephone" placeholder="Téléphone" type="tel">
+											<label>Date de début</label>
+											<input class="form-control" id="datepicker" name="datedebut" type="text">
 										</div>
 										<div class="form-group">
-											<label>Pseudo</label>
-											<input class="form-control" name="pseudo" placeholder="Pseudo" type="text">
+											<label>Durée (heure)</label>
+											<input class="form-control" name="duree" type="text">
+										</div>
+										<div class="form-group">
+											<label>Date de fin</label>
+											<input class="form-control" id="datepicker" name="datefin" type="text">
 										</div>
 									</div>
 									<div class="col-6">
 										<div class="form-group">
-											<label>Prénom</label>
-											<input class="form-control" name="prenom" placeholder="Prénom" type="text">
+											<label>Nombre d'inscription</label>
+											<input class="form-control" name="nbinscription" placeholder="nombre inscription" type="text">
 										</div>
 										<div class="form-group">
-											<label>Email</label>
-											<input class="form-control" name="email" placeholder="Email" type="email">
+											<label>Infos</label>
+											<input class="form-control" name="infos" placeholder="Infos" type="text">
 										</div>
 										<div class="form-group">
-											<label>Mot de passe</label>
-											<input class="form-control" name="password" placeholder="*********" type="password">
+											<label>Photo</label>
+											<input class="form-control" name="photo" accept="image/*" type="file">
+											<input type="submit">
 										</div>
 									</div>
 								</div>
