@@ -9,10 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.sortir.bll.ParticipantManager;
 import fr.eni.sortir.bll.SortieManager;
-import fr.eni.sortir.bo.Participant;
 import fr.eni.sortir.bo.Sortie;
 
 /**
