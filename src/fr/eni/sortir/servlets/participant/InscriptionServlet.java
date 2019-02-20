@@ -16,7 +16,7 @@ import fr.eni.sortir.bo.Participant;
 /**
  * Servlet implementation class InscriptionServlet
  */
-@WebServlet("/InscriptionServlet")
+@WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

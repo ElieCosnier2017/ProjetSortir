@@ -1,39 +1,83 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
+		<title>Sortir.com - Inscription</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffffbd">
+			<a class="navbar-brand" href="/">Sortir.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav mr-auto">
+					<%--<li class="nav-item active">--%>
+					<%--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>--%>
+					<%--</li>--%>
+					<%--<li class="nav-item">--%>
+					<%--<a class="nav-link" href="#">Features</a>--%>
+					<%--</li>--%>
+					<%--<li class="nav-item">--%>
+					<%--<a class="nav-link" href="#">Pricing</a>--%>
+					<%--</li>--%>
+				</ul>
+				<span class="navbar-text">
 
-<!-- Page Content -->
-<div class="row"></div>
-	<div class="form ">
-
-		<div class="site-title col-md-4">
-			<span>Sortir.com</span>
-		</div>
-
-		<c:if test="${param.message != null}">
-			<div class="col-md-6 mb-2 alert alert-danger"
-				role="alert">
-				<strong>${param.message}</strong>
+				</span>
 			</div>
-		</c:if>
+		</nav>
+		<div class="container">
+			<div class="row justify-content-md-center" style="margin-top: 5%;">
+				<div class="col-sm-10">
 
-		<form method="post" action="InscriptionServlet" class="col-md-8">
-			<label for="nom">Nom :</label>
-			<input type="text" placeholder="Votre nom" name="nom"><br />
-			<label for="prenom">Prénom :</label> 
-			<input type="text" placeholder="Votre prénom" name="prenom"><br />
-			<label for="pseudo">Pseudo :</label>
-			<input type="text" placeholder="Votre pseudo" name="pseudo"><br />
-			<label for="telephone">Téléphone :</label>
-			<input type="text" placeholder="Votre téléphone" name="telephone"><br />
-			<label for="mail">email :</label>
-			<input type="text" placeholder="Votre mail" name="mail"><br />
-			<label for="password">Mot de passe :</label>
-			<input type="password" placeholder="Votre mot de passe" name="password"><br />
-			<label for="actif">Actif :</label>
-			<input type="checkbox" name="actif"><br />	
-			<label for="admin">Administrateur :</label>
-			<input type="checkbox" name="admin"><br />							
-			<input type="submit" value="inscrire"><br />
-		</form>
-	</div>
+					<c:if test="${param.message != null}">
+						<%--<div class="col-md-6 mb-2 alert alert-danger"--%>
+							<%--role="alert">--%>
+							<%--<strong>${param.message}</strong>--%>
+						<%--</div>--%>
+					</c:if>
 
+					<div class="card">
+						<article class="card-body">
+							<h4 class="card-title mb-4 mt-1">Inscription</h4>
+							<form>
+								<div class="row">
+									<div class="col-6">
+										<div class="form-group">
+											<label>Nom</label>
+											<input class="form-control" name="nom" placeholder="Nom" type="text">
+										</div>
+										<div class="form-group">
+											<label>TÃ©lÃ©phone</label>
+											<input class="form-control" name="telephone" placeholder="TÃ©lÃ©phone" type="tel">
+										</div>
+										<div class="form-group">
+											<label>Pseudo</label>
+											<input class="form-control" name="pseudo" placeholder="Pseudo" type="text">
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<label>PrÃ©nom</label>
+											<input class="form-control" name="prenom" placeholder="PrÃ©nom" type="text">
+										</div>
+										<div class="form-group">
+											<label>Email</label>
+											<input class="form-control" name="email" placeholder="Email" type="email">
+										</div>
+										<div class="form-group">
+											<label>Mot de passe</label>
+											<input class="form-control" name="password" placeholder="*********" type="password">
+										</div>
+									</div>
+								</div>
+								<br>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block"> S'inscrire  </button>
+								</div>
+							</form>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
 <%@ include file="../layout/footer.jsp"%>
