@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="../layout/entete.jsp"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
 <title>Sortir.com - Créer sortie</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -30,7 +32,6 @@
 				<%--<li class="nav-item active">--%>
 				<%--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>--%>
 				<%--</li>--%>
-				<%--<li class="nav-item">--%>
 				<%--<a class="nav-link" href="#">Features</a>--%>
 				<%--</li>--%>
 				<%--<li class="nav-item">--%>
@@ -59,26 +60,26 @@
 												id="datepicker" name="datedebut" type="text"
 												style="width: 7em;">
 										</div>
-										<div class="form-group" style="padding-left:62px">
+										<div class="form-group" style="padding-left: 62px">
 											<label>Durée</label> <input class="form-control" min="1"
 												name="duree" type="number" style="width: 5em">
 										</div>
-										<div class="form-group" style="padding-left:59px">
+										<div class="form-group" style="padding-left: 59px">
 											<label>Date de fin</label> <input class="form-control"
 												id="datepicker2" name="datefin" type="text"
 												style="width: 7em;">
 										</div>
 									</div>
 									<div class="form-group">
-										<label>Organisateur</label> <input class="form-control" name="nom"
-											placeholder="organisateur" type="text">
-									</div>									
+										<label>Organisateur</label> <input class="form-control"
+											name="nom" placeholder="organisateur" type="text">
+									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label>Nombre d'inscription</label> <input
-											class="form-control" name="nbinscription" type="number" min="1"
-											style="width: 5em">
+											class="form-control" name="nbinscription" type="number"
+											min="1" style="width: 5em">
 									</div>
 									<div class="form-group">
 										<label>Infos</label> <input class="form-control" name="infos"
@@ -87,6 +88,19 @@
 									<div class="form-group">
 										<label>Photo</label> <input class="form-control" name="photo"
 											accept="image/*" type="file">
+									</div>
+									<div class="form-group">
+									
+											2 ${requestScope.listeLieux.size()}
+											<c:forEach items="${listeLieux}" var="item">
+    											${item.nom}<br>
+    											${item.getNom()}<br>
+											</c:forEach>
+										<select>
+
+						
+								
+										</select>
 									</div>
 								</div>
 							</div>

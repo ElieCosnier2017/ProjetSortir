@@ -2,6 +2,8 @@ package fr.eni.sortir.servlets.participant;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.sortir.bll.BusinessException;
+import fr.eni.sortir.bll.LieuManager;
 import fr.eni.sortir.bll.SortieManager;
+import fr.eni.sortir.bo.Lieu;
 import fr.eni.sortir.bo.Sortie;
 
 /**
@@ -34,6 +40,14 @@ public class SortirServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			LieuManager lieuManager = new LieuManager();
+			List<Lieu> listeLieux = lieuManager.selectAll();
+			request.setAttribute("listeLieux", listeLieux);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+				
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
 		rd.forward(request, response);
 	}
