@@ -35,7 +35,7 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inscription.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
 		rd.forward(request, response);
 	}
 
@@ -52,13 +52,15 @@ public class InscriptionServlet extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			String pseudo = request.getParameter("pseudo");
 			String password = request.getParameter("password");
-			String admin = request.getParameter("admin");
-			String actif = request.getParameter("actif");
+			String admin = "0";
+			String actif = "1";
 			
-			participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password, Boolean.valueOf(admin), Boolean.valueOf(actif));
-			
-			response.sendRedirect("/WEB-INF/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
-										
+			if(nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || telephone.isEmpty() || pseudo.isEmpty() || password.isEmpty() || admin.isEmpty() || actif.isEmpty()) {
+				response.sendRedirect("/WEB-INF/views/inscription?message=" + URLEncoder.encode(message, "UTF-8"));
+			}
+			else {
+				participant = participantManager.ajouter(nom, prenom, telephone, mail, pseudo, password, Boolean.valueOf(admin), Boolean.valueOf(actif));	
+			}			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
