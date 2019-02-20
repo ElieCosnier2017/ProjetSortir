@@ -14,6 +14,10 @@ public class Sortie implements Serializable {
     private String infosSortie;
     private String etat;
 
+    public Sortie(){
+
+    }
+
     public Sortie(int idSortie, String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat) {
         this.idSortie = idSortie;
         this.nom = nom;

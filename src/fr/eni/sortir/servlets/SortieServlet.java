@@ -22,9 +22,8 @@ public class SortieServlet extends HttpServlet {
      */
     public SortieServlet() throws BusinessException {
         super();
-        System.out.println("toto");
 		SortieManager sortieManager = new SortieManager();
-		sortieManager.selectionnerListes();
+		sortieManager.sortiesBySite(1);
         // TODO Auto-generated constructor stub
     }
 
