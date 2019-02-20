@@ -4,5 +4,12 @@
         <title>Sortir.com - Accueil</title>
     </head>
     <body>
+        <%
+            int idparticipant;
+            HttpSession httpSession = request.getSession();
+            //idparticipant = (Integer) httpSession.getAttribute("idParticipant");
+        %>
+    <span>
 
+    </span>
 <%@ include file="../layout/footer.jsp"%>

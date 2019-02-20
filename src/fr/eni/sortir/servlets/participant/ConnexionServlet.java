@@ -1,5 +1,6 @@
 package fr.eni.sortir.servlets.participant;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ConnexionManager;
 import fr.eni.sortir.bo.Participant;
@@ -19,7 +20,6 @@ public class ConnexionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
         String email = request.getParameter("email");
         String mdp = request.getParameter("mdp");
-
         if(email!=null && mdp !=null )
         {
             ConnexionManager connexionManager = new ConnexionManager();
@@ -30,6 +30,8 @@ public class ConnexionServlet extends HttpServlet {
                    session.setAttribute("idParticipant", participant.getIdparticipant());
                    response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
                    response.setHeader("Location", "/");
+               } else {
+                   //TODO afficher message si pas de resultat
                }
             } catch (BusinessException e) {
                 e.printStackTrace();
