@@ -46,31 +46,39 @@
 				<div class="card">
 					<article class="card-body">
 						<h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
-						<form>
+						<form method="post" action="/Sortir">
 							<div class="row">
 								<div class="col-6">
 									<div class="form-group">
 										<label>Nom</label> <input class="form-control" name="nom"
 											placeholder="Nom" type="text">
 									</div>
-									<div class="form-group">
-										<label>Date de début</label> <input class="form-control"
-											id="datepicker" name="datedebut" type="text" style="width: 7em">
+									<div style="display: inline-flex;">
+										<div class="form-group">
+											<label>Date de début</label> <input class="form-control"
+												id="datepicker" name="datedebut" type="text"
+												style="width: 7em;">
+										</div>
+										<div class="form-group" style="padding-left:62px">
+											<label>Durée</label> <input class="form-control" min="1"
+												name="duree" type="number" style="width: 5em">
+										</div>
+										<div class="form-group" style="padding-left:59px">
+											<label>Date de fin</label> <input class="form-control"
+												id="datepicker2" name="datefin" type="text"
+												style="width: 7em;">
+										</div>
 									</div>
 									<div class="form-group">
-										<label>Date de fin</label> <input class="form-control"
-											id="datepicker2" name="datefin" type="text" style="width: 7em">
-									</div>
-									<div class="form-group">
-										<label>Durée (heure)</label> <input class="form-control"
-											name="duree" type="text" style="width: 5em">
-									</div>
+										<label>Organisateur</label> <input class="form-control" name="nom"
+											placeholder="organisateur" type="text">
+									</div>									
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label>Nombre d'inscription</label> <input
-											class="form-control" name="nbinscription"
-											placeholder="nombre inscription" type="text">
+											class="form-control" name="nbinscription" type="number" min="1"
+											style="width: 5em">
 									</div>
 									<div class="form-group">
 										<label>Infos</label> <input class="form-control" name="infos"

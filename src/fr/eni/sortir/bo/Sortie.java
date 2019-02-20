@@ -14,6 +14,9 @@ public class Sortie implements Serializable {
     private String infosSortie;
     private String etat;
     private String photo;
+    private String organisateur;
+    private int idLieu;
+    private int idEtat;
 
     public Sortie(String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat, String photo) {
         this.nom = nom;
@@ -96,5 +99,29 @@ public class Sortie implements Serializable {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+    
+    public String getOrganisateur() {
+        return organisateur;
+    }
+
+    public void setOrganisateur(String organisateur) {
+        this.organisateur = organisateur;
+    }
+    
+    public int getIdLieu() {
+        return idLieu;
+    }
+
+    public void setIdLieu(int idLieu) {
+        this.idLieu = idLieu;
+    }
+    
+    public int getIdEtat() {
+        return idEtat;
+    }
+
+    public void setidEtat(int idEtat) {
+        this.idEtat = idEtat;
     }
 }

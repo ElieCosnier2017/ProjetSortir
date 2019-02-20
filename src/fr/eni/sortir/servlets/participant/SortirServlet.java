@@ -50,9 +50,12 @@ public class SortirServlet extends HttpServlet {
 			String nbInscription = request.getParameter("nbinscription");
 			String infos = request.getParameter("infos");
 			String photo = request.getParameter("photo");
+			String organisateur = request.getParameter("organisateur");
 			String etat = "Ouverte";
+			int idEtat = 1;
+			int idLieu = 1;
 			
-			sortie = sortieManager.ajouter(nom, Date.valueOf(dateDebut), Integer.valueOf(duree), Date.valueOf(dateFin), Integer.valueOf(nbInscription), infos, etat, photo);	
+			sortie = sortieManager.ajouter(nom, Date.valueOf(dateDebut), Integer.valueOf(duree), Date.valueOf(dateFin), Integer.valueOf(nbInscription), infos, etat, photo, organisateur, idLieu, idEtat);	
 		}
 		catch (Exception e) {
 			e.printStackTrace();

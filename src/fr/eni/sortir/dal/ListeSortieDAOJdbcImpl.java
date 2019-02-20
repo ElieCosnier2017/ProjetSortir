@@ -12,7 +12,7 @@ import fr.eni.sortir.bo.Sortie;
 
 public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
-	private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIE SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIE WHERE idSortie=?";
 
@@ -58,6 +58,9 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());
 			pstmt.setString(8, sortie.getPhoto());
+			pstmt.setString(9, sortie.getOrganisateur());
+			pstmt.setInt(10, sortie.getIdLieu());
+			pstmt.setInt(11, sortie.getIdEtat());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
@@ -92,6 +95,9 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());
 			pstmt.setString(8, sortie.getPhoto());
+			pstmt.setString(9, sortie.getOrganisateur());
+			pstmt.setInt(10, sortie.getIdLieu());
+			pstmt.setInt(11, sortie.getIdEtat());
 			pstmt.executeUpdate();
 		} catch (SQLException e)
 		{
