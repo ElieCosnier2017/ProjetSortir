@@ -33,7 +33,7 @@ public class SortieServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SortieManager sortieManager = new SortieManager();
 		try {
-			sortieManager.selectionnerListes();
+			sortieManager.sortiesBySite(1);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

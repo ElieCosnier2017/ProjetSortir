@@ -9,14 +9,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#datepicker").datepicker();
-	});
-	$(function() {
-		$("#datepicker2").datepicker();
-	});
-</script>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light"
@@ -90,8 +83,8 @@
 											accept="image/*" type="file">
 									</div>
 									<div class="form-group">
-									
-											2 ${requestScope.listeLieux.size()}
+
+										2 ${requestScope.listeLieux.size()}
 											<c:forEach items="${listeLieux}" var="item">
     											${item.nom}<br>
     											${item.getNom()}<br>
@@ -115,4 +108,15 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$(document.ready(function(){
+			$(function() {
+				$("#datepicker").datepicker();
+			});
+			$(function() {
+				$("#datepicker2").datepicker();
+			});
+		}))
+	</script>
 	<%@ include file="../layout/footer.jsp"%>
