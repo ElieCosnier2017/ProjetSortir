@@ -126,7 +126,8 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 
 	@Override
 	public JSONArray selectSortiesBySite(int idSite) {
-		List<Sortie> listeSortie = new ArrayList<>();
+		JSONArray jsonArray = new JSONArray();
+
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_SORTIE_BY_SITE);
@@ -135,16 +136,13 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 			while(rs.next())
 			{
 				Sortie sortie = sortieBuilder(rs);
-				listeSortie.add(sortie);
+				jsonArray.add(sortie.toString());
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.add(listeSortie);
-		System.out.println(jsonArray.toJSONString());
 		return jsonArray;
 	}
 
@@ -154,7 +152,7 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 	 * @return sortie
 	 * @throws SQLException SQLException
 	 */
-	public Sortie  sortieBuilder(ResultSet rs) throws SQLException {
+	public Sortie sortieBuilder(ResultSet rs) throws SQLException {
 		Sortie sortie = new Sortie();
 		sortie.setIdSortie(rs.getInt("no_sortie"));
 		sortie.setDateDebut(rs.getDate("datedebut"));
