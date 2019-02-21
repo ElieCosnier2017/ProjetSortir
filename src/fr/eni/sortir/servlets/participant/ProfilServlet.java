@@ -58,8 +58,12 @@ public class ProfilServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//idparticipant = (Integer) httpSession.getAttribute("idParticipant");
-
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String mail = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String pseudo = request.getParameter("pseudo");
+		String password = request.getParameter("password");
 	}
 
 }

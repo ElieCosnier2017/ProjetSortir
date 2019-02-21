@@ -5,10 +5,10 @@
         <title>Sortir.com - Gestion du profil</title>
     </head>
     <body>
-        <div class="container emp-profile">
-            <%
-                Participant participant = (Participant) request.getAttribute("participant");
-            %>
+        <%--<div class="container emp-profile">--%>
+            <%--<%--%>
+                <%--Participant participant = (Participant) request.getAttribute("participant");--%>
+            <%--%>--%>
             <div class="row">
                 <div class="col-md-4">
                     <img src="">
@@ -65,22 +65,53 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="editprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+         <div class="modal fade" id="editprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Modifier le profil</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Modifier</button>
-                        <button type="button" class="btn btn-danger">Annuler</button>
-                    </div>
+                    <form method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input class="form-control" name="nom" placeholder="Nom" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Téléphone</label>
+                                        <input class="form-control" name="telephone" placeholder="Téléphone" type="tel" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pseudo</label>
+                                        <input class="form-control" name="pseudo" placeholder="Pseudo" type="text"required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Prénom</label>
+                                        <input class="form-control" name="prenom" placeholder="Prénom" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input class="form-control" name="email" placeholder="Email" type="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mot de passe</label>
+                                        <input class="form-control" name="password" placeholder="*********" type="password" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Modifier</button>
+                            <button type="button" class="btn btn-danger">Annuler</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
