@@ -15,7 +15,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/* REQUETES */
 	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, mot_de_passe, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
-	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, email=? WHERE idParticipant=?";
+	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, mail=?, pseudo=? WHERE idParticipant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
 	private static final String SELECT_ONE_BY_ID="SELECT * FROM PARTICIPANTS WHERE no_participant=?";
@@ -71,7 +71,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(2, participant.getPrenom());
 			pstmt.setString(3, participant.getTelephone());
 			pstmt.setString(4, participant.getMail());
-			pstmt.setInt(5, participant.getIdparticipant());
+			pstmt.setString(5, participant.getPseudo());
+			pstmt.setInt(6, participant.getIdparticipant());
 			pstmt.executeUpdate();
 		} catch (SQLException e)
 		{
