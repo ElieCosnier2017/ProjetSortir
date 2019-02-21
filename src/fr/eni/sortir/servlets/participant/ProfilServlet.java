@@ -1,5 +1,6 @@
 package fr.eni.sortir.servlets.participant;
 
+import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ParticipantManager;
 import fr.eni.sortir.bo.Participant;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 
 /**
  * Servlet implementation class ParticipantServlet
@@ -37,6 +39,15 @@ public class ProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idparticipant;
 		HttpSession httpSession = request.getSession();
+ 		idparticipant = (int) httpSession.getAttribute("idParticipant");
+		ParticipantManager participantManager = new ParticipantManager();
+		try {
+			request.setAttribute("participant", participantManager.afficher(idparticipant));
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
 		rd.forward(request, response);
