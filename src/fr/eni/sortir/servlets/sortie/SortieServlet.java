@@ -1,4 +1,4 @@
-package fr.eni.sortir.servlets;
+package fr.eni.sortir.servlets.sortie;
 
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.SortieManager;
