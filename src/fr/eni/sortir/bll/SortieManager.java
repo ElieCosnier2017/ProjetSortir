@@ -2,23 +2,21 @@ package fr.eni.sortir.bll;
 
 import fr.eni.sortir.bo.Sortie;
 import fr.eni.sortir.dal.DAOFactory;
-import fr.eni.sortir.dal.ListeSortieDAO;
+import fr.eni.sortir.dal.SortieDAO;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import java.sql.Date;
 import java.util.List;
 
 public class SortieManager {
-    private ListeSortieDAO listeSortieDAO;
+    private SortieDAO sortieDAO;
 
     public SortieManager() {
-        this.listeSortieDAO= DAOFactory.getListeSortieDAO();
+        this.sortieDAO = DAOFactory.getListeSortieDAO();
     }
 
-    public List<Sortie> selectionnerListes() throws BusinessException
-    {
-        return this.listeSortieDAO.selectAll();
+    public List<Sortie> selectionnerListes() throws BusinessException {
+        return this.sortieDAO.selectAll();
     }
 
     public Sortie ajouter(String nom, Date dateDebut, int duree, Date dateFin, int nbInscriptions, String infos, String etat, String photo, String organistaeur, int idLieu, int idEtat) throws BusinessException
@@ -30,7 +28,7 @@ public class SortieManager {
 
 		if(!exception.hasErreurs())
 		{
-			this.listeSortieDAO.insert(sortie);
+			this.sortieDAO.insert(sortie);
 		}
 
 		if(exception.hasErreurs())
@@ -42,6 +40,10 @@ public class SortieManager {
 
     public JSONArray sortiesBySite(int idSite) throws BusinessException
     {
-        return this.listeSortieDAO.selectSortiesBySite(idSite);
+        return this.sortieDAO.selectSortiesBySite(idSite);
+    }
+
+    public Sortie selectById(int idSortie){
+        return this.sortieDAO.selectById(idSortie);
     }
 }

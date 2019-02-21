@@ -11,9 +11,10 @@ import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bo.Sortie;
 import org.json.simple.JSONArray;
 
-public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
+public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
-	private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SELECT_BY_ID = "SELECT * FROM SORTIES WHERE no_sortie=?";
+    private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIE SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIE WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
@@ -125,6 +126,26 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 	}
 
 	@Override
+	public Sortie selectById(int idSortie) {
+        Sortie sortie = new Sortie();
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
+            pstmt.setInt(1, idSortie);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+               sortie = sortieBuilder(rs);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return sortie;
+	}
+
+	@Override
 	public JSONArray selectSortiesBySite(int idSite) {
 		JSONArray jsonArray = new JSONArray();
 
@@ -154,7 +175,9 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 	 */
 	public Sortie sortieBuilder(ResultSet rs) throws SQLException {
 		Sortie sortie = new Sortie();
+
 		sortie.setIdSortie(rs.getInt("no_sortie"));
+		sortie.setNom(rs.getString("nom"));
 		sortie.setDateDebut(rs.getDate("datedebut"));
 		sortie.setDuree(rs.getInt("duree"));
 		sortie.setDateLimiteInscription(rs.getDate("datecloture"));

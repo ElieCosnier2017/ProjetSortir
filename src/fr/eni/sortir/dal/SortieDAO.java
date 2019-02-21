@@ -8,13 +8,15 @@ import fr.eni.sortir.bo.Participant;
 import fr.eni.sortir.bo.Sortie;
 import org.json.simple.JSONArray;
 
-public interface ListeSortieDAO {
-	public List<Sortie> selectAll() throws BusinessException;
-	public JSONArray selectSortiesBySite(int idSite);
+public interface SortieDAO {
+	List<Sortie> selectAll() throws BusinessException;
+	JSONArray selectSortiesBySite(int idSite);
 
 	void insert(Sortie sortie) throws BusinessException;
 
 	Sortie update(Sortie sortie) throws SQLException;
 
 	void delete(int idSortie) throws BusinessException;
+
+	Sortie selectById(int idSortie);
 }

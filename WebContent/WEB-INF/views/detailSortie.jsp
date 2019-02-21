@@ -1,3 +1,4 @@
+<%@ page import="fr.eni.sortir.bo.Sortie" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
 <%@ include file="../layout/navbar.jsp"%>
@@ -5,11 +6,15 @@
 </head>
 <body>
 <div class="container emp-profile">
+    <%
+
+        Sortie sortie = (Sortie) request.getAttribute("sortie");
+    %>
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <h3>
-                    Kshiti Ghelani
+                    <%= sortie.getNom() %>
                 </h3>
             </div>
             <div class="col-md-6">
@@ -20,13 +25,13 @@
                                 <label>Date et heure de la sortie</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p><%= sortie.getDateDebut() %></p>
                             </div>
                             <div class="col-md-6">
                                 <label>Ville organisatrice</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p>a faire</p>
                             </div>
                         </div>
                         <div class="row">
@@ -34,13 +39,13 @@
                                 <label>Date limite inscription</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti Ghelani</p>
+                                <p><%= sortie.getDateLimiteInscription() %></p>
                             </div>
                             <div class="col-md-6">
                                 <label>Lieu</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p>a faire</p>
                             </div>
                         </div>
                         <div class="row">
@@ -48,13 +53,13 @@
                                 <label>Nombre de place</label>
                             </div>
                             <div class="col-md-6">
-                                <p>kshitighelani@gmail.com</p>
+                                <p><%= sortie.getNbInscriptionsMax() %></p>
                             </div>
                             <div class="col-md-6">
                                 <label>Rue</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p>a faire </p>
                             </div>
                         </div>
                         <div class="row">
@@ -62,13 +67,13 @@
                                 <label>Durée</label>
                             </div>
                             <div class="col-md-6">
-                                <p>02 00 00 00 00</p>
+                                <p><%= sortie.getDuree() %></p>
                             </div>
                             <div class="col-md-6">
                                 <label>Code postal</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p> a faire </p>
                             </div>
                         </div>
                         <div class="row">
@@ -82,7 +87,7 @@
                                 <label>Latitude</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p> a faire</p>
                             </div>
                         </div>
                         <div class="row">
@@ -90,13 +95,13 @@
                                 <label>Description et infos</label>
                             </div>
                             <div class="col-md-6">
-                                <p>02 00 00 00 00</p>
+                                <p><%= sortie.getInfosSortie() %></p>
                             </div>
                             <div class="col-md-6">
                                 <label>Longitude</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Kshiti123</p>
+                                <p> a faire </p>
                             </div>
                         </div>
                     </div>
