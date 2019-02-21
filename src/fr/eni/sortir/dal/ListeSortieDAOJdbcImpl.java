@@ -61,7 +61,7 @@ public class ListeSortieDAOJdbcImpl implements ListeSortieDAO {
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());
 			pstmt.setString(8, sortie.getPhoto());
-			pstmt.setString(9, sortie.getOrganisateur());
+			pstmt.setInt(9, sortie.getOrganisateur());
 			pstmt.setInt(10, sortie.getIdLieu());
 			pstmt.setInt(11, sortie.getIdEtat());
 			pstmt.executeUpdate();

@@ -7,6 +7,8 @@ public class Etat implements Serializable {
     private int idEtat;
     private String libelle;
 
+    public Etat() {}
+
     public Etat(int idEtat, String libelle) {
         this.idEtat = idEtat;
         this.libelle = libelle;

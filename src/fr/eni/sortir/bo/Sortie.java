@@ -14,14 +14,14 @@ public class Sortie implements Serializable {
     private String infosSortie;
     private String etat;
     private String photo;
-    private String organisateur;
+    private int organisateur;
     private int idLieu;
     private int idEtat;
 
     public Sortie(){
     }
 
-    public Sortie(String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat, String photo) {
+    public Sortie(String nom, Date dateHeureDebut, int duree, Date dateLimiteInscription, int nbInscriptionsMax, String infosSortie, String etat, String photo, int organisateur, int idLieu, int idEtat) {
         this.nom = nom;
         this.dateDebut = dateHeureDebut;
         this.duree = duree;
@@ -30,6 +30,9 @@ public class Sortie implements Serializable {
         this.infosSortie = infosSortie;
         this.etat = etat;
         this.photo = photo;
+        this.organisateur = organisateur;
+        this.idLieu = idLieu;
+        this.idEtat = idEtat;
     }
 
     public int getIdSortie() {
@@ -104,11 +107,11 @@ public class Sortie implements Serializable {
         this.photo = photo;
     }
 
-    public String getOrganisateur() {
+    public int getOrganisateur() {
         return organisateur;
     }
 
-    public void setOrganisateur(String organisateur) {
+    public void setOrganisateur(int organisateur) {
         this.organisateur = organisateur;
     }
 

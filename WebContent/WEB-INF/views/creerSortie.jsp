@@ -9,14 +9,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#datepicker").datepicker();
-	});
-	$(function() {
-		$("#datepicker2").datepicker();
-	});
-</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light"
@@ -47,7 +39,7 @@
 				<div class="card">
 					<article class="card-body">
 						<h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
-						<form method="post" action="/Sortir">
+						<form method="post" action="/sortie/add">
 							<div class="row">
 								<div class="col-6">
 									<div class="form-group">
@@ -71,8 +63,11 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label>Organisateur</label> <input class="form-control"
-											name="nom" placeholder="organisateur" type="text">
+										<select id="idLieu" name="lieu" class="form-control">
+											<c:forEach var="lieu" items="${listeLieux}">
+												<option value="${lieu.idLieu}">${lieu.nom}</option>
+											</c:forEach>
+										</select>
 									</div>
 								</div>
 								<div class="col-6">
@@ -86,21 +81,15 @@
 											placeholder="Infos" type="text">
 									</div>
 									<div class="form-group">
-										<label>Photo</label> <input class="form-control" name="photo"
-											accept="image/*" type="file">
+										<select id="idEtat" name="etat" class="form-control">
+											<c:forEach var="etat" items="${listeEtats}">
+												<option value="${etat.idEtat}">${etat.libelle}</option>
+											</c:forEach>
+										</select>
 									</div>
 									<div class="form-group">
-									
-											2 ${requestScope.listeLieux.size()}
-											<c:forEach items="${listeLieux}" var="item">
-    											${item.nom}<br>
-    											${item.getNom()}<br>
-											</c:forEach>
-										<select>
-
-						
-								
-										</select>
+										<label>Photo</label> <input class="form-control" name="photo"
+											accept="image/*" type="file">
 									</div>
 								</div>
 							</div>
@@ -115,4 +104,16 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			$(function () {
+				$("#datepicker").datepicker();
+			});
+			$(function () {
+				$("#datepicker2").datepicker();
+			})
+		});
+
+	</script>
 	<%@ include file="../layout/footer.jsp"%>

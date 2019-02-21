@@ -12,4 +12,5 @@
     <span>
 
     </span>
+        <a href="/sortie/add" class="float-right btn btn-outline-primary">Inscription</a>
 <%@ include file="../layout/footer.jsp"%>

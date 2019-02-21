@@ -21,12 +21,9 @@ public class SortieManager {
         return this.listeSortieDAO.selectAll();
     }
 
-    public Sortie ajouter(String nom, Date dateDebut, int duree, Date dateFin, int nbInscriptions, String infos, String etat, String photo, String organistaeur, int idLieu, int idEtat) throws BusinessException
+    public Sortie ajouter(Sortie sortie) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
-
-		Sortie sortie = new Sortie( nom, dateDebut, duree, dateFin, nbInscriptions, infos, etat, photo);
-
 
 		if(!exception.hasErreurs())
 		{

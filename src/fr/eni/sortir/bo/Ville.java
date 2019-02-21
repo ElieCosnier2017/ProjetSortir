@@ -14,6 +14,8 @@ public class Ville implements Serializable {
         this.codePostal = codePostal;
     }
 
+    public Ville(){}
+
     public int getIdVille() {
         return idVille;
     }

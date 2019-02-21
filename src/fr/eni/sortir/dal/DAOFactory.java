@@ -13,4 +13,8 @@ public abstract class DAOFactory {
 	public static LieuDAO getLieuDAO() {
 		return new LieuDAOJdbcImpl();
 	}
+
+	public static EtatDAO getEtatDAO() {
+		return new EtatDAOJdbcImpl();
+	}
 }
