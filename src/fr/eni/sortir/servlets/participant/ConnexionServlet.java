@@ -1,6 +1,5 @@
 package fr.eni.sortir.servlets.participant;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ConnexionManager;
 import fr.eni.sortir.bo.Participant;

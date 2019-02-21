@@ -4,12 +4,5 @@
         <title>Sortir.com - Accueil</title>
     </head>
     <body>
-        <%
-            int idparticipant;
-            HttpSession httpSession = request.getSession();
-            //idparticipant = (Integer) httpSession.getAttribute("idParticipant");
-        %>
-    <span>
-
-    </span>
+    <a href="/sortie/detail" class="float-right btn btn-outline-primary" style="margin-left: 10px;">detail sortie</a>
 <%@ include file="../layout/footer.jsp"%>

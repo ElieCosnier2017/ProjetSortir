@@ -127,4 +127,22 @@ public class Sortie implements Serializable {
     public void setidEtat(int idEtat) {
         this.idEtat = idEtat;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "idSortie=" + idSortie +
+                ", nom='" + nom + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", duree=" + duree +
+                ", dateLimiteInscription=" + dateLimiteInscription +
+                ", nbInscriptionsMax=" + nbInscriptionsMax +
+                ", infosSortie='" + infosSortie + '\'' +
+                ", etat='" + etat + '\'' +
+                ", photo='" + photo + '\'' +
+                ", organisateur='" + organisateur + '\'' +
+                ", idLieu=" + idLieu +
+                ", idEtat=" + idEtat +
+                '}';
+    }
 }
