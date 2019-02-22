@@ -1,7 +1,7 @@
 package fr.eni.sortir.bo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class Sortie implements Serializable {
 

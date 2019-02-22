@@ -1,9 +1,6 @@
 package fr.eni.sortir.dal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +52,9 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, sortie.getNom());
-			pstmt.setDate(2, sortie.getDateDebut());
+			pstmt.setTimestamp(2, new Timestamp(sortie.getDateDebut().getTime()));
 			pstmt.setInt(3, sortie.getDuree());
-			pstmt.setDate(4, sortie.getDateLimiteInscription());
+			pstmt.setTimestamp(4, new Timestamp(sortie.getDateLimiteInscription().getTime()));
 			pstmt.setInt(5, sortie.getNbInscriptionsMax());
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());
@@ -92,9 +89,9 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
 			pstmt.setString(1, sortie.getNom());
-			pstmt.setDate(2, sortie.getDateDebut());
+			pstmt.setTimestamp(2, new Timestamp(sortie.getDateDebut().getTime()));
 			pstmt.setInt(3, sortie.getDuree());
-			pstmt.setDate(4, sortie.getDateLimiteInscription());
+			pstmt.setTimestamp(4, new Timestamp(sortie.getDateLimiteInscription().getTime()));
 			pstmt.setInt(5, sortie.getNbInscriptionsMax());
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());

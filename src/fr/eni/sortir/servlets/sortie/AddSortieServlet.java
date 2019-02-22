@@ -1,13 +1,7 @@
 package fr.eni.sortir.servlets.sortie;
 
-import fr.eni.sortir.bll.BusinessException;
-import fr.eni.sortir.bll.EtatManager;
-import fr.eni.sortir.bll.LieuManager;
-import fr.eni.sortir.bll.SortieManager;
-import fr.eni.sortir.bo.Etat;
-import fr.eni.sortir.bo.Lieu;
-import fr.eni.sortir.bo.Participant;
-import fr.eni.sortir.bo.Sortie;
+import fr.eni.sortir.bll.*;
+import fr.eni.sortir.bo.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +25,7 @@ public class AddSortieServlet extends HttpServlet {
 
 	private SortieManager sortieManager;
 	private LieuManager lieuManager;
-	private EtatManager etatManager;
+	private VilleManager villeManager;
 	private Sortie sortie;
 
     /**
@@ -41,7 +35,7 @@ public class AddSortieServlet extends HttpServlet {
         super();
         this.sortieManager = new SortieManager();
         this.lieuManager = new LieuManager();
-        this.etatManager = new EtatManager();
+        this.villeManager = new VilleManager();
     }
 
 	/**
@@ -56,12 +50,12 @@ public class AddSortieServlet extends HttpServlet {
 		}
 
 		try {
-			List<Etat> etats= etatManager.selectAll();
-			request.setAttribute("listeEtats", etats);
+			List<Ville> villes= villeManager.selectAll();
+			request.setAttribute("listeVilles", villes);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-				
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
 		rd.forward(request, response);
 	}
@@ -73,34 +67,23 @@ public class AddSortieServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			Sortie nouvelleSortie = new Sortie();
+
 			nouvelleSortie.setNom(request.getParameter("nom"));
+			nouvelleSortie.setidEtat(4);
+			nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
+			nouvelleSortie.setInfosSortie(request.getParameter("infos"));
 			nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
 			nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
-			nouvelleSortie.setInfosSortie(request.getParameter("infos"));
-			nouvelleSortie.setPhoto(request.getParameter("photo"));
-			nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
-			System.out.println(request.getParameter("datedebut"));
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			try {
-				Date datedebut = formatter.parse(request.getParameter("datedebut"));
-				nouvelleSortie.setDateDebut((java.sql.Date) datedebut);
-				Date datefin = formatter.parse(request.getParameter("datefin"));
-				nouvelleSortie.setDateLimiteInscription((java.sql.Date) datefin);
-			} catch (ParseException e2) {
-				e2.printStackTrace();
-
-			}
-
-			int idEtat = Integer.parseInt(request.getParameter("etat"));
-			nouvelleSortie.setEtat(etatManager.selectById(idEtat).getLibelle());
-			nouvelleSortie.setidEtat(idEtat);
-
 			HttpSession session = request.getSession();
 			int participantConnecte = (int)session.getAttribute("idParticipant");
 			nouvelleSortie.setOrganisateur(participantConnecte);
 
+			String datedebut = request.getParameter("datedebut");
+			String datefin = request.getParameter("datefin");
+
+			datedebut = datedebut.replace('T', ' ');
+			nouvelleSortie.setDateDebut(new SimpleDateFormat("yyyy-MM-dd H:m").parse(datedebut));
+			nouvelleSortie.setDateLimiteInscription(new SimpleDateFormat("yyyy-MM-dd").parse(datefin));
 			sortie = sortieManager.ajouter(nouvelleSortie);
 		}
 		catch (Exception e) {

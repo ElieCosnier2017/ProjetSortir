@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Description et infos</label>
-                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;"></textarea>
+                                    <textarea class="form-control" name="infos" type="text" size="4"></textarea>
                                 </div>
                             </div>
                         </div>
