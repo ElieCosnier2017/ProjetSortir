@@ -37,6 +37,16 @@ public class Participant implements Serializable {
         this.pseudo = pseudo;
     }
 
+    public Participant(int idparticipant, String nom, String prenom, String telephone, String mail, String pseudo, String password) {
+        this.idparticipant = idparticipant;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.pseudo = pseudo;
+        this.password = password;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
