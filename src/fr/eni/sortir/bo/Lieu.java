@@ -10,6 +10,10 @@ public class Lieu implements Serializable {
     private float latitude;
     private float longitude;
 
+    public Lieu(){
+
+    }
+
     public Lieu(int idLieu, String nom, String rue, float latitude, float longitude) {
         this.idLieu = idLieu;
         this.nom = nom;

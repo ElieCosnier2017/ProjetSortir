@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.sortir.bll.BusinessException;
-import fr.eni.sortir.bo.Participant;
 import fr.eni.sortir.bo.Sortie;
 import org.json.simple.JSONArray;
 
@@ -19,4 +18,7 @@ public interface SortieDAO {
 	void delete(int idSortie) throws BusinessException;
 
 	Sortie selectById(int idSortie);
+
+	List selectAllInfoById(int idSortie);
+
 }

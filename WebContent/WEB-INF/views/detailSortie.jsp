@@ -2,36 +2,35 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
 <%@ include file="../layout/navbar.jsp"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <title>Sortir.com - Detail sortie</title>
 </head>
 <body>
 <div class="container emp-profile">
-    <%
-
-        Sortie sortie = (Sortie) request.getAttribute("sortie");
-    %>
+    <c:if test="${!empty sortie }">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <h3>
-                    <%= sortie.getNom() %>
+                    ${ sortie.getNom() }
                 </h3>
             </div>
             <div class="col-md-6">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Date et heure de la sortie</label>
                             </div>
                             <div class="col-md-6">
-                                <p><%= sortie.getDateDebut() %></p>
+                                ${ sortie.getDateDebut() }
                             </div>
                             <div class="col-md-6">
                                 <label>Ville organisatrice</label>
                             </div>
                             <div class="col-md-6">
-                                <p>a faire</p>
+                                ${ site.getNom() }
                             </div>
                         </div>
                         <div class="row">
@@ -39,13 +38,13 @@
                                 <label>Date limite inscription</label>
                             </div>
                             <div class="col-md-6">
-                                <p><%= sortie.getDateLimiteInscription() %></p>
+                                ${ sortie.getDateLimiteInscription() }
                             </div>
                             <div class="col-md-6">
                                 <label>Lieu</label>
                             </div>
                             <div class="col-md-6">
-                                <p>a faire</p>
+                                ${ lieu.getNom() }
                             </div>
                         </div>
                         <div class="row">
@@ -53,13 +52,13 @@
                                 <label>Nombre de place</label>
                             </div>
                             <div class="col-md-6">
-                                <p><%= sortie.getNbInscriptionsMax() %></p>
+                                ${ sortie.getNbInscriptionsMax() }
                             </div>
                             <div class="col-md-6">
                                 <label>Rue</label>
                             </div>
                             <div class="col-md-6">
-                                <p>a faire </p>
+                                ${ lieu.getRue() }
                             </div>
                         </div>
                         <div class="row">
@@ -67,27 +66,21 @@
                                 <label>Durée</label>
                             </div>
                             <div class="col-md-6">
-                                <p><%= sortie.getDuree() %></p>
+                                ${ sortie.getDuree() }
                             </div>
                             <div class="col-md-6">
                                 <label>Code postal</label>
                             </div>
                             <div class="col-md-6">
-                                <p> a faire </p>
+                                ${ ville.getCodePostal() }
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Durée</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>02 00 00 00 00</p>
-                            </div>
-                            <div class="col-md-6">
                                 <label>Latitude</label>
                             </div>
                             <div class="col-md-6">
-                                <p> a faire</p>
+                                ${ lieu.getLatitude() }
                             </div>
                         </div>
                         <div class="row">
@@ -95,13 +88,13 @@
                                 <label>Description et infos</label>
                             </div>
                             <div class="col-md-6">
-                                <p><%= sortie.getInfosSortie() %></p>
+                                ${ sortie.getInfosSortie() }
                             </div>
                             <div class="col-md-6">
                                 <label>Longitude</label>
                             </div>
                             <div class="col-md-6">
-                                <p> a faire </p>
+                                ${ lieu.getLongitude() }
                             </div>
                         </div>
                     </div>
@@ -109,5 +102,6 @@
             </div>
         </div>
     </form>
+    </c:if>
 </div>
 <%@ include file="../layout/footer.jsp"%>

@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
         <title>Sortir.com - Connexion</title>
     </head>
     <body>

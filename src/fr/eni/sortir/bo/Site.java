@@ -7,6 +7,10 @@ public class Site implements Serializable {
     private int idSite;
     private String nom;
 
+    public  Site(){
+
+    }
+
     public Site(int idSite, String nom) {
         this.idSite = idSite;
         this.nom = nom;
