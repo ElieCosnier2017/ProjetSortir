@@ -13,11 +13,6 @@ public class ParticipantManager {
 	{
 		this.participantDAO=DAOFactory.getParticipantDAO();
 	}
-	
-//	public Participant selectById(int id) throws BusinessException, SQLException
-//	{
-//		 return this.participantDAO.selectById(id);
-//	}
 
 	public Participant afficher(int no_participant) throws BusinessException, SQLException {
 		BusinessException exception = new BusinessException();

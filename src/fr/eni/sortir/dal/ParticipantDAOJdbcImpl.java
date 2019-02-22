@@ -15,11 +15,11 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/* REQUETES */
 	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, mot_de_passe, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
-	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, email=? WHERE idParticipant=?";
+	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, mail=?, pseudo=? WHERE idParticipant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
-	private static final String SELECT_ONE_BY_ID="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif FROM PARTICIPANTS WHERE idParticipant=?";
-	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE (mail=? OR pseudo=?) AND mot_de_passe= ?";
+	private static final String SELECT_ONE_BY_ID="SELECT * FROM PARTICIPANTS WHERE no_participant=?";
+	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE (mail=? OR pseudo=?) AND mot_de_passe= ? AND actif = ?";
 
 	/**
 	 * Methode qui permet d'ajouter un participant.
@@ -71,7 +71,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(2, participant.getPrenom());
 			pstmt.setString(3, participant.getTelephone());
 			pstmt.setString(4, participant.getMail());
-			pstmt.setInt(5, participant.getIdparticipant());
+			pstmt.setString(5, participant.getPseudo());
+			pstmt.setInt(6, participant.getIdparticipant());
 			pstmt.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -129,6 +130,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(1, emailOrPseudo);
 			pstmt.setString(2, emailOrPseudo);
 			pstmt.setString(3, mdp);
+			pstmt.setString(4, "1");
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {

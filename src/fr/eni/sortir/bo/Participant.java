@@ -28,7 +28,16 @@ public class Participant implements Serializable {
 		this.actif = actif;
 	}
 
-	public static long getSerialVersionUID() {
+    public Participant(int idparticipant, String nom, String prenom, String telephone, String mail, String pseudo) {
+        this.idparticipant = idparticipant;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.pseudo = pseudo;
+    }
+
+    public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
