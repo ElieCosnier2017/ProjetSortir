@@ -13,7 +13,7 @@ public class ParticipantManager {
 	{
 		this.participantDAO=DAOFactory.getParticipantDAO();
 	}
-²
+
 	public Participant afficher(int no_participant) throws BusinessException, SQLException {
 		BusinessException exception = new BusinessException();
 

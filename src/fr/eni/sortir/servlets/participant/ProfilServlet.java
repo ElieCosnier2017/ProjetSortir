@@ -22,8 +22,8 @@ import java.sql.SQLException;
 public class ProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ParticipantManager participantManager = new ParticipantManager();
-	Participant participant;
+	private ParticipantManager participantManager = new ParticipantManager();
+	private Participant participant;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +40,6 @@ public class ProfilServlet extends HttpServlet {
 		int idparticipant;
 		HttpSession httpSession = request.getSession();
  		idparticipant = (int) httpSession.getAttribute("idParticipant");
-		ParticipantManager participantManager = new ParticipantManager();
 		try {
 			request.setAttribute("participant", participantManager.afficher(idparticipant));
 		} catch (BusinessException e) {
@@ -57,13 +56,26 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession httpSession = request.getSession();
+		int idparticipant = (int) httpSession.getAttribute("idParticipant");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String mail = request.getParameter("email");
 		String telephone = request.getParameter("telephone");
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
+
+
+		if (password.isEmpty()){
+			try {
+				participant = new Participant(idparticipant, nom, prenom, mail, telephone, pseudo);
+				participantManager.modifier(participant);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
