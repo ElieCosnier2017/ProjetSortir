@@ -17,4 +17,12 @@ public abstract class DAOFactory {
 	public static InscriptionDAO getInscriptionDAO() {
 		return new InscriptionDAOJdbcImpl();
 	}
+
+	public static EtatDAO getEtatDAO() {
+		return new EtatDAOJdbcImpl();
+	}
+
+	public static VilleDAO getVilleDAO() {
+		return new VilleDAOJdbcImpl();
+	}
 }

@@ -102,6 +102,7 @@
             </div>
         </div>
     </form>
+    <a href="/sortie/add" class="float-right btn btn-outline-primary" style="margin-left: 10px;">Créer une sortie</a>
     </c:if>
 </div>
 <%@ include file="../layout/footer.jsp"%>

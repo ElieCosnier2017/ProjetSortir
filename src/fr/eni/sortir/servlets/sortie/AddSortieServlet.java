@@ -1,10 +1,7 @@
 package fr.eni.sortir.servlets.sortie;
 
-import fr.eni.sortir.bll.BusinessException;
-import fr.eni.sortir.bll.LieuManager;
-import fr.eni.sortir.bll.SortieManager;
-import fr.eni.sortir.bo.Lieu;
-import fr.eni.sortir.bo.Sortie;
+import fr.eni.sortir.bll.*;
+import fr.eni.sortir.bo.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,15 +23,19 @@ import java.util.List;
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	SortieManager sortieManager = new SortieManager();
-	Sortie sortie;
+	private SortieManager sortieManager;
+	private LieuManager lieuManager;
+	private VilleManager villeManager;
+	private Sortie sortie;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddSortieServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        this.sortieManager = new SortieManager();
+        this.lieuManager = new LieuManager();
+        this.villeManager = new VilleManager();
     }
 
 	/**
@@ -39,13 +43,19 @@ public class AddSortieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			LieuManager lieuManager = new LieuManager();
-			List<Lieu> listeLieux = lieuManager.selectAll();
-			request.setAttribute("listeLieux", listeLieux);
+			List<Lieu> Lieux = lieuManager.selectAll();
+			request.setAttribute("listeLieux", Lieux);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-				
+
+		try {
+			List<Ville> villes= villeManager.selectAll();
+			request.setAttribute("listeVilles", villes);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
 		rd.forward(request, response);
 	}
@@ -55,19 +65,26 @@ public class AddSortieServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String nom = request.getParameter("nom");
-			String dateDebut = request.getParameter("datedebut");
-			String duree = request.getParameter("duree");
-			String dateFin = request.getParameter("datefin");
-			String nbInscription = request.getParameter("nbinscription");
-			String infos = request.getParameter("infos");
-			String photo = request.getParameter("photo");
-			String organisateur = request.getParameter("organisateur");
-			String etat = "Ouverte";
-			int idEtat = 1;
-			int idLieu = 1;
-			
-			sortie = sortieManager.ajouter(nom, Date.valueOf(dateDebut), Integer.valueOf(duree), Date.valueOf(dateFin), Integer.valueOf(nbInscription), infos, etat, photo, organisateur, idLieu, idEtat);	
+			request.setCharacterEncoding("UTF-8");
+			Sortie nouvelleSortie = new Sortie();
+
+			nouvelleSortie.setNom(request.getParameter("nom"));
+			nouvelleSortie.setidEtat(4);
+			nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
+			nouvelleSortie.setInfosSortie(request.getParameter("infos"));
+			nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
+			nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
+			HttpSession session = request.getSession();
+			int participantConnecte = (int)session.getAttribute("idParticipant");
+			nouvelleSortie.setOrganisateur(participantConnecte);
+
+			String datedebut = request.getParameter("datedebut");
+			String datefin = request.getParameter("datefin");
+
+			datedebut = datedebut.replace('T', ' ');
+			nouvelleSortie.setDateDebut(new SimpleDateFormat("yyyy-MM-dd H:m").parse(datedebut));
+			nouvelleSortie.setDateLimiteInscription(new SimpleDateFormat("yyyy-MM-dd").parse(datefin));
+			sortie = sortieManager.ajouter(nouvelleSortie);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
