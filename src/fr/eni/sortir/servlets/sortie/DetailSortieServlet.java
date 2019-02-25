@@ -1,6 +1,5 @@
 package fr.eni.sortir.servlets.sortie;
 
-import fr.eni.sortir.bll.LieuManager;
 import fr.eni.sortir.bll.SortieManager;
 import fr.eni.sortir.bo.Lieu;
 import fr.eni.sortir.bo.Site;
@@ -25,19 +24,31 @@ public class DetailSortieServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SortieManager sortieManager = new SortieManager();
-        LieuManager lieuManager = new LieuManager();
-        //Sortie sortie  = sortieManager.selectById((Integer) request.getAttribute("idSortie"));
-        List listInfoSortie  = sortieManager.selectAllInfoById(2);
-        Sortie sortie = (Sortie) listInfoSortie.get(0);
-        Lieu lieu = (Lieu) listInfoSortie.get(1);
-        Ville ville = (Ville) listInfoSortie.get(2);
-        Site site = (Site) listInfoSortie.get(3);
+        Integer idSortie = lireParametreIdSortie(request);
+        if(idSortie != null){
+            List listInfoSortie  = sortieManager.selectAllInfoById(idSortie);
+            Sortie sortie = (Sortie) listInfoSortie.get(0);
+            Lieu lieu = (Lieu) listInfoSortie.get(1);
+            Ville ville = (Ville) listInfoSortie.get(2);
+            Site site = (Site) listInfoSortie.get(3);
 
-        request.setAttribute("sortie", sortie);
-        request.setAttribute("lieu", lieu);
-        request.setAttribute("ville", ville);
-        request.setAttribute("site", site);
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSortie.jsp");
-        rd.forward(request, response);
+            request.setAttribute("sortie", sortie);
+            request.setAttribute("lieu", lieu);
+            request.setAttribute("ville", ville);
+            request.setAttribute("site", site);
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSortie.jsp");
+            rd.forward(request, response);
+        } else {
+            response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+            response.setHeader("Location", "/");
+        }
+    }
+
+    private int lireParametreIdSortie(HttpServletRequest request) {
+        Integer idSortie = null;
+        if(request.getParameter("id")!=null) {
+            idSortie = Integer.parseInt(request.getParameter("id"));
+        }
+        return idSortie;
     }
 }
