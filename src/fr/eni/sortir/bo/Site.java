@@ -12,6 +12,10 @@ public class Site implements Serializable {
         this.nom = nom;
     }
 
+    public Site(int idSite) {
+        this.idSite = idSite;
+    }
+
     public int getIdSite() {
         return idSite;
     }

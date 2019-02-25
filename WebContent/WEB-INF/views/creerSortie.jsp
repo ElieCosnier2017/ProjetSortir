@@ -1,3 +1,5 @@
+<%@ page import="fr.eni.sortir.bo.Lieu" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
@@ -54,45 +56,81 @@
                                     <label>Date limite d'inscription</label>
                                     <input class="form-control" name="datefin" type="date">
                                 </div>
-                                <div style="display:inline-flex">
-                                    <div class="form-group">
-                                        <label>Nombre d'inscription</label>
-                                        <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
-                                    </div>
-                                    <div class="form-group" style="padding-left: 5em">
-                                        <label>Durée (minutes)</label>
-                                        <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
                                 <div class="form-group">
-                                    <label>Villes</label>
-                                    <select id="idVille" name="ville" class="form-control">
-                                        <c:forEach var="ville" items="${listeVilles}">
-                                            <option value="${ville.idVille}">${ville.nom}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <label>Nombre d'inscription</label>
+                                    <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
                                 </div>
                                 <div class="form-group">
-                                    <label>Lieux</label>
-                                    <select id="idLieu" name="lieu" class="form-control">
-                                        <c:forEach var="lieu" items="${listeLieux}">
-                                            <option value="${lieu.idLieu}">${lieu.nom}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <label>Durée (minutes)</label>
+                                    <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
                                 </div>
                                 <div class="form-group">
                                     <label>Description et infos</label>
                                     <textarea class="form-control" name="infos" type="text" style="height: 128px;"></textarea>
                                 </div>
                             </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Ville organisatrice</label>
+                                    <input class="form-control" value="${villeOrga}" name="villeOrga" id="villeOrga" type="text" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ville</label>
+                                    <select id="idVille" name="ville" class="form-control" onchange="setCp()">
+                                        <c:forEach var="ville" items="${listeVilles}">
+                                            <option value="${ville.idVille}">${ville.nom}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Lieu</label>
+                                    <select id="idLieu" name="lieu" class="form-control" onchange="setRue()">
+                                        <c:forEach var="lieu" items="${listeLieux}">
+                                            <option value="${lieu.idLieu}" >${lieu.nom}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rue</label>
+                                    <input class="form-control" name="rue" id="rue" type="text" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Code postal</label>
+                                    <input class="form-control" name="cp" id="cp" type="text" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Latitude</label>
+                                    <input class="form-control" name="latitude" id="latitude" type="text" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Longitude</label>
+                                    <input class="form-control" name="longitude" id="longitude" type="text" readonly>
+                                </div>
+                            </div>
                         </div>
                         <br>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                S'inscrire
-                            </button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Publier
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Annuler
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </article>
@@ -100,16 +138,60 @@
         </div>
     </div>
 </div>
-
 <script>
-    $(document).ready(function () {
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-        $(function () {
-            $("#datepicker2").datepicker();
-        })
-    });
 
+    window.onload = function ()
+    {
+        var listLieux = [
+            <c:forEach var="lieu" items="${listeLieux}">
+            { id : ${lieu.idLieu}, rue :  "${lieu.rue}", latitude : ${lieu.latitude}, longitude : ${lieu.longitude}},
+            </c:forEach>
+        ];
+        var lieu = listLieux.find(
+            el => el.id == idLieu
+    );
+        document.getElementById("rue").value = listLieux[0].rue;
+        document.getElementById("latitude").value = listLieux[0].latitude;
+        document.getElementById("longitude").value = listLieux[0].longitude;
+
+        var listVilles = [
+            <c:forEach var="ville" items="${listeVilles}">
+            { id : ${ville.idVille}, cp :  "${ville.codePostal}"},
+            </c:forEach>
+        ];
+        document.getElementById("cp").value = listVilles[0].cp;
+    };
+
+    var listLieux = [
+        <c:forEach var="lieu" items="${listeLieux}">
+        { id : ${lieu.idLieu}, rue :  "${lieu.rue}", latitude : ${lieu.latitude}, longitude : ${lieu.longitude}},
+        </c:forEach>
+    ];
+
+    var listVilles = [
+        <c:forEach var="ville" items="${listeVilles}">
+            { id : ${ville.idVille}, cp :  "${ville.codePostal}"},
+        </c:forEach>
+    ];
+
+    function setRue() {
+        var e = document.getElementById("idLieu");
+        var idLieu = e.value;
+        var rue = listLieux.find(
+            el => el.id == idLieu
+    );
+        document.getElementById("rue").value = rue.rue;
+        document.getElementById("latitude").value = rue.latitude;
+        document.getElementById("longitude").value = rue.longitude;
+    }
+
+        function setCp() {
+            var e = document.getElementById("idVille");
+            var idVille = e.value;
+            var cp = listVilles.find(
+                el => el.id == idVille
+        );
+            document.getElementById("cp").value = cp.cp;
+        }
 </script>
 <%@ include file="../layout/footer.jsp" %>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +25,9 @@ public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private SortieManager sortieManager;
+	private ParticipantManager participantManager;
 	private LieuManager lieuManager;
+	private SiteManager siteManager;
 	private VilleManager villeManager;
 	private Sortie sortie;
 
@@ -34,8 +37,10 @@ public class AddSortieServlet extends HttpServlet {
     public AddSortieServlet() {
         super();
         this.sortieManager = new SortieManager();
+		this.participantManager = new ParticipantManager();
         this.lieuManager = new LieuManager();
         this.villeManager = new VilleManager();
+        this.siteManager =  new SiteManager();
     }
 
 	/**
@@ -53,6 +58,20 @@ public class AddSortieServlet extends HttpServlet {
 			List<Ville> villes= villeManager.selectAll();
 			request.setAttribute("listeVilles", villes);
 		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
+		HttpSession session = request.getSession();
+		int participantConnecte = (int)session.getAttribute("idParticipant");
+		try {
+			Participant participant = participantManager.afficher(participantConnecte);
+			Site site = siteManager.selectById(participant.getSite());
+			System.out.println(site.getNom());
+			request.setAttribute("villeOrga", site.getNom());
+
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 

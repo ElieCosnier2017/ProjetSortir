@@ -26,8 +26,7 @@ public class ParticipantManager {
 	}
 
 
-	public Participant ajouter(String nom, String prenom, String telephone, String mail, String pseudo, String password, boolean admin, boolean actif) throws BusinessException
-	{
+	public Participant ajouter(String nom, String prenom, String telephone, String mail, String pseudo, String password, boolean admin, boolean actif) throws BusinessException{
 		BusinessException exception = new BusinessException();
 
 		Participant participant = new Participant(nom, prenom, telephone, mail, pseudo, password, admin, actif);
@@ -45,8 +44,7 @@ public class ParticipantManager {
 		return participant;
 	}
 	
-	public Participant modifier(Participant participant) throws BusinessException, SQLException
-	{
+	public Participant modifier(Participant participant) throws BusinessException, SQLException{
 		return this.participantDAO.update(participant);
 	}
 	

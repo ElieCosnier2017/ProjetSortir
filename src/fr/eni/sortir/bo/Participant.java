@@ -13,6 +13,7 @@ public class Participant implements Serializable {
     private String password;
     private boolean administrateur;
     private boolean actif;
+    private int idSite;
     
 	public Participant() {		
 	}
@@ -35,6 +36,18 @@ public class Participant implements Serializable {
         this.telephone = telephone;
         this.mail = mail;
         this.pseudo = pseudo;
+    }
+
+    public Participant(String nom, String prenom, String telephone, String mail, String pseudo, String password, boolean administrateur, boolean actif, int idSite) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.pseudo = pseudo;
+        this.password = password;
+        this.administrateur = administrateur;
+        this.actif = actif;
+        this.idSite = idSite;
     }
 
     public static long getSerialVersionUID() {
@@ -111,5 +124,13 @@ public class Participant implements Serializable {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public int getSite() {
+        return idSite;
+    }
+
+    public void setSite (int site) {
+        this.idSite = site;
     }
 }

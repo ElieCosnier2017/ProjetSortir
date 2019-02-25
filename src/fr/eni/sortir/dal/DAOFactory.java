@@ -21,4 +21,8 @@ public abstract class DAOFactory {
 	public static VilleDAO getVilleDAO() {
 		return new VilleDAOJdbcImpl();
 	}
+
+	public static SiteDAO getSiteDAO() {
+		return new SiteDAOJdbcImpl();
+	}
 }

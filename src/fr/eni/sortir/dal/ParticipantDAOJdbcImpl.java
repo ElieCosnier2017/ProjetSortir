@@ -17,8 +17,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, mot_de_passe, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
 	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, mail=?, pseudo=? WHERE idParticipant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
-	private static final String SELECT_ALL="SELECT idParticipant, nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
-	private static final String SELECT_ONE_BY_ID="SELECT * FROM PARTICIPANTS WHERE no_participant=?";
+	private static final String SELECT_ALL="SELECT nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
+	private static final String SELECT_ONE_BY_ID="SELECT no_participant, nom, prenom, telephone,pseudo, mail, administrateur, mot_de_passe, actif, sites_no_site FROM PARTICIPANTS WHERE no_participant=? ";
 	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE (mail=? OR pseudo=?) AND mot_de_passe= ? AND actif = ?";
 
 	/**
@@ -185,8 +185,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		participant.setPassword(rs.getString("mot_de_passe"));
 		participant.setAdministrateur(rs.getBoolean("administrateur"));
 		participant.setActif(rs.getBoolean("actif"));
+		participant.setSite(rs.getInt("sites_no_site"));
 
 		return participant;
 	}
-	
 }
