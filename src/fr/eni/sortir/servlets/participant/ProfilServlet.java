@@ -18,7 +18,7 @@ import java.sql.SQLException;
 /**
  * Servlet implementation class ParticipantServlet
  */
-@WebServlet("/profil")
+@WebServlet("/profilParticipant")
 public class ProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,28 +38,26 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		int idparticipant = 0;
+		HttpSession httpSession = request.getSession();
+		Integer idparticipant = (int) httpSession.getAttribute("idParticipant");
+//		if(!httpSession.getAttribute("idParticipant").equals("")) {
 
-		if(session.getAttribute("idParticipant") != null) {
-			idparticipant = (int) session.getAttribute("idParticipant");
 
-			try {
-				request.setAttribute("participant", participantManager.afficher(idparticipant));
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
-			rd.forward(request, response);
+		try {
+			request.setAttribute("participant", participantManager.afficher(idparticipant));
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+//		} else {
+//			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+//			response.setHeader("Location", "/connexion");
+//		}
 
-		if (idparticipant == 0) {
-			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-			response.setHeader("Location", "/connexion");
-		}
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

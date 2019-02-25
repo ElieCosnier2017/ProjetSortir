@@ -25,6 +25,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String DELETE="DELETE FROM SORTIE WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
 			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
+	private static final String CANCEL_SORTIE = "UPDATE SORTIE SET etatsortie=?,  WHERE no_sortie=?";
 
 	@Override
 	public List<Sortie> selectAll() {
@@ -187,6 +188,11 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			e.printStackTrace();
 		}
 		return sortieInfo;
+	}
+
+	@Override
+	public void cancelSortie(int idSortie, String motif) {
+
 	}
 
 	@Override
