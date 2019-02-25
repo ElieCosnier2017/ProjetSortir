@@ -11,6 +11,8 @@ public class EtatDAOJdbcImpl implements  EtatDAO {
 
     private static final String SELECT_ALL="SELECT * FROM ETATS";
     private static final String SELECT_ONE_BY_ID = "SELECT * FROM ETATS WHERE no_etat=?";
+    private static final String SELECT_ONE_BY_LIBELLE = "SELECT * FROM ETATS WHERE libelle=?";
+
 
     /**
      * Méthode qui sélectionne tous les éléments de la table LIEUX
@@ -47,6 +49,31 @@ public class EtatDAOJdbcImpl implements  EtatDAO {
             PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
 
             pstmt.setInt(1, idEtat);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next())
+            {
+                etat = this.map(rs);
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return etat;
+    }
+
+    /**
+     * Méthode qui récupère tous les éléments de la table ETATS pour un Libelle donné
+     */
+    @Override
+    public Etat selectByLibelle(String libelleEtat) {
+        Etat etat = null;
+
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_LIBELLE);
+
+            pstmt.setString(1, libelleEtat);
             ResultSet rs = pstmt.executeQuery();
 
             if(rs.next())

@@ -21,5 +21,5 @@ public interface SortieDAO {
 
 	List selectAllInfoById(int idSortie);
 
-    void cancelSortie(int idSortie, String motif);
+    void cancelSortie(int idSortie, int idEtat, String motif);
 }
