@@ -35,7 +35,11 @@ public class InscriptionSortieServlet extends HttpServlet {
             }
         }
         else {
-            inscriptionManager.desistementSortie(idSortie, idParticipant);
+            try {
+                inscriptionManager.desistementSortie(idSortie, idParticipant);
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            }
         }
     }
 

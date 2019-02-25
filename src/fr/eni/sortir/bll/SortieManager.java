@@ -48,5 +48,8 @@ public class SortieManager {
         return this.sortieDAO.selectAllInfoById(idSortie);
     }
 
+    public void cancelSortie(int idSortie, String motif) {
+        this.sortieDAO.cancelSortie(idSortie, motif);
+    }
 
 }

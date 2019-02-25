@@ -40,7 +40,7 @@ public class InscriptionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -63,7 +63,7 @@ public class InscriptionServlet extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 
 				// a changer
-				response.setHeader("Location", "/");
+				response.setHeader("Location", "/profilParticipant");
 
 			} else {
 				//TODO afficher message si pas de resultat

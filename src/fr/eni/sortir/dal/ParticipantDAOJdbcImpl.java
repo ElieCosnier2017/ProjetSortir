@@ -142,7 +142,6 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("after builder" +  participant);
 		return participant;
 	}
 

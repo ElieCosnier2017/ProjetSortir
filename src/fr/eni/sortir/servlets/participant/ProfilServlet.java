@@ -12,58 +12,59 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.sql.SQLException;
 
 /**
- * Servlet implementation class ParticipantServlet
+ * Servlet implementation class ProfilServlet
  */
-@WebServlet("/profil")
+@WebServlet("/profilParticipant")
 public class ProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private ParticipantManager participantManager;
-	private Participant participant;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ProfilServlet() {
         super();
-		participantManager = new ParticipantManager();
-
+        System.out.println("const");
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession httpSession = request.getSession();
-		Integer idparticipant = (int) httpSession.getAttribute("idParticipant");
-//		if(!httpSession.getAttribute("idParticipant").equals("")) {
+		ParticipantManager participantManager;
+		Participant participant;
+		HttpSession session = request.getSession();
+		int idparticipant = 0;
+		participantManager = new ParticipantManager();
+		if(session.getAttribute("idParticipant") != null) {
+			idparticipant = (int) session.getAttribute("idParticipant");
 
+			try {
+				request.setAttribute("participant", participantManager.afficher(idparticipant));
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		try {
-			request.setAttribute("participant", participantManager.afficher(idparticipant));
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
+			rd.forward(request, response);
 		}
-//		} else {
+
+//		if (idparticipant == 0) {
 //			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 //			response.setHeader("Location", "/connexion");
 //		}
-
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response){
+		ParticipantManager participantManager = new ParticipantManager();
+		Participant participant;
 		HttpSession httpSession = request.getSession();
 		int idparticipant = (int) httpSession.getAttribute("idParticipant");
 		String nom = request.getParameter("nom");
