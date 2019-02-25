@@ -20,7 +20,12 @@ import java.util.List;
 /**
  * Servlet implementation class Sortir
  */
-@WebServlet("/sortie/add")
+@WebServlet(
+        urlPatterns= {
+                "/nouvelleSortie",
+                "/editerSortie",
+                "/annulerSortie"
+        })
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,34 +52,36 @@ public class AddSortieServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			List<Lieu> Lieux = lieuManager.selectAll();
-			request.setAttribute("listeLieux", Lieux);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
 
-		try {
-			List<Ville> villes= villeManager.selectAll();
-			request.setAttribute("listeVilles", villes);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
+        if(request.getServletPath().equals("/nouvelleSortie")) {
+            try {
+                List<Lieu> Lieux = lieuManager.selectAll();
+                request.setAttribute("listeLieux", Lieux);
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            }
 
-		HttpSession session = request.getSession();
-		int participantConnecte = (int)session.getAttribute("idParticipant");
-		try {
-			Participant participant = participantManager.afficher(participantConnecte);
-			Site site = siteManager.selectById(participant.getSite());
-			System.out.println(site.getNom());
-			request.setAttribute("villeOrga", site.getNom());
+            try {
+                List<Ville> villes = villeManager.selectAll();
+                request.setAttribute("listeVilles", villes);
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            }
 
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            HttpSession session = request.getSession();
+            int participantConnecte = (int) session.getAttribute("idParticipant");
+            try {
+                Participant participant = participantManager.afficher(participantConnecte);
+                Site site = siteManager.selectById(participant.getSite());
+                System.out.println(site.getNom());
+                request.setAttribute("villeOrga", site.getNom());
 
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
 		rd.forward(request, response);
 	}

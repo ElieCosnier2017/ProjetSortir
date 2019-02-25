@@ -41,7 +41,7 @@
             <div class="card">
                 <article class="card-body">
                     <h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
-                    <form method="post" action="/sortie/add">
+                    <form method="post" action="action="<%=request.getContextPath()%>/${path}"">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -110,17 +110,10 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 offset-2">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">
                                         Enregistrer
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        Publier
                                     </button>
                                 </div>
                             </div>
