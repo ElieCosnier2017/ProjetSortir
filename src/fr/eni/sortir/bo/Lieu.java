@@ -22,8 +22,6 @@ public class Lieu implements Serializable {
         this.longitude = longitude;
     }
 
-    public Lieu(){}
-
     public int getIdLieu() {
         return idLieu;
     }
