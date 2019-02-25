@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
         <title>Sortir.com - Connexion</title>
     </head>
     <body>
@@ -35,7 +37,7 @@
                             <form method="post">
                                 <div class="form-group">
                                     <label>Votre email ou votre pseudo</label>
-                                    <input class="form-control" name="email" placeholder="Email ou Pseudo" type="text" required>
+                                    <input class="form-control" name="email" placeholder="Email ou Pseudo" type="text" autofocus required>
                                 </div>
                                 <div class="form-group">
                                     <label>Ton mot de passe</label>

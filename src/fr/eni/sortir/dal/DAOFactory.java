@@ -2,7 +2,7 @@ package fr.eni.sortir.dal;
 
 public abstract class DAOFactory {
 
-	public static SortieDAO getListeSortieDAO() {
+	public static SortieDAO getSortieDAO() {
 		return new SortieDAOJdbcImpl();
 	}
 
@@ -12,6 +12,10 @@ public abstract class DAOFactory {
 
 	public static LieuDAO getLieuDAO() {
 		return new LieuDAOJdbcImpl();
+	}
+
+	public static InscriptionDAO getInscriptionDAO() {
+		return new InscriptionDAOJdbcImpl();
 	}
 
 	public static EtatDAO getEtatDAO() {

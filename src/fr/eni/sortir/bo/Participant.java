@@ -14,7 +14,7 @@ public class Participant implements Serializable {
     private boolean administrateur;
     private boolean actif;
     private int idSite;
-    
+
 	public Participant() {		
 	}
 	
@@ -49,7 +49,6 @@ public class Participant implements Serializable {
         this.actif = actif;
         this.idSite = idSite;
     }
-
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

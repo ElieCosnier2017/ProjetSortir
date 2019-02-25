@@ -12,7 +12,7 @@ public class SortieManager {
     private SortieDAO sortieDAO;
 
     public SortieManager() {
-        this.sortieDAO = DAOFactory.getListeSortieDAO();
+        this.sortieDAO = DAOFactory.getSortieDAO();
     }
 
     public List<Sortie> selectionnerListes() throws BusinessException {
@@ -43,4 +43,10 @@ public class SortieManager {
     public Sortie selectById(int idSortie){
         return this.sortieDAO.selectById(idSortie);
     }
+
+    public List selectAllInfoById(int idSortie){
+        return this.sortieDAO.selectAllInfoById(idSortie);
+    }
+
+
 }

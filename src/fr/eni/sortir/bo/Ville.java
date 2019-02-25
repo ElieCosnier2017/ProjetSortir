@@ -8,13 +8,14 @@ public class Ville implements Serializable {
     private String nom;
     private int codePostal;
 
+    public Ville() {
+    }
+
     public Ville(int idVille, String nom, int codePostal) {
         this.idVille = idVille;
         this.nom = nom;
         this.codePostal = codePostal;
     }
-
-    public Ville(){}
 
     public int getIdVille() {
         return idVille;

@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class ProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ParticipantManager participantManager = new ParticipantManager();
+	private ParticipantManager participantManager;
 	private Participant participant;
 
     /**
@@ -30,16 +30,19 @@ public class ProfilServlet extends HttpServlet {
      */
     public ProfilServlet() {
         super();
-        // TODO Auto-generated constructor stub
+		participantManager = new ParticipantManager();
+
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idparticipant;
 		HttpSession httpSession = request.getSession();
- 		idparticipant = (int) httpSession.getAttribute("idParticipant");
+		Integer idparticipant = (int) httpSession.getAttribute("idParticipant");
+//		if(!httpSession.getAttribute("idParticipant").equals("")) {
+
+
 		try {
 			request.setAttribute("participant", participantManager.afficher(idparticipant));
 		} catch (BusinessException e) {
@@ -47,6 +50,11 @@ public class ProfilServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+//		} else {
+//			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+//			response.setHeader("Location", "/connexion");
+//		}
+
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
 		rd.forward(request, response);
@@ -64,18 +72,25 @@ public class ProfilServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
+		String confpassword = request.getParameter("confpassword");
+		System.out.println(nom + ' '+prenom+' '+mail+' '+telephone+' '+pseudo);
 
-
-		if (password.isEmpty()){
-			try {
-				participant = new Participant(idparticipant, nom, prenom, mail, telephone, pseudo);
-				participantManager.modifier(participant);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		if(password == null) {
+			Participant oldparticipant = (Participant) request.getAttribute("participant");
+			password = oldparticipant.getPassword();
 		}
+
+		try {
+			participant = new Participant(idparticipant, nom, prenom, telephone, mail, pseudo, password);
+			participantManager.modifier(participant);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+
 	}
 
 }

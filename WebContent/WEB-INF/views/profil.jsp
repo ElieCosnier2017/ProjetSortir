@@ -2,117 +2,62 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
 <%@ include file="../layout/navbar.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
         <title>Sortir.com - Gestion du profil</title>
     </head>
     <body>
-        <%--<div class="container emp-profile">--%>
-            <%--<%--%>
-                <%--Participant participant = (Participant) request.getAttribute("participant");--%>
-            <%--%>--%>
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="">
-                    <h5>
-                        <%= participant.getNom() %> <%= participant.getPrenom() %>
-                    </h5>
-                    <input type="button" class="profile-edit-btn" data-toggle="modal" data-target="#editprofile" value="Modifier le Profil"/>
-                </div>
-                <div class="col-md-6">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Pseudo</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= participant.getPseudo() %></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Nom </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= participant.getNom() %></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Prenom</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= participant.getPrenom() %></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= participant.getMail() %></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Téléphone</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= participant.getTelephone() %></p>
-                                </div>
-                            </div>
-                        </div>
+        <div class="container emp-profile">
+            <c:if test="${!empty participant }">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="">
                     </div>
-                </div>
-            </div>
-        </div>
-         <div class="modal fade" id="editprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modifier le profil</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post">
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Nom</label>
-                                        <input class="form-control" name="nom" placeholder="Nom" type="text" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Téléphone</label>
-                                        <input class="form-control" name="telephone" placeholder="Téléphone" type="tel" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Pseudo</label>
-                                        <input class="form-control" name="pseudo" placeholder="Pseudo" type="text"required>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Prénom</label>
-                                        <input class="form-control" name="prenom" placeholder="Prénom" type="text" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input class="form-control" name="email" placeholder="Email" type="email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mot de passe</label>
-                                        <input class="form-control" name="password" placeholder="*********" type="password" required>
-                                    </div>
-                                </div>
+                    <div class="col-md-">
+                        <form method="post">
+                            <div class="form-group">
+                                <label>Pseudo</label>
+                                <input class="form-control" name="pseudo" placeholder="Pseudo" value="${participant.pseudo}" type="text" required>
                             </div>
-                        </div>
-                        <div class="modal-footer">
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input class="form-control" name="prenom" placeholder="Prénom" value="${participant.prenom}" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input class="form-control" name="nom" placeholder="Nom" value="${participant.nom}"  type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input class="form-control" name="telephone" placeholder="Téléphone" value="<c:if test="${!empty participant.telephone }"> ${participant.telephone} </c:if>"  type="tel">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" name="email" placeholder="Email" value="${participant.mail}" type="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nouveau mot de passe</label>
+                                <input class="form-control" name="password" placeholder="Nouveau mot de passe" type="password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirmation nouveau mot de passe</label>
+                                <input class="form-control" name="confpassword" placeholder="Confirmation nouveau mot de passe" type="password">
+                            </div>
+                            <div class="form-group">
+                                <label>Ville de rattachement</label>
+                                <input class="form-control" name="ville" placeholder="" type="">
+                            </div>
+                            <div class="form-group">
+                                <label>Photo</label>
+                                <input class="form-control" name="photo" placeholder="" type="file">
+                            </div>
+
                             <button type="submit" class="btn btn-success">Modifier</button>
-                            <button type="button" class="btn btn-danger">Annuler</button>
-                        </div>
-                    </form>
+                            <a href="/" class="btn btn-danger">Annuler</a>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </c:if>
         </div>
+
 <%@ include file="../layout/footer.jsp"%>

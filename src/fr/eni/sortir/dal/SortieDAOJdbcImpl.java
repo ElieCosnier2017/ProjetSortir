@@ -5,12 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.sortir.bll.BusinessException;
+import fr.eni.sortir.bo.Lieu;
+import fr.eni.sortir.bo.Site;
 import fr.eni.sortir.bo.Sortie;
+import fr.eni.sortir.bo.Ville;
 import org.json.simple.JSONArray;
 
 public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
     private static final String SELECT_BY_ID = "SELECT * FROM SORTIES WHERE no_sortie=?";
+	private static final String SELECT_ALL_INFO_BY_ID = "SELECT * FROM SORTIES As s " +
+			"JOIN PARTICIPANTS AS p ON s.organisateur = p.no_participant " +
+			"JOIN LIEUX as l ON s.lieux_no_lieu = l.no_lieu " +
+			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
+			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
+			"WHERE s.no_sortie = ? ";
     private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIE SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIE WHERE idSortie=?";
@@ -140,6 +149,44 @@ public class SortieDAOJdbcImpl implements SortieDAO {
             e.printStackTrace();
         }
         return sortie;
+	}
+
+	@Override
+	public List selectAllInfoById(int idSortie) {
+		Sortie sortie = new Sortie();
+		Lieu lieu = new Lieu();
+		Ville ville = new Ville();
+		Site site = new Site();
+		List sortieInfo = new ArrayList();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_INFO_BY_ID);
+			pstmt.setInt(1, idSortie);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				sortie = sortieBuilder(rs);
+				lieu.setIdLieu(rs.getInt("no_lieu"));
+				lieu.setLatitude(rs.getFloat("latitude"));
+				lieu.setLongitude(rs.getFloat("longitude"));
+				lieu.setNom(rs.getString("nom_lieu"));
+				lieu.setRue(rs.getString("rue"));
+				ville.setIdVille(rs.getInt("no_ville"));
+				ville.setCodePostal(rs.getInt("code_postal"));
+				ville.setNom(rs.getString("nom_ville"));
+				site.setIdSite(rs.getInt("no_site"));
+				site.setNom(rs.getString("nom_site"));
+				sortieInfo.add(sortie);
+				sortieInfo.add(lieu);
+				sortieInfo.add(ville);
+				sortieInfo.add(site);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return sortieInfo;
 	}
 
 	@Override
