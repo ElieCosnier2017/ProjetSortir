@@ -3,6 +3,7 @@ package fr.eni.sortir.servlets.sortie;
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.InscriptionManager;
 import fr.eni.sortir.bo.Participant;
+import fr.eni.sortir.dal.CodesResultatDAL;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,16 +31,23 @@ public class InscriptionSortieServlet extends HttpServlet {
         if(request.getServletPath().equals("/sortie/inscription")){
             try {
                 inscriptionManager.inscriptionSortie(idSortie, idParticipant);
-                response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		        response.setHeader("Location", "/");
+                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", "/");
             } catch (BusinessException e) {
+                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", "/");
+                e.ajouterErreur(CodesResultatDAL.ALREADY_EXIST);
                 e.printStackTrace();
             }
         }
         else {
             try {
                 inscriptionManager.desistementSortie(idSortie, idParticipant);
+                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", "/");
             } catch (BusinessException e) {
+                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", "/");
                 e.printStackTrace();
             }
         }
