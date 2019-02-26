@@ -7,6 +7,7 @@ import fr.eni.sortir.dal.SortieDAO;
 import org.json.simple.JSONArray;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class SortieManager {
@@ -35,6 +36,11 @@ public class SortieManager {
 		}
 		return sortie;
 	}
+
+    public Sortie update(Sortie sortie) throws BusinessException, SQLException
+    {
+        return this.sortieDAO.update(sortie);
+    }
 
     public JSONArray sortiesBySite(int idSite) throws BusinessException
     {

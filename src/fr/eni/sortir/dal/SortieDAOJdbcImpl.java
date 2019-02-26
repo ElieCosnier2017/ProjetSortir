@@ -21,7 +21,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
 			"WHERE s.no_sortie = ? ";
     private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE SORTIE SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
+	private static final String UPDATE = "UPDATE SORTIE SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, organisateur=?, lieux_no_lieu=?, etats_no_etat=?  WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIE WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
 			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
@@ -106,7 +106,9 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());
 			pstmt.setString(8, sortie.getPhoto());
-			pstmt.setInt(9, sortie.getIdSortie());
+			pstmt.setInt(9, sortie.getOrganisateur());
+			pstmt.setInt(10, sortie.getIdLieu());
+			pstmt.setInt(11, sortie.getIdEtat());
 			pstmt.executeUpdate();
 		} catch (SQLException e)
 		{

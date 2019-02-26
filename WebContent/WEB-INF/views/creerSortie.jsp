@@ -56,14 +56,39 @@
                                     <label>Date limite d'inscription</label>
                                     <input class="form-control" name="datefin" type="date">
                                 </div>
-                                <div class="form-group">
-                                    <label>Nombre d'inscription</label>
-                                    <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
-                                </div>
-                                <div class="form-group">
-                                    <label>Durée (minutes)</label>
-                                    <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
-                                </div>
+                                <c:choose>
+                                    <c:when test ="${title}== Modifier">
+                                        <div style="display:inline-flex">
+                                            <div class="form-group">
+                                                <label>Nombre d'inscription</label>
+                                                <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Durée (minutes)</label>
+                                                <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>États</label>
+                                            <select id="idEtat" name="etat" class="form-control">
+                                                <c:forEach var="etat" items="${listeEtats}">
+                                                    <option value="${etat.idEtat}">${etat.libelle}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="form-group">
+                                            <label>Nombre d'inscription</label>
+                                            <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Durée (minutes)</label>
+                                            <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+
                                 <div class="form-group">
                                     <label>Description et infos</label>
                                     <textarea class="form-control" name="infos" type="text" style="height: 128px;"></textarea>
