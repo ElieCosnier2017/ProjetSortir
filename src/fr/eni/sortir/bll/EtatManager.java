@@ -23,4 +23,8 @@ public class EtatManager {
     {
         return this.etatDAO.selectById(idEtat);
     }
+
+    public Etat selectByLibelle(String libelle){
+        return this.etatDAO.selectByLibelle(libelle);
+    }
 }

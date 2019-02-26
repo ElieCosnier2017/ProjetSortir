@@ -1,5 +1,6 @@
 package fr.eni.sortir.bll;
 
+import fr.eni.sortir.bo.Etat;
 import fr.eni.sortir.bo.Sortie;
 import fr.eni.sortir.dal.DAOFactory;
 import fr.eni.sortir.dal.SortieDAO;
@@ -48,5 +49,10 @@ public class SortieManager {
         return this.sortieDAO.selectAllInfoById(idSortie);
     }
 
+    public void cancelSortie(int idSortie, String motif) {
+        EtatManager etatManager = new EtatManager();
+        Etat etat = etatManager.selectByLibelle("Annulée");
+        this.sortieDAO.cancelSortie(idSortie, etat.getIdEtat(), motif);
+    }
 
 }

@@ -9,4 +9,6 @@ import java.util.List;
 public interface EtatDAO {
     List<Etat> selectAll() throws BusinessException;
     Etat selectById(int idEtat) throws SQLException;
+
+    Etat selectByLibelle(String libelle);
 }
