@@ -41,7 +41,7 @@
             <div class="card">
                 <article class="card-body">
                     <h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
-                    <form method="post" action="action="<%=request.getContextPath()%>/${path}"">
+                    <form method="post">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">

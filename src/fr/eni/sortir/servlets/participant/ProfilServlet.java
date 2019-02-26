@@ -31,7 +31,6 @@ public class ProfilServlet extends HttpServlet {
     public ProfilServlet() {
         super();
 		participantManager = new ParticipantManager();
-
     }
 
 	/**

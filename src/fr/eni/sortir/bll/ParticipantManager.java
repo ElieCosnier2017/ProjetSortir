@@ -32,8 +32,7 @@ public class ParticipantManager {
 		Participant participant = new Participant(nom, prenom, telephone, mail, pseudo, password, admin, actif);
 
 
-		if(!exception.hasErreurs())
-		{
+		if(!exception.hasErreurs()) {
 			this.participantDAO.insert(participant);
 		}
 

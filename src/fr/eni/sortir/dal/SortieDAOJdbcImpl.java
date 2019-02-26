@@ -20,12 +20,12 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
 			"WHERE s.no_sortie = ? ";
-    private static final String INSERT="INSERT INTO SORTIE (nom, datedebut, duree, datecloture, nbinscriptionsmax, descritpionsinfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE SORTIE SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
-	private static final String DELETE="DELETE FROM SORTIE WHERE idSortie=?";
+    private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
+	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
 			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
-	private static final String CANCEL_SORTIE = "UPDATE SORTIE SET etatsortie=?, etats_no_etat=? WHERE no_sortie=?";
+	private static final String CANCEL_SORTIE = "UPDATE SORTIES SET etatsortie=?, etats_no_etat=? WHERE no_sortie=?";
 
 	@Override
 	public List<Sortie> selectAll() {
