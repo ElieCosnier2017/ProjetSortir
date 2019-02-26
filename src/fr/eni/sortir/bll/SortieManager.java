@@ -41,7 +41,7 @@ public class SortieManager {
         return this.sortieDAO.selectSortiesBySite(idSite);
     }
 
-    public Sortie selectById(int idSortie){
+    public Sortie selectById(int idSortie) throws BusinessException{
         return this.sortieDAO.selectById(idSortie);
     }
 

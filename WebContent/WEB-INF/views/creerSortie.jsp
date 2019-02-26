@@ -4,7 +4,7 @@
 <%@ include file="../layout/entete.jsp" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
-<title>Sortir.com - Créer sortie</title>
+<title>${title} sortie</title>
 <link rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -41,7 +41,7 @@
             <div class="card">
                 <article class="card-body">
                     <h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
-                    <form method="post" action="action="<%=request.getContextPath()%>/${path}"">
+                    <form method="post" action="<%=request.getContextPath()%>/${path}">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
