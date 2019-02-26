@@ -119,9 +119,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">
+                                    <a href="/" type="button" class="btn btn-primary btn-block">
                                         Annuler
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
