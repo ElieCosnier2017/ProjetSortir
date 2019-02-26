@@ -42,7 +42,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(4, participant.getMail());
 			pstmt.setString(5, participant.getPseudo());
 			pstmt.setString(6, participant.getPassword());
-			pstmt.executeUpdate();
+			pstmt.execute();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
 			if (rs.next())
@@ -93,7 +93,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
 			pstmt.setInt(1, idParticipant);
-			pstmt.executeUpdate();
+			pstmt.execute();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
