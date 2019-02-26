@@ -32,16 +32,19 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	@Override
 	public List<Sortie> selectAll() {
 		List<Sortie> listeSortie = new ArrayList<Sortie>();
-//		try(Connection cnx = ConnectionProvider.getConnection()) {
-//			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
-//			ResultSet rs = pstmt.executeQuery();
-//			while(rs.next()) {
-//
-//			}
-//		}
-//		catch(Exception e) {
-//			e.printStackTrace();
-//		}
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				System.out.println(rs.getString("libelle"));
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return listeSortie;
 	}
 
@@ -219,15 +222,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			while(rs.next())
 			{
 				Sortie sortie = sortieBuilder(rs);
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("no_sortie", sortie.getIdSortie());
-				jsonObject.put("nom", sortie.getNom());
-				jsonObject.put("dateDebut", sortie.getDateDebut());
-				jsonObject.put("duree", sortie.getDuree());
-				jsonObject.put("dateLimiteInscription", sortie.getDateLimiteInscription());
-
-
-				jsonArray.add(jsonObject);
+				jsonArray.add(sortie.toString());
 			}
 		}
 		catch(Exception e)
@@ -254,10 +249,6 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		sortie.setNbInscriptionsMax(rs.getInt("nbinscriptionsmax"));
 		sortie.setInfosSortie(rs.getString("descriptioninfos"));
 		sortie.setEtat(rs.getString("etatsortie"));
-		sortie.setPhoto(rs.getString("urlPhoto"));
-		sortie.setidEtat(rs.getInt("etats_no_etat"));
-		sortie.setIdLieu(rs.getInt("lieux_no_lieu"));
-		sortie.setOrganisateur(rs.getInt("organisateur"));
 		return sortie;
 	}
 }
