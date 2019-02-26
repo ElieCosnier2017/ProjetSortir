@@ -1,9 +1,9 @@
 <%@ page import="fr.eni.sortir.bo.Lieu" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.sun.media.sound.SimpleSoundbank" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-
 <title>${title} sortie</title>
 <link rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -40,32 +40,32 @@
         <div class="col-sm-10">
             <div class="card">
                 <article class="card-body">
-                    <h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
+                    <h4 class="card-title mb-4 mt-1">${title} une sortie</h4>
                     <form method="post" action="<%=request.getContextPath()%>/${path}">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Nom de la sortie</label>
-                                    <input class="form-control" name="nom" placeholder="Nom" type="text">
+                                    <input class="form-control" name="nom" placeholder="Nom" type="text" value="${sortie.nom}">
                                 </div>
                                 <div class="form-group">
                                     <label>Date et heure de la sortie</label>
-                                    <input class="form-control" name="datedebut" type="datetime-local">
+                                    <input class="form-control" name="datedebut" type="datetime-local" value="${sortie.dateDebut}">
                                 </div>
                                 <div class="form-group">
                                     <label>Date limite d'inscription</label>
-                                    <input class="form-control" name="datefin" type="date">
+                                    <input class="form-control" name="datefin" type="date" value="${sortie.dateLimiteInscription}">
                                 </div>
                                 <c:choose>
-                                    <c:when test ="${title}== Modifier">
+                                    <c:when test ="${title == 'Modifier'}">
                                         <div style="display:inline-flex">
                                             <div class="form-group">
                                                 <label>Nombre d'inscription</label>
-                                                <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
+                                                <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em;" value="${sortie.nbInscriptionsMax}">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="padding-left: 4em">
                                                 <label>Durée (minutes)</label>
-                                                <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
+                                                <input class="form-control" min="1" name="duree" type="number" style="width: 5em" value="${sortie.duree}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -91,7 +91,7 @@
 
                                 <div class="form-group">
                                     <label>Description et infos</label>
-                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;"></textarea>
+                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;">${sortie.infosSortie}</textarea>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -135,13 +135,22 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-4 offset-2">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">
                                         Enregistrer
                                     </button>
                                 </div>
                             </div>
+                            <c:if test ="${title == 'Modifier'}">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <a href="<%=request.getContextPath()%>/delete" type="button" class="btn btn-primary btn-block">
+                                            Supprimer sortie
+                                        </a>
+                                    </div>
+                                </div>
+                            </c:if>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <a href="/" type="button" class="btn btn-primary btn-block">
@@ -171,6 +180,7 @@
         document.getElementById("rue").value = listLieux[0].rue;
         document.getElementById("latitude").value = listLieux[0].latitude;
         document.getElementById("longitude").value = listLieux[0].longitude;
+        document.getElementById("idEtat").value = ${idEtat};
 
         var listVilles = [
             <c:forEach var="ville" items="${listeVilles}">

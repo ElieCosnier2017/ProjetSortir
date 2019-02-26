@@ -81,8 +81,6 @@ public class AddSortieServlet extends HttpServlet {
                 Participant participant = participantManager.afficher(participantConnecte);
                 Site site = siteManager.selectById(participant.getSite());
                 request.setAttribute("villeOrga", site.getNom());
-				List<Etat> etats = etatManager.selectAll();
-				request.setAttribute("listeEtats", etats);
 
             } catch (BusinessException e) {
                 e.printStackTrace();
@@ -94,7 +92,7 @@ public class AddSortieServlet extends HttpServlet {
 		else if ((request.getServletPath().equals("/editerSortie")))
 		{
 			request.setAttribute("title", "Modifier");
-			int idSortie= Integer.parseInt(request.getParameter("idSortie"));
+			int idSortie= 2;
 			SortieManager sortieManager = new SortieManager();
 
 			try {
@@ -102,13 +100,20 @@ public class AddSortieServlet extends HttpServlet {
 				Sortie sortie = sortieManager.selectById(idSortie);
 				request.setAttribute("sortie", sortie);
 				request.setAttribute("path", "editerSortie");
+				List<Etat> etats = etatManager.selectAll();
+				request.setAttribute("listeEtats", etats);
+				List<Ville> villes = villeManager.selectAll();
+				request.setAttribute("listeVilles", villes);
+				List<Lieu> Lieux = lieuManager.selectAll();
+				request.setAttribute("listeLieux", Lieux);
+				Etat etat = etatManager.selectById(sortie.getIdEtat());
+				request.setAttribute("idEtat", etat.getIdEtat());
 
 			} catch (BusinessException e) {
 				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/formSortie.jsp");
-			rd.forward(request, response);
-
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
@@ -158,7 +163,7 @@ public class AddSortieServlet extends HttpServlet {
 		Sortie nouvelleSortie = new Sortie();
 		nouvelleSortie.setNom(request.getParameter("nom"));
 		if(isCreation){
-			nouvelleSortie.setidEtat(4);
+			nouvelleSortie.setidEtat(2);
 		}
 		else {
 			nouvelleSortie.setidEtat(Integer.parseInt(request.getParameter("etat")));
