@@ -22,9 +22,9 @@ import java.util.List;
  */
 @WebServlet(
         urlPatterns= {
-                "/nouvelleSortie",
-                "/editerSortie",
-                "/annulerSortie"
+                "/sortie/ajouter",
+                "/sortie/editer",
+                "/sortie/annuler"
         })
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

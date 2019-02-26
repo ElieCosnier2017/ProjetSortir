@@ -27,9 +27,11 @@ public class InscriptionSortieServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Integer idParticipant = (Integer) session.getAttribute("idParticipant");
         InscriptionManager inscriptionManager = new InscriptionManager();
-        if(request.getServletPath().equals("/sortir/inscription")){
+        if(request.getServletPath().equals("/sortie/inscription")){
             try {
                 inscriptionManager.inscriptionSortie(idSortie, idParticipant);
+                response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+		        response.setHeader("Location", "/");
             } catch (BusinessException e) {
                 e.printStackTrace();
             }
