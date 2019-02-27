@@ -39,7 +39,7 @@ public class DetailSortieServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSortie.jsp");
             rd.forward(request, response);
         } else {
-            response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
             response.setHeader("Location", "/");
         }
     }

@@ -49,7 +49,7 @@ public class FilterUtilisation implements Filter {
         HttpSession session = httpRequest.getSession();
 
         if(session != null) {
-            if(session.getAttribute("idParticipant") != null) {
+            if(session.getAttribute("participant") != null) {
                 conditionUtilisation = true;
             }
         }

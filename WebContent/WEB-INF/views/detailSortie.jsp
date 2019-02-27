@@ -1,8 +1,6 @@
-<%@ page import="fr.eni.sortir.bo.Sortie" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
 <%@ include file="../layout/navbar.jsp"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <title>Sortir.com - Detail sortie</title>
 </head>
 <body>
@@ -102,7 +100,6 @@
             </div>
         </div>
     </form>
-    <a href="/sortie/add" class="float-right btn btn-outline-primary" style="margin-left: 10px;">Créer une sortie</a>
     </c:if>
 </div>
 <%@ include file="../layout/footer.jsp"%>
