@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 public interface SortieDAO {
 	List<Sortie> selectAll() throws BusinessException;
 
-	JSONObject selectSortiesBySite(int idSite);
+	List<Sortie> selectSortiesBySite(int idSite);
 
 	void insert(Sortie sortie) throws BusinessException;
 

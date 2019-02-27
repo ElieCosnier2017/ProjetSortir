@@ -4,10 +4,9 @@ import fr.eni.sortir.bo.Etat;
 import fr.eni.sortir.bo.Sortie;
 import fr.eni.sortir.dal.DAOFactory;
 import fr.eni.sortir.dal.SortieDAO;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class SortieManager {
@@ -37,7 +36,12 @@ public class SortieManager {
 		return sortie;
 	}
 
-    public JSONObject sortiesBySite(int idSite) throws BusinessException
+    public Sortie update(Sortie sortie) throws BusinessException, SQLException
+    {
+        return this.sortieDAO.update(sortie);
+    }
+
+    public List<Sortie> sortiesBySite(int idSite) throws BusinessException
     {
         return this.sortieDAO.selectSortiesBySite(idSite);
     }

@@ -26,6 +26,16 @@ public class InscriptionManager {
         }
     }
 
+    public int countinscrit(int idSortie) {
+        int nbInscription = inscriptionDAO.count(idSortie);
+        return nbInscription;
+    }
+
+    public Boolean isInscrit(int idSortie, int idParticipant) {
+        Boolean nbInscription = inscriptionDAO.estInscrit(idSortie, idParticipant);
+        return nbInscription;
+    }
+
     private boolean verifSortieForInscriptionOrDesistement(int idSortie) throws BusinessException {
         Sortie sortie = sortieManager.selectById(idSortie);
         return 1 == sortie.getIdEtat() && sortie.getDateLimiteInscription().after(new java.sql.Date(new java.util.Date().getTime()));
