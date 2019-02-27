@@ -47,7 +47,7 @@ public class SortieServlet extends HttpServlet {
 			Participant connecter = (Participant) session.getAttribute("participant");
 
 
-				out.println(json_sortie(1, connecter).toJSONString());
+			out.println(json_sortie(1, connecter).toJSONString());
 
 
 	}
@@ -86,8 +86,10 @@ public class SortieServlet extends HttpServlet {
 				jsonObject.put("dateLimiteInscription", sortie.getDateLimiteInscription().toString());
 				jsonObject.put("nbInscrit", nbinscrit);
 				jsonObject.put("nbMax", sortie.getNbInscriptionsMax());
+				jsonObject.put("idEtat", etatLibelle.getIdEtat());
 				jsonObject.put("libelleEtat", etatLibelle.getLibelle());
 				jsonObject.put("isInscrit", inscrit);
+				jsonObject.put("idParticipant", organisateur.getIdparticipant());
 				jsonObject.put("nomParticipant", organisateur.getNom());
 				jsonObject.put("prenomParticipant", organisateur.getPrenom());
 

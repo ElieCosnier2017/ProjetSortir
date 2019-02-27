@@ -76,9 +76,9 @@ public class AddSortieServlet extends HttpServlet {
             }
 
             HttpSession session = request.getSession();
-            int participantConnecte = (int) session.getAttribute("idParticipant");
+			Participant participantConnecte = (Participant) session.getAttribute("participant");
             try {
-                Participant participant = participantManager.afficher(participantConnecte);
+                Participant participant = participantManager.afficher(participantConnecte.getIdparticipant());
                 Site site = siteManager.selectById(participant.getSite());
                 request.setAttribute("villeOrga", site.getNom());
 				List<Etat> etats = etatManager.selectAll();
@@ -168,8 +168,8 @@ public class AddSortieServlet extends HttpServlet {
 		nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
 		nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
 		HttpSession session = request.getSession();
-		int participantConnecte = (int) session.getAttribute("idParticipant");
-		nouvelleSortie.setOrganisateur(participantConnecte);
+		Participant participantConnecte = (Participant) session.getAttribute("idParticipant");
+		nouvelleSortie.setOrganisateur(participantConnecte.getIdparticipant());
 
 		String datedebut = request.getParameter("datedebut");
 		String datefin = request.getParameter("datefin");
