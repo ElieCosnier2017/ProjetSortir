@@ -2,7 +2,6 @@ package fr.eni.sortir.servlets.sortie;
 
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.InscriptionManager;
-import fr.eni.sortir.bo.Participant;
 import fr.eni.sortir.dal.CodesResultatDAL;
 
 import javax.servlet.ServletException;

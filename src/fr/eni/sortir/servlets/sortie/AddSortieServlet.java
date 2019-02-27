@@ -53,7 +53,7 @@ public class AddSortieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(request.getServletPath().equals("/nouvelleSortie")) {
+        if(request.getServletPath().equals("/sortie/ajouter")) {
 
 			request.setAttribute("title", "Ajouter");
 			request.setAttribute("path", "nouvelleSortie");
@@ -86,7 +86,7 @@ public class AddSortieServlet extends HttpServlet {
             }
         }
 		// Afficher le formulaire de modification d'une sortie
-		else if ((request.getServletPath().equals("/editerSortie")))
+		else if ((request.getServletPath().equals("/sortie/editer")))
 		{
 			request.setAttribute("title", "Modifier");
 			int idSortie= Integer.parseInt(request.getParameter("idSortie"));
@@ -116,7 +116,7 @@ public class AddSortieServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Formulaire d'ajout d'une sortie
-		if(request.getServletPath().equals("/nouvelleSortie")) {
+		if(request.getServletPath().equals("/sortie/ajouter")) {
 			try {
 				request.setCharacterEncoding("UTF-8");
 				Sortie nouvelleSortie = new Sortie();

@@ -60,7 +60,7 @@ public class InscriptionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			if(participant != null){
-				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+				response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 
 				// a changer
 				response.setHeader("Location", "/profilParticipant");

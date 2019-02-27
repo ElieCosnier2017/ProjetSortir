@@ -23,8 +23,8 @@ public class ConnexionServlet extends HttpServlet {
                Participant participant =  connexionManager.getParticipant(email, mdp);
                if(participant != null){
                    HttpSession session = request.getSession();
-                   session.setAttribute("idParticipant", participant.getIdparticipant());
-                   response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+                   session.setAttribute("participant", participant);
+                   response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
                    response.setHeader("Location", "/");
                    if(rememberMe != null){
                         rememberParticipant(request, response, email);
@@ -62,7 +62,7 @@ public class ConnexionServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("test");
-        request.setAttribute("loginParticipant", rememberParticipant(request, response, null));
+        request.setAttribute("loginParticipant" ,  rememberParticipant(request, response, null));
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
         rd.forward(request, response);
     }
