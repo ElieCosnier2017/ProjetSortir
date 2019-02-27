@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface VilleDAO {
     List<Ville> selectAll() throws BusinessException;
+
+    Ville selectOneById(int idVille) throws BusinessException;
 }

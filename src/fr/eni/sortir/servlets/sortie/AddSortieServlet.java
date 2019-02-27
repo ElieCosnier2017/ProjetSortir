@@ -87,11 +87,14 @@ public class AddSortieServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
+			rd.forward(request, response);
         }
 		else if ((request.getServletPath().equals("/editerSortie")))
 		{
 			request.setAttribute("title", "Modifier");
-			int idSortie= 2;
+			Integer idSortie = lireParametreIdSortie(request);
 			SortieManager sortieManager = new SortieManager();
 
 			try {
@@ -112,10 +115,31 @@ public class AddSortieServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
-		rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
+			rd.forward(request, response);
+		}
+		else if(request.getServletPath().equals("/annulerSortie")) {
+			request.setAttribute("title", "Annuler");
+			Integer idSortie = lireParametreIdSortie(request);
+
+			try {
+				Sortie sortie = sortieManager.selectById(idSortie);
+				request.setAttribute("sortie", sortie);
+
+				Participant participant = participantManager.afficher(sortie.getOrganisateur());
+				Site site = siteManager.selectById(participant.getSite());
+				request.setAttribute("villeOrga", site.getNom());
+
+				Lieu lieu = lieuManager.selectById(sortie.getIdLieu());
+				request.setAttribute("lieu", lieu.getNom());
+			} catch (SQLException | BusinessException e) {
+				e.printStackTrace();
+			}
+
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/annulerSortie.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -182,5 +206,13 @@ public class AddSortieServlet extends HttpServlet {
 		nouvelleSortie.setDateLimiteInscription(new SimpleDateFormat("yyyy-MM-dd").parse(datefin));
 
 		return nouvelleSortie;
+	}
+
+	private int lireParametreIdSortie(HttpServletRequest request) {
+		Integer idSortie = null;
+		if(request.getParameter("id")!=null) {
+			idSortie = Integer.parseInt(request.getParameter("id"));
+		}
+		return idSortie;
 	}
 }

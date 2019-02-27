@@ -145,7 +145,7 @@
                             <c:if test ="${title == 'Modifier'}">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <a href="<%=request.getContextPath()%>/supprimerSortie" type="button" class="btn btn-primary btn-block">
+                                        <a href="<%=request.getContextPath()%>/annulerSortie" type="button" class="btn btn-primary btn-block">
                                             Supprimer sortie
                                         </a>
                                     </div>
@@ -153,7 +153,7 @@
                             </c:if>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <a href="/" type="button" class="btn btn-primary btn-block">
+                                    <a href="<%=request.getContextPath()%>/annulerSortie?idSortie=${sortie.idSortie}" type="button" class="btn btn-primary btn-block">
                                         Annuler
                                     </a>
                                 </div>
