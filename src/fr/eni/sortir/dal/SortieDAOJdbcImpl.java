@@ -15,14 +15,14 @@ import org.json.simple.parser.JSONParser;
 
 public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
-    private static final String SELECT_BY_ID = "SELECT * FROM SORTIES WHERE no_sortie=?";
+	private static final String SELECT_BY_ID = "SELECT * FROM SORTIES WHERE no_sortie=?";
 	private static final String SELECT_ALL_INFO_BY_ID = "SELECT * FROM SORTIES As s " +
 			"JOIN PARTICIPANTS AS p ON s.organisateur = p.no_participant " +
 			"JOIN LIEUX as l ON s.lieux_no_lieu = l.no_lieu " +
 			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
 			"WHERE s.no_sortie = ? ";
-    private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
@@ -32,19 +32,16 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	@Override
 	public List<Sortie> selectAll() {
 		List<Sortie> listeSortie = new ArrayList<Sortie>();
-		try(Connection cnx = ConnectionProvider.getConnection())
-		{
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next())
-			{
-				System.out.println(rs.getString("libelle"));
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+//		try(Connection cnx = ConnectionProvider.getConnection()) {
+//			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+//			ResultSet rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//
+//			}
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		return listeSortie;
 	}
 
@@ -136,22 +133,22 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 
 	@Override
 	public Sortie selectById(int idSortie) {
-        Sortie sortie = new Sortie();
-        try(Connection cnx = ConnectionProvider.getConnection())
-        {
-            PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
-            pstmt.setInt(1, idSortie);
-            ResultSet rs = pstmt.executeQuery();
-            while(rs.next())
-            {
-               sortie = sortieBuilder(rs);
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return sortie;
+		Sortie sortie = new Sortie();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
+			pstmt.setInt(1, idSortie);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				sortie = sortieBuilder(rs);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return sortie;
 	}
 
 	@Override
@@ -222,7 +219,15 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			while(rs.next())
 			{
 				Sortie sortie = sortieBuilder(rs);
-				jsonArray.add(sortie.toString());
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("no_sortie", sortie.getIdSortie());
+				jsonObject.put("nom", sortie.getNom());
+				jsonObject.put("dateDebut", sortie.getDateDebut());
+				jsonObject.put("duree", sortie.getDuree());
+				jsonObject.put("dateLimiteInscription", sortie.getDateLimiteInscription());
+
+
+				jsonArray.add(jsonObject);
 			}
 		}
 		catch(Exception e)
@@ -249,6 +254,10 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		sortie.setNbInscriptionsMax(rs.getInt("nbinscriptionsmax"));
 		sortie.setInfosSortie(rs.getString("descriptioninfos"));
 		sortie.setEtat(rs.getString("etatsortie"));
+		sortie.setPhoto(rs.getString("urlPhoto"));
+		sortie.setidEtat(rs.getInt("etats_no_etat"));
+		sortie.setIdLieu(rs.getInt("lieux_no_lieu"));
+		sortie.setOrganisateur(rs.getInt("organisateur"));
 		return sortie;
 	}
 }
