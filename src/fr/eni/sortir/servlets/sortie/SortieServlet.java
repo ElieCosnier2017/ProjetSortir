@@ -24,6 +24,7 @@ public class SortieServlet extends HttpServlet {
     public SortieServlet() throws BusinessException {
         super();
 		SortieManager sortieManager = new SortieManager();
+		sortieManager.sortiesBySite(1);
         // TODO Auto-generated constructor stub
     }
 
@@ -33,8 +34,10 @@ public class SortieServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SortieManager sortieManager = new SortieManager();
 		try {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			out.println(sortieManager.sortiesBySite(1));
+			out.println(sortieManager.sortiesBySite(1).toJSONString());
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

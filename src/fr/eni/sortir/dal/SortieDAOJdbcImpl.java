@@ -15,7 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
-	private static final String SELECT_BY_ID = "SELECT * FROM SORTIES WHERE no_sortie=?";
+    private static final String SELECT_BY_ID = "SELECT * FROM SORTIES WHERE no_sortie=?";
 	private static final String SELECT_ALL_INFO_BY_ID = "SELECT * FROM SORTIES As s " +
 			"JOIN PARTICIPANTS AS p ON s.organisateur = p.no_participant " +
 			"JOIN LIEUX as l ON s.lieux_no_lieu = l.no_lieu " +
@@ -133,22 +133,22 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 
 	@Override
 	public Sortie selectById(int idSortie) {
-		Sortie sortie = new Sortie();
-		try(Connection cnx = ConnectionProvider.getConnection())
-		{
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
-			pstmt.setInt(1, idSortie);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next())
-			{
-				sortie = sortieBuilder(rs);
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return sortie;
+        Sortie sortie = new Sortie();
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
+            pstmt.setInt(1, idSortie);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+               sortie = sortieBuilder(rs);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return sortie;
 	}
 
 	@Override

@@ -5,12 +5,11 @@
 
 			driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 			type="javax.sql.DataSource"
-			url="jdbc:sqlserver://LAPTOP-M5P3NLFT;integratedSecurity=true;databaseName=SORTIR"
-			username=""
-			password=""
+			url="jdbc:sqlserver://44-UC45-15:1433;databaseName=SORTIR"
+			username="sa"
+			password="Pa$$w0rd"
 			maxTotal="100"
 			maxIdle="30"
 			maxWaitMillis="10000"
 	/>
-
 </Context>

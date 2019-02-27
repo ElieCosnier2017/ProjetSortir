@@ -55,11 +55,6 @@ public class ProfilServlet extends HttpServlet {
 		} else {
 			System.out.println("pas de connexion");
 		}
-
-//		if (idparticipant == 0) {
-//			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-//			response.setHeader("Location", "/connexion");
-//		}
 	}
 
 	/**

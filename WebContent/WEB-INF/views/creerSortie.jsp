@@ -4,7 +4,7 @@
 <%@ include file="../layout/entete.jsp" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
-<title>${title} sortie</title>
+<title>Sortir.com - ${title} Créer sortie</title>
 <link rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -41,7 +41,7 @@
             <div class="card">
                 <article class="card-body">
                     <h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
-                    <form method="post" action="<%=request.getContextPath()%>/${path}">
+                    <form method="post" action="action="<%=request.getContextPath()%>/${path}"">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -56,39 +56,14 @@
                                     <label>Date limite d'inscription</label>
                                     <input class="form-control" name="datefin" type="date">
                                 </div>
-                                <c:choose>
-                                    <c:when test ="${title}== Modifier">
-                                        <div style="display:inline-flex">
-                                            <div class="form-group">
-                                                <label>Nombre d'inscription</label>
-                                                <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Durée (minutes)</label>
-                                                <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>États</label>
-                                            <select id="idEtat" name="etat" class="form-control">
-                                                <c:forEach var="etat" items="${listeEtats}">
-                                                    <option value="${etat.idEtat}">${etat.libelle}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="form-group">
-                                            <label>Nombre d'inscription</label>
-                                            <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Durée (minutes)</label>
-                                            <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-
+                                <div class="form-group">
+                                    <label>Nombre d'inscription</label>
+                                    <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
+                                </div>
+                                <div class="form-group">
+                                    <label>Durée (minutes)</label>
+                                    <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
+                                </div>
                                 <div class="form-group">
                                     <label>Description et infos</label>
                                     <textarea class="form-control" name="infos" type="text" style="height: 128px;"></textarea>
@@ -144,9 +119,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <a href="/" type="button" class="btn btn-primary btn-block">
+                                    <button type="submit" class="btn btn-primary btn-block">
                                         Annuler
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
