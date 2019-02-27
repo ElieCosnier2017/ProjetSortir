@@ -2,6 +2,7 @@ package fr.eni.sortir.servlets.sortie;
 
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.InscriptionManager;
+import fr.eni.sortir.bo.Participant;
 import fr.eni.sortir.dal.CodesResultatDAL;
 
 import javax.servlet.ServletException;
@@ -25,11 +26,11 @@ public class InscriptionSortieServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idSortie = lireParametreIdSortie(request);
         HttpSession session = request.getSession();
-        Integer idParticipant = (Integer) session.getAttribute("idParticipant");
+        Participant participant = (Participant) session.getAttribute("participant");
         InscriptionManager inscriptionManager = new InscriptionManager();
         if(request.getServletPath().equals("/sortie/inscription")){
             try {
-                inscriptionManager.inscriptionSortie(idSortie, idParticipant);
+                inscriptionManager.inscriptionSortie(idSortie, participant.getIdparticipant());
                 response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
                 response.setHeader("Location", "/");
             } catch (BusinessException e) {
@@ -41,7 +42,7 @@ public class InscriptionSortieServlet extends HttpServlet {
         }
         else {
             try {
-                inscriptionManager.desistementSortie(idSortie, idParticipant);
+                inscriptionManager.desistementSortie(idSortie, participant.getIdparticipant());
                 response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
                 response.setHeader("Location", "/");
             } catch (BusinessException e) {
