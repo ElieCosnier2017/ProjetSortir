@@ -145,7 +145,7 @@
                             <c:if test ="${title == 'Modifier'}">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <a href="<%=request.getContextPath()%>/delete" type="button" class="btn btn-primary btn-block">
+                                        <a href="<%=request.getContextPath()%>/supprimerSortie" type="button" class="btn btn-primary btn-block">
                                             Supprimer sortie
                                         </a>
                                     </div>
@@ -166,7 +166,7 @@
     </div>
 </div>
 <script>
-
+debugger;
     window.onload = function ()
     {
         var listLieux = [
@@ -180,7 +180,6 @@
         document.getElementById("rue").value = listLieux[0].rue;
         document.getElementById("latitude").value = listLieux[0].latitude;
         document.getElementById("longitude").value = listLieux[0].longitude;
-        document.getElementById("idEtat").value = ${idEtat};
 
         var listVilles = [
             <c:forEach var="ville" items="${listeVilles}">

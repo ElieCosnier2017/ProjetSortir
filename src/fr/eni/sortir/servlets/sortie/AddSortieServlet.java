@@ -125,6 +125,9 @@ public class AddSortieServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(request.getServletPath().equals("/delete")) {
+
+		}
 		// Formulaire d'ajout d'une sortie
 		if(request.getServletPath().equals("/nouvelleSortie")) {
 			try {
