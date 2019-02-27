@@ -44,10 +44,10 @@ public class SortieServlet extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			HttpSession session = request.getSession();
-//			Participant connecter = session.getAttribute("idParticipant");
+			Participant connecter = (Participant) session.getAttribute("participant");
 
 
-				out.println(json_sortie(1).toJSONString());
+				out.println(json_sortie(1, connecter).toJSONString());
 
 
 	}
@@ -60,7 +60,7 @@ public class SortieServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private JSONObject json_sortie(int idSite){
+	private JSONObject json_sortie(int idSite, Participant connecter){
 		JSONArray jsonArray = new JSONArray();
 		JSONObject finalObject = new JSONObject();
 		SortieManager sortieManager = new SortieManager();
@@ -75,7 +75,7 @@ public class SortieServlet extends HttpServlet {
 				Etat etatLibelle = etatManager.selectById(sortie.getIdEtat());
 				Participant organisateur = participantManager.afficher(sortie.getOrganisateur());
 
-				Boolean inscrit = inscriptionManager.isInscrit(sortie.getIdSortie(),          );
+				Boolean inscrit = inscriptionManager.isInscrit(sortie.getIdSortie(),connecter.getIdparticipant());
 
 				JSONObject jsonObject = new JSONObject();
 				System.out.println(sortie.toString());
