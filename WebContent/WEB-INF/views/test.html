@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.13.5/dist/bootstrap-table.min.css">
+
+        <title>Hello, Bootstrap Table!</title>
+    </head>
+    <body>
+
+        <div id="toolbar">
+            <div class="form-inline" role="form">
+                <div class="form-group">
+                    <span>Offset: </span>
+                    <input name="offset" class="form-control w70" type="number" value="0">
+                </div>
+                <div class="form-group">
+                    <span>Limit: </span>
+                    <input name="limit" class="form-control w70" type="number" value="5">
+                </div>
+                <div class="form-group">
+                    <input name="search" class="form-control" type="text" placeholder="Search">
+                </div>
+                <button id="ok" type="submit" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+        <table
+                id="table"
+                data-toggle="table"
+                data-toolbar="#toolbar"
+                data-show-refresh="true"
+                data-show-toggle="true"
+                data-show-columns="true"
+                data-url="http://localhost:8080/sorties">
+            <thead>
+            <tr>
+                <th data-field="nom">Nom de la sortie</th>
+                <th data-field="dateDebut">Date de la sortie</th>
+                <th data-field="dateLimiteInscription">Clôture</th>
+                <th data-field="">Inscrit/Places</th>
+                <th data-field="libelleEtat">Etat</th>
+                <th data-field="">Inscrit</th>
+                <th data-field="nomParticipant">Organisateur</th>
+                <th data-field="action">Actions</th>
+            </tr>
+            </thead>
+        </table>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS, and then Bootstrap Table JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.13.5/dist/bootstrap-table.min.js"></script>
+    </body>
+</html>
