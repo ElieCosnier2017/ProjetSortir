@@ -3,16 +3,14 @@ package fr.eni.sortir.dal;
 import fr.eni.sortir.bll.BusinessException;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Calendar;
+
 
 public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 
     private static final String INSERT = "INSERT INTO INSCRIPTIONS (date_inscription, sorties_no_sortie, participants_no_participant) VALUES (GETDATE(),?,?)";
     private static final String DELETE = "DELETE FROM INSCRIPTIONS WHERE sorties_no_sortie=? AND participants_no_participant=?";
-
     private static final String COUNT_INSCRIPTION_BY_SORTIE = "SELECT COUNT(*) as nb FROM INSCRIPTIONS WHERE sorties_no_sortie = ?";
 
     @Override
@@ -68,6 +66,4 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
             throw businessException;
         }
     }
-
-
 }

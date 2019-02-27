@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,10 +71,10 @@ public class AddSortieServlet extends HttpServlet {
             }
 
             HttpSession session = request.getSession();
-            int participantConnecte = (int) session.getAttribute("idParticipant");
+            Participant participantConnecte = (Participant) session.getAttribute("participant");
             try {
-                Participant participant = participantManager.afficher(participantConnecte);
-                Site site = siteManager.selectById(participant.getSite());
+                Site site = siteManager.selectById(participantConnecte.getSite());
+                System.out.println(site);
                 request.setAttribute("villeOrga", site.getNom());
 
             } catch (BusinessException e) {
@@ -122,14 +120,14 @@ public class AddSortieServlet extends HttpServlet {
 				Sortie nouvelleSortie = new Sortie();
 
 				nouvelleSortie.setNom(request.getParameter("nom"));
-				nouvelleSortie.setidEtat(4);
+				nouvelleSortie.setidEtat(12485);
 				nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
 				nouvelleSortie.setInfosSortie(request.getParameter("infos"));
 				nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
 				nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
 				HttpSession session = request.getSession();
-				int participantConnecte = (int) session.getAttribute("idParticipant");
-				nouvelleSortie.setOrganisateur(participantConnecte);
+				Participant participant = (Participant) session.getAttribute("participant");
+				nouvelleSortie.setOrganisateur(participant.getIdparticipant());
 
 				String datedebut = request.getParameter("datedebut");
 				String datefin = request.getParameter("datefin");
@@ -169,7 +167,7 @@ public class AddSortieServlet extends HttpServlet {
 				e2.printStackTrace();
 
 			}
-			sortieUp.setDuree(Integer.parseInt(request.getParameter("duree")));
+				sortieUp.setDuree(Integer.parseInt(request.getParameter("duree")));
 			sortieUp.setNbParticipantMax(Integer.parseInt(request.getParameter("nbParticipantMax")));
 			sortieUp.setDescription(request.getParameter("description"));
 

@@ -6,7 +6,7 @@
 <body>
 <div class="container emp-profile">
     <c:if test="${!empty sortie }">
-    <form method="post">
+    <form>
         <div class="row">
             <div class="col-md-4">
                 <h3>
@@ -98,6 +98,26 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">pseudo</th>
+                    <th scope="col">nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${ participants }" var="participantSortie">
+                        <tr>
+                            <td>
+                                <a href="/profil?id=${participantSortie.idparticipant}">${participantSortie.pseudo}</a>
+                            </td>
+                            <td>${participantSortie.nom}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
     </form>
     </c:if>

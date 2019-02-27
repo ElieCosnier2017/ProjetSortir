@@ -1,10 +1,8 @@
 package fr.eni.sortir.servlets.sortie;
 
+import fr.eni.sortir.bll.ParticipantManager;
 import fr.eni.sortir.bll.SortieManager;
-import fr.eni.sortir.bo.Lieu;
-import fr.eni.sortir.bo.Site;
-import fr.eni.sortir.bo.Sortie;
-import fr.eni.sortir.bo.Ville;
+import fr.eni.sortir.bo.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,9 +22,11 @@ public class DetailSortieServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SortieManager sortieManager = new SortieManager();
+        ParticipantManager participantManager = new ParticipantManager();
         Integer idSortie = lireParametreIdSortie(request);
         if(idSortie != null){
             List listInfoSortie  = sortieManager.selectAllInfoById(idSortie);
+            List participants = participantManager.selectAllInfosParticipantBySortie(idSortie);
             Sortie sortie = (Sortie) listInfoSortie.get(0);
             Lieu lieu = (Lieu) listInfoSortie.get(1);
             Ville ville = (Ville) listInfoSortie.get(2);
@@ -36,6 +36,7 @@ public class DetailSortieServlet extends HttpServlet {
             request.setAttribute("lieu", lieu);
             request.setAttribute("ville", ville);
             request.setAttribute("site", site);
+            request.setAttribute("participants", participants);
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/detailSortie.jsp");
             rd.forward(request, response);
         } else {
