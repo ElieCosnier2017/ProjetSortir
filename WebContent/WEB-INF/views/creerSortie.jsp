@@ -141,7 +141,7 @@
             </c:forEach>
         ];
         var lieu = listLieux.find(
-            el => el.id == idLieu
+            el => el.id === idLieu
     );
         document.getElementById("rue").value = listLieux[0].rue;
         document.getElementById("latitude").value = listLieux[0].latitude;
@@ -171,7 +171,7 @@
         var e = document.getElementById("idLieu");
         var idLieu = e.value;
         var rue = listLieux.find(
-            el => el.id == idLieu
+            el => el.id === idLieu
     );
         document.getElementById("rue").value = rue.rue;
         document.getElementById("latitude").value = rue.latitude;
@@ -182,7 +182,7 @@
             var e = document.getElementById("idVille");
             var idVille = e.value;
             var cp = listVilles.find(
-                el => el.id == idVille
+                el => el.id === idVille
         );
             document.getElementById("cp").value = cp.cp;
         }

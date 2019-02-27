@@ -37,6 +37,7 @@
                             <form method="post">
                                 <div class="form-group">
                                     <label>Votre email ou votre pseudo</label>
+                                    <span>${ loginParticipant }</span>
                                     <input class="form-control" name="email" value="${ loginParticipant }" placeholder="Email ou Pseudo" type="text" autofocus required>
                                 </div>
                                 <div class="form-group">

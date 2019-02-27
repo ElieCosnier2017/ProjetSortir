@@ -37,7 +37,7 @@ public class SortieManager {
 		return sortie;
 	}
 
-    public JSONArray sortiesBySite(int idSite) throws BusinessException
+    public JSONObject sortiesBySite(int idSite) throws BusinessException
     {
         return this.sortieDAO.selectSortiesBySite(idSite);
     }
