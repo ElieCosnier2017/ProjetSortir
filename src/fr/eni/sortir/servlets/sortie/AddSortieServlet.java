@@ -88,7 +88,6 @@ public class AddSortieServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-		// Afficher le formulaire de modification d'une sortie
 		else if ((request.getServletPath().equals("/editerSortie")))
 		{
 			request.setAttribute("title", "Modifier");
@@ -96,7 +95,6 @@ public class AddSortieServlet extends HttpServlet {
 			SortieManager sortieManager = new SortieManager();
 
 			try {
-				//affichage de la sortie en cours
 				Sortie sortie = sortieManager.selectById(idSortie);
 				request.setAttribute("sortie", sortie);
 				request.setAttribute("path", "editerSortie");
@@ -128,7 +126,6 @@ public class AddSortieServlet extends HttpServlet {
 		if(request.getServletPath().equals("/delete")) {
 
 		}
-		// Formulaire d'ajout d'une sortie
 		if(request.getServletPath().equals("/nouvelleSortie")) {
 			try {
 				request.setCharacterEncoding("UTF-8");
@@ -141,7 +138,6 @@ public class AddSortieServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// Formulaire de modification d'une sortie
 		if(request.getServletPath().equals("/editerSortie"))
 		{
 			try {
@@ -157,7 +153,6 @@ public class AddSortieServlet extends HttpServlet {
 
 			RequestDispatcher rd = request.getRequestDispatcher("/sorties");
 			rd.forward(request, response);
-
 		}
 	}
 
