@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 
 public class SortieManager {
@@ -38,12 +37,7 @@ public class SortieManager {
 		return sortie;
 	}
 
-    public Sortie update(Sortie sortie) throws BusinessException, SQLException
-    {
-        return this.sortieDAO.update(sortie);
-    }
-
-    public JSONArray sortiesBySite(int idSite) throws BusinessException
+    public JSONObject sortiesBySite(int idSite) throws BusinessException
     {
         return this.sortieDAO.selectSortiesBySite(idSite);
     }

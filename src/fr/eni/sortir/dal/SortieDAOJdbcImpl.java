@@ -11,7 +11,6 @@ import fr.eni.sortir.bo.Sortie;
 import fr.eni.sortir.bo.Ville;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
@@ -208,9 +207,10 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 
 
 	@Override
-	public JSONArray selectSortiesBySite(int idSite) {
+	public JSONObject selectSortiesBySite(int idSite) {
 		JSONArray jsonArray = new JSONArray();
-
+		JSONObject jsonObject = new JSONObject();
+		JSONObject finalObject = new JSONObject();
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_SORTIE_BY_SITE);
@@ -219,22 +219,21 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			while(rs.next())
 			{
 				Sortie sortie = sortieBuilder(rs);
-				JSONObject jsonObject = new JSONObject();
 				jsonObject.put("no_sortie", sortie.getIdSortie());
 				jsonObject.put("nom", sortie.getNom());
 				jsonObject.put("dateDebut", sortie.getDateDebut());
 				jsonObject.put("duree", sortie.getDuree());
 				jsonObject.put("dateLimiteInscription", sortie.getDateLimiteInscription());
-
-
 				jsonArray.add(jsonObject);
+
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return jsonArray;
+		finalObject.put("rows", jsonArray);
+		return finalObject;
 	}
 
 	/**

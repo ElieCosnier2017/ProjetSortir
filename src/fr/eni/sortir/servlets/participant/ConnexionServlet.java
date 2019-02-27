@@ -42,8 +42,9 @@ public class ConnexionServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
 
         for(Cookie cookie : cookies){
-            System.out.println(cookie.getName());
-            if("loginParticipant" == cookie.getName()){
+            if("loginParticipant".equals(cookie.getName())){
+                System.out.println(cookie.getName());
+                System.out.println("cookie value = " + cookie.getValue());
                 return cookie.getValue();
             }
         }
