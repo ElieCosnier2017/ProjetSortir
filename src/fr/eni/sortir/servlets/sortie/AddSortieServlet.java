@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
         urlPatterns= {
                 "/sortie/ajouter",
                 "/sortie/editer",
-                "/sortie/annuler"
+				"/sortie/publier"
         })
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -118,86 +120,55 @@ public class AddSortieServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Formulaire d'ajout d'une sortie
-		if(request.getServletPath().equals("/sortie/ajouter")) {
+		if (request.getParameter("ajouter") != null) {
 			try {
-				request.setCharacterEncoding("UTF-8");
-				Sortie nouvelleSortie = new Sortie();
 
-				nouvelleSortie.setNom(request.getParameter("nom"));
-				nouvelleSortie.setidEtat(12485);
-				nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
-				nouvelleSortie.setInfosSortie(request.getParameter("infos"));
-				nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
-				nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
-				HttpSession session = request.getSession();
-				Participant participant = (Participant) session.getAttribute("participant");
-				nouvelleSortie.setOrganisateur(participant.getIdparticipant());
-
-				String datedebut = request.getParameter("datedebut");
-				String datefin = request.getParameter("datefin");
-
-				datedebut = datedebut.replace('T', ' ');
-				nouvelleSortie.setDateDebut(new SimpleDateFormat("yyyy-MM-dd H:m").parse(datedebut));
-				nouvelleSortie.setDateLimiteInscription(new SimpleDateFormat("yyyy-MM-dd").parse(datefin));
-
-				if (nouvelleSortie != null){
+				Sortie nouvelleSortie = createSortie(request, 8);
+				if (nouvelleSortie != null) {
 					sortie = sortieManager.ajouter(nouvelleSortie);
+					response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+					response.setHeader("Location", "/");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		/*// Formulaire de modification d'une sortie
-		if(request.getServletPath().equals("/editerSortie"))
-		{
-			//Je lis les paramètres
-			request.setCharacterEncoding("UTF-8");
-			Sortie sortieUp = new Sortie();
-			sortieUp.setIdSortie(Integer.parseInt(request.getParameter("idSortie")));
-			sortieUp.setNom(request.getParameter("nom"));
-			sortieUp.setUrlPhoto(request.getParameter("urlPhoto"));
-			String dateString = request.getParameter("date");
-			String heureString = request.getParameter("heure");
-			String concateneeDateSortie=  dateString + " " + heureString;
-			SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-			try {
-				Date dateSortie = formatter6.parse(concateneeDateSortie);
-				sortieUp.setDateHeureDebut(dateSortie);
-				SimpleDateFormat formatter7=new SimpleDateFormat("yyyy-MM-dd");
-				Date dateFin = formatter7.parse(request.getParameter("dateHeureFin"));
-				sortieUp.setDateHeureFin(dateFin);
-			} catch (ParseException e2) {
-				e2.printStackTrace();
-
-			}
-				sortieUp.setDuree(Integer.parseInt(request.getParameter("duree")));
-			sortieUp.setNbParticipantMax(Integer.parseInt(request.getParameter("nbParticipantMax")));
-			sortieUp.setDescription(request.getParameter("description"));
-
-			HttpSession session = request.getSession(true);
-			Participant participantEnCours = (Participant) session.getAttribute("currentSessionParticipant");
-			sortieUp.setOrganisateur(participantEnCours);
-
-			Lieu lieuNew = new Lieu();
-			lieuNew.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
-			sortieUp.setIdLieu(lieuNew);
-
-			Etat etatNew = new Etat();
-			etatNew.setIdEtat(Integer.parseInt(request.getParameter("etat")));
-			sortieUp.setIdEtat(etatNew);
-
-			SortieManager sortieManager = new SortieManager();
+		} else if (request.getParameter("publier") != null) {
 			try {
 
-				sortieManager.update(sortieUp);
-			} catch (BusinessException | SQLException e) {
+				Sortie nouvelleSortie = createSortie(request, 1);
+				if (nouvelleSortie != null) {
+					sortie = sortieManager.ajouter(nouvelleSortie);
+					response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+					response.setHeader("Location", "/");
+				}
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			RequestDispatcher rd = request.getRequestDispatcher("/sorties");
-			rd.forward(request, response);
+		}
+	}
 
-		}*/
+	private Sortie createSortie(HttpServletRequest request, int idEtat) throws UnsupportedEncodingException, ParseException {
+		request.setCharacterEncoding("UTF-8");
+		Sortie nouvelleSortie = new Sortie();
+
+		nouvelleSortie.setNom(request.getParameter("nom"));
+		nouvelleSortie.setidEtat(idEtat);
+		nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
+		nouvelleSortie.setInfosSortie(request.getParameter("infos"));
+		nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
+		nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
+		HttpSession session = request.getSession();
+		Participant participant = (Participant) session.getAttribute("participant");
+		nouvelleSortie.setOrganisateur(participant.getIdparticipant());
+
+		String datedebut = request.getParameter("datedebut");
+		String datefin = request.getParameter("datefin");
+
+		datedebut = datedebut.replace('T', ' ');
+		nouvelleSortie.setDateDebut(new SimpleDateFormat("yyyy-MM-dd H:m").parse(datedebut));
+		nouvelleSortie.setDateLimiteInscription(new SimpleDateFormat("yyyy-MM-dd").parse(datefin));
+
+		return nouvelleSortie;
 	}
 }

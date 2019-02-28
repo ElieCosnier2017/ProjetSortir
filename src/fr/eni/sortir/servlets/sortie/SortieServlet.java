@@ -78,7 +78,6 @@ public class SortieServlet extends HttpServlet {
 				Boolean inscrit = inscriptionManager.isInscrit(sortie.getIdSortie(),connecter.getIdparticipant());
 
 				JSONObject jsonObject = new JSONObject();
-				System.out.println(sortie.toString());
 				jsonObject.put("no_sortie", sortie.getIdSortie());
 				jsonObject.put("nom", sortie.getNom());
 				jsonObject.put("dateDebut", sortie.getDateDebut().toString());

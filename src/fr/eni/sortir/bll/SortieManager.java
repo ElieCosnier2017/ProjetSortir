@@ -11,6 +11,7 @@ import java.util.List;
 
 public class SortieManager {
     private SortieDAO sortieDAO;
+    private EtatManager etatManager = new EtatManager();
 
     public SortieManager() {
         this.sortieDAO = DAOFactory.getSortieDAO();
@@ -55,9 +56,14 @@ public class SortieManager {
     }
 
     public void cancelSortie(int idSortie, String motif) {
-        EtatManager etatManager = new EtatManager();
+
         Etat etat = etatManager.selectByLibelle("Annulée");
         this.sortieDAO.cancelSortie(idSortie, etat.getIdEtat(), motif);
+    }
+
+    public void postSortie(int idSortie){
+        Etat etat = etatManager.selectByLibelle("Ouverte");
+        this.sortieDAO.postSortie(idSortie, etat.getIdEtat());
     }
 
 }
