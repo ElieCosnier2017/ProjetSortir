@@ -25,27 +25,27 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Nom de la sortie</label>
-                                    <input class="form-control" name="nom" placeholder="Nom" type="text" value="${sortie.nom}">
+                                    <input class="form-control" name="nom" placeholder="Nom" type="text" value="${sortie.nom}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Date et heure de la sortie</label>
-                                    <input class="form-control" name="datedebut" type="datetime-local" value="${datedebut}">
+                                    <input class="form-control" name="datedebut" type="datetime-local" value="${datedebut}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Date limite d'inscription</label>
-                                    <input class="form-control" name="datefin" type="date" value="${sortie.dateLimiteInscription}">
+                                    <input class="form-control" name="datefin" type="date" value="${sortie.dateLimiteInscription}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Nombre d'inscription</label>
-                                    <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em" value="${sortie.nbInscriptionsMax}">
+                                    <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em" value="${sortie.nbInscriptionsMax}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Durée (minutes)</label>
-                                    <input class="form-control" min="1" name="duree" type="number" style="width: 5em" value="${sortie.duree}">
+                                    <input class="form-control" min="1" name="duree" type="number" style="width: 5em" value="${sortie.duree}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description et infos</label>
-                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;">${sortie.infosSortie}</textarea>
+                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;" required>${sortie.infosSortie}</textarea>
                                 </div>
                             </div>
                             <div class="col-6">
