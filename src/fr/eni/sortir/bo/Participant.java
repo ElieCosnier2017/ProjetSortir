@@ -29,7 +29,7 @@ public class Participant implements Serializable {
 		this.actif = actif;
 	}
 
-    public Participant(int idparticipant, String nom, String prenom, String telephone, String mail, String pseudo, String password) {
+    public Participant(int idparticipant, String nom, String prenom, String telephone, String mail, String pseudo, String password, int idSite) {
         this.idparticipant = idparticipant;
         this.nom = nom;
         this.prenom = prenom;
@@ -37,6 +37,7 @@ public class Participant implements Serializable {
         this.mail = mail;
         this.pseudo = pseudo;
         this.password = password;
+        this.idSite = idSite;
     }
 
     public Participant(String nom, String prenom, String telephone, String mail, String pseudo, String password, boolean administrateur, boolean actif, int idSite) {

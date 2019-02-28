@@ -29,7 +29,7 @@ public class VilleDAOJdbcImpl implements  VilleDAO {
 
             while(rs.next())
             {
-                villes.add(this.map(rs));
+                villes.add(this.villeBuilder(rs));
             }
         } catch (Exception e)
         {
@@ -43,18 +43,17 @@ public class VilleDAOJdbcImpl implements  VilleDAO {
      */
     @Override
     public Ville selectOneById(int idVille) throws BusinessException {
-        Ville ville = null;
+        Ville ville = new Ville();
 
-        try (Connection cnx = ConnectionProvider.getConnection())
+        try(Connection cnx = ConnectionProvider.getConnection())
         {
             PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
-
             pstmt.setInt(1, idVille);
             ResultSet rs = pstmt.executeQuery();
 
             if(rs.next())
             {
-                ville = this.map(rs);
+                ville = this.villeBuilder(rs);
             }
         } catch (Exception e)
         {
@@ -68,7 +67,7 @@ public class VilleDAOJdbcImpl implements  VilleDAO {
      * @return ville
      * @throws SQLException
      */
-    private Ville map(ResultSet rs) throws SQLException {
+    private Ville villeBuilder(ResultSet rs) throws SQLException {
         Ville ville = new Ville();
         ville.setIdVille(rs.getInt("no_ville"));
         ville.setNom(rs.getString("nom_ville"));

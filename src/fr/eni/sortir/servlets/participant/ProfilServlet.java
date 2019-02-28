@@ -2,9 +2,9 @@ package fr.eni.sortir.servlets.participant;
 
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ParticipantManager;
-import fr.eni.sortir.bll.VilleManager;
+import fr.eni.sortir.bll.SiteManager;
 import fr.eni.sortir.bo.Participant;
-import fr.eni.sortir.bo.Ville;
+import fr.eni.sortir.bo.Site;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,9 +23,7 @@ import java.util.List;
 @WebServlet("/profil")
 public class ProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private ParticipantManager participantManager;
-	private Participant participant;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,15 +39,13 @@ public class ProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Participant idparticipant = (Participant) session.getAttribute("participant");
-		VilleManager villeManager = new VilleManager();
+		SiteManager siteManager = new SiteManager();
 
 		try {
-			List<Ville> villeList = villeManager.selectAll();
-			request.setAttribute("listeVilles", villeList);
+			List<Site> siteList = siteManager.selectAll();
+			request.setAttribute("listeVilles", siteList);
 			request.setAttribute("participant", participantManager.afficher(idparticipant.getIdparticipant()));
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (BusinessException | SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -63,7 +59,7 @@ public class ProfilServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession httpSession = request.getSession();
-		int idparticipant = (int) httpSession.getAttribute("idParticipant");
+		Participant participant = (Participant) httpSession.getAttribute("participant");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String mail = request.getParameter("email");
@@ -71,19 +67,17 @@ public class ProfilServlet extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		String confpassword = request.getParameter("confpassword");
+		String idSite = request.getParameter("ville");
 		System.out.println(nom + ' '+prenom+' '+mail+' '+telephone+' '+pseudo);
 
-		if(password == null) {
-			Participant oldparticipant = (Participant) request.getAttribute("participant");
-			password = oldparticipant.getPassword();
+		if(password.equals("")) {
+			password = participant.getPassword();
 		}
 
 		try {
-			participant = new Participant(idparticipant, nom, prenom, telephone, mail, pseudo, password);
+			participant = new Participant(participant.getIdparticipant(), nom, prenom, telephone, mail, pseudo, password, Integer.parseInt(idSite));
 			participantManager.modifier(participant);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (BusinessException | SQLException e) {
 			e.printStackTrace();
 		}
 	}

@@ -16,4 +16,5 @@ public class CodesResultatDAL {
 	 * Echec pendant tentative d'insertion d'un objet deja existant
 	 */
 	public static final int ALREADY_EXIST=10002;
+    public static final int OBJECTS_DOESNT_MATCH = 10003 ;
 }

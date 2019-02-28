@@ -11,7 +11,7 @@
                     <a class="float-right nav-link" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="float-right nav-link" href="/profil">Mon profil</a>
+                    <a class="float-right nav-link" href="/profil?id=${sessionScope.participant.idparticipant}">Mon profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="float-right nav-link" href="/deconnexion">Se deconnecter</a>
