@@ -18,5 +18,7 @@ public interface ParticipantDAO {
 	
 	void delete(int idParticipant) throws BusinessException;
 	
-	 Participant selectById(int idParticipant) throws SQLException;
+	Participant selectById(int idParticipant) throws SQLException;
+
+	List<Participant> selectAllInfosParticipantBySortie(int idSortie);
 }

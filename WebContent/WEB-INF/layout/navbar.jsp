@@ -7,7 +7,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <c:if test="${sessionScope.participant != null}">
-           <span>${sessionScope.participant.getNom()}</span>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="float-right nav-link" href="/">Accueil</a>

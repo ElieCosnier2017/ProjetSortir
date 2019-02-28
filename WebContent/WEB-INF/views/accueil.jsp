@@ -4,6 +4,8 @@
         <title>Sortir.com - Accueil</title>
     </head>
     <body>
+    <c:if test="${sessionScope.participant != null}">
+        <span>${sessionScope.participant.getNom()}</span>
         <div style="margin-top: 10%;">
                 <%--<div id="toolbar">--%>
                     <%--<div class="form-inline" role="form">--%>
@@ -25,9 +27,6 @@
                         id="table"
                         data-toggle="table"
                         data-toolbar="#toolbar"
-                        data-show-refresh="true"
-                        data-show-toggle="true"
-                        data-show-columns="true"
                         data-url="/sorties"
                         style="background-color:#f7f7f7">
                     <thead>
@@ -46,5 +45,12 @@
             </div>
         </div>
         <a href="${pageContext.request.contextPath}/sortie/ajouter" class="btn btn-success" style="margin-left: 10px;">Créer une sortie</a>
-
+    </c:if>
+    <c:if test="${sessionScope.participant == null}">
+    <div class="container">
+        <h1 class="text-uppercase mb-0">Bienvenue sur Sortir.com</h1>
+        <hr class="star-light" style="border-color: #fff;">
+        <h2 class="font-weight-light mb-0">Le site pour trouver une sortie de l'ENI pour boire une bonne binouze </h2>
+    </div>
+    </c:if>
 <%@ include file="../layout/footer.jsp"%>

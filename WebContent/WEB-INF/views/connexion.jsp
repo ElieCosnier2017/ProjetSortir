@@ -45,8 +45,9 @@
                                     <input class="form-control" name="mdp" placeholder="******" type="password" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="remember">Se souvenir de moi : </label>
-                                    <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="remember" id="remember"> Se souvenir de moi </label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block"> Connexion </button>
