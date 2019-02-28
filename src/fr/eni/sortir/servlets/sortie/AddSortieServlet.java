@@ -24,7 +24,8 @@ import java.util.List;
         urlPatterns= {
                 "/sortie/ajouter",
                 "/sortie/editer",
-				"/sortie/publier"
+                "/sortie/publier",
+                "/sortie/annuler"
         })
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -58,7 +59,7 @@ public class AddSortieServlet extends HttpServlet {
         if(request.getServletPath().equals("/sortie/ajouter")) {
 
 			request.setAttribute("title", "Ajouter");
-			request.setAttribute("path", "nouvelleSortie");
+			request.setAttribute("path", "/sortie/ajouter");
 
             try {
                 List<Lieu> Lieux = lieuManager.selectAll();
@@ -93,21 +94,29 @@ public class AddSortieServlet extends HttpServlet {
 		else if ((request.getServletPath().equals("/sortie/editer")))
 		{
 			request.setAttribute("title", "Modifier");
-			int idSortie= Integer.parseInt(request.getParameter("idSortie"));
+			Integer idSortie = lireParametreIdSortie(request);
 			SortieManager sortieManager = new SortieManager();
 
 			try {
 				//affichage de la sortie en cours
 				Sortie sortie = sortieManager.selectById(idSortie);
 				request.setAttribute("sortie", sortie);
-				request.setAttribute("path", "editerSortie");
+				request.setAttribute("path", "/sortie/editer");
+				String dateDebut = sortie.getDateDebut("dd/MM/yyyy H:m");
+				request.setAttribute("datedebut", dateDebut);
+				List<Lieu> Lieux = lieuManager.selectAll();
+				request.setAttribute("listeLieux", Lieux);
+				List<Ville> villes = villeManager.selectAll();
+				request.setAttribute("listeVilles", villes);
+				Participant participant = participantManager.afficher(sortie.getOrganisateur());
+				Site site = siteManager.selectById(participant.getSite());
+				request.setAttribute("villeOrga", site.getNom());
 
 			} catch (BusinessException e) {
 				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/formSortie.jsp");
-			rd.forward(request, response);
-
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSortie.jsp");
@@ -145,7 +154,47 @@ public class AddSortieServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		}
+		}else if ((request.getServletPath().equals("/sortie/editer")))
+        {
+            request.setAttribute("title", "Modifier");
+            Integer idSortie = lireParametreIdSortie(request);
+            SortieManager sortieManager = new SortieManager();
+
+            try {
+                request.setCharacterEncoding("UTF-8");
+                Sortie nouvelleSortie = new Sortie();
+                // Sortie avant modifs
+                Sortie sortie = sortieManager.selectById(idSortie);
+
+                nouvelleSortie.setNom(request.getParameter("nom"));
+                nouvelleSortie.setidEtat(8);
+                nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
+                nouvelleSortie.setInfosSortie(request.getParameter("infos"));
+                nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
+                nouvelleSortie.setNbInscriptionsMax(Integer.parseInt(request.getParameter("nbinscription")));
+                nouvelleSortie.setOrganisateur(sortie.getOrganisateur());
+
+                String datedebut = request.getParameter("datedebut");
+                String datefin = request.getParameter("datefin");
+
+                datedebut = datedebut.replace('T', ' ');
+                nouvelleSortie.setDateDebut(new SimpleDateFormat("yyyy-MM-dd H:m").parse(datedebut));
+                nouvelleSortie.setDateLimiteInscription(new SimpleDateFormat("yyyy-MM-dd").parse(datefin));
+                if (nouvelleSortie != null){
+                    sortieManager.update(nouvelleSortie);
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+            rd.forward(request, response);
+        }
 	}
 
 	private Sortie createSortie(HttpServletRequest request, int idEtat) throws UnsupportedEncodingException, ParseException {
@@ -171,4 +220,12 @@ public class AddSortieServlet extends HttpServlet {
 
 		return nouvelleSortie;
 	}
+
+    private int lireParametreIdSortie(HttpServletRequest request) {
+        Integer idSortie = null;
+        if(request.getParameter("id")!=null) {
+            idSortie = Integer.parseInt(request.getParameter("id"));
+        }
+        return idSortie;
+    }
 }

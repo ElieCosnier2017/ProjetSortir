@@ -13,6 +13,7 @@ import java.util.List;
 public class VilleDAOJdbcImpl implements  VilleDAO {
 
     private static final String SELECT_ALL="SELECT * FROM VILLES";
+    private static final String SELECT_ONE_BY_ID = "SELECT * FROM VILLES WHERE idVille=?";
 
     /**
      * Méthode qui sélectionne tous les éléments de la table LIEUX
@@ -35,6 +36,31 @@ public class VilleDAOJdbcImpl implements  VilleDAO {
             e.printStackTrace();
         }
         return villes;
+    }
+
+    /**
+     * Méthode qui récupère tous les éléments de la table VILLES pour un ID donné
+     */
+    @Override
+    public Ville selectOneById(int idVille) throws BusinessException {
+        Ville ville = null;
+
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
+
+            pstmt.setInt(1, idVille);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next())
+            {
+                ville = this.map(rs);
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return ville;
     }
 
     /**

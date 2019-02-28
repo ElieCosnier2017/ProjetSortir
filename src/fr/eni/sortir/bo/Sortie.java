@@ -1,7 +1,9 @@
 package fr.eni.sortir.bo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Sortie implements Serializable {
 
@@ -53,6 +55,12 @@ public class Sortie implements Serializable {
 
     public Date getDateDebut() {
         return dateDebut;
+    }
+
+    public String getDateDebut(String format){
+        SimpleDateFormat formater = new SimpleDateFormat(format);
+        formater.setTimeZone(TimeZone.getTimeZone("ARI"));
+        return formater.format(dateDebut);
     }
 
     public void setDateDebut(Date dateDebut) {

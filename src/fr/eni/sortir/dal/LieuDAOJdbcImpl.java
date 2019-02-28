@@ -12,6 +12,7 @@ import fr.eni.sortir.bo.Lieu;
 
 public class LieuDAOJdbcImpl implements LieuDAO{
 	private static final String SELECT_ALL = "SELECT * FROM LIEUX";
+	private static final String SELECT_ONE_BY_ID = "SELECT * FROM LIEUX WHERE no_lieu=?";
 
 	/**
 	 * Méthode qui sélectionne tous les éléments de la table LIEUX
@@ -34,6 +35,31 @@ public class LieuDAOJdbcImpl implements LieuDAO{
 			e.printStackTrace();
 		}
 		return listeLieux;
+	}
+
+	/**
+	 * Méthode qui récupère tous les éléments de la table LIEUX pour un ID donné
+	 */
+	@Override
+	public Lieu selectOneById(int idLieu) throws BusinessException {
+		Lieu lieu = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
+
+			pstmt.setInt(1, idLieu);
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next())
+			{
+				lieu = this.map(rs);
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lieu;
 	}
 
 	/**
