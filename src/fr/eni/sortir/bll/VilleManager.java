@@ -22,4 +22,19 @@ public class VilleManager {
     {
         return this.villeDAO.selectOneById(idVille);
     }
+
+    public void ajouter(Ville ville) throws BusinessException
+    {
+        BusinessException exception = new BusinessException();
+
+        if(!exception.hasErreurs())
+        {
+            this.villeDAO.insert(ville);
+        }
+
+        if(exception.hasErreurs())
+        {
+            throw exception;
+        }
+    }
 }

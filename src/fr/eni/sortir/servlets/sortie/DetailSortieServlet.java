@@ -31,7 +31,6 @@ public class DetailSortieServlet extends HttpServlet {
             Lieu lieu = (Lieu) listInfoSortie.get(1);
             Ville ville = (Ville) listInfoSortie.get(2);
             Site site = (Site) listInfoSortie.get(3);
-
             request.setAttribute("sortie", sortie);
             request.setAttribute("lieu", lieu);
             request.setAttribute("ville", ville);

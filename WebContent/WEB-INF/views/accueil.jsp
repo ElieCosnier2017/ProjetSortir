@@ -4,6 +4,7 @@
         <title>Sortir.com - Accueil</title>
     </head>
     <body>
+    <a href="/ville/gererVille" class="btn btn-success" style="margin-left: 10px;">Créer une ville</a>
     <c:if test="${sessionScope.participant != null}">
         <div class="row">
             <div class="col-md-4 offset-md-8">

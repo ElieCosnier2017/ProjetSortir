@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -156,6 +155,10 @@ public class AddSortieServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+			rd.forward(request, response);
+
 		}else if ((request.getServletPath().equals("/sortie/editer")))
 		{
 			request.setAttribute("title", "Modifier");
