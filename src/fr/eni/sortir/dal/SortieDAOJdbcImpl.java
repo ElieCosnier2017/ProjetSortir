@@ -20,7 +20,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			"JOIN LIEUX as l ON s.lieux_no_lieu = l.no_lieu " +
 			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
-			"WHERE s.no_sortie = ? ";
+			"WHERE s.no_sortie = ?" +
+			"ORDER BY datecloture DESC ";
 	private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
