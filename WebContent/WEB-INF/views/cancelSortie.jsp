@@ -50,11 +50,13 @@
                         <textarea name="motif" rows="5"></textarea>
                     </div>
                 </div>
+                <input type="text" name="idSortie" value="${sortie.getIdSortie()}" hidden>
                 <div>
                     <button type="submit" class="btn btn-primary">
                         Valider
                     </button>
                 </div>
+
             </div>
         </div>
     </form>

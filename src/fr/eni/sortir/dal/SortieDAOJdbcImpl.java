@@ -190,13 +190,13 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	}
 
 	@Override
-	public void cancelSortie(int idSortie, int idEtat, String motif) {
+	public void cancelSortie(int idSortie, String motif) {
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(CANCEL_SORTIE);
 
 			pstmt.setString(1, motif);
-			pstmt.setInt(2, idEtat);
+			pstmt.setInt(2, 6);
 			pstmt.setInt(3, idSortie);
 
 			pstmt.executeUpdate();
