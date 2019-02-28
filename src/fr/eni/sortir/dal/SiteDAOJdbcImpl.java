@@ -1,15 +1,76 @@
 package fr.eni.sortir.dal;
 
+import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bo.Site;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SiteDAOJdbcImpl implements SiteDAO {
 
     private static final String SELECT_ONE_BY_ID = "SELECT nom_site FROM SITES WHERE no_site=?";
+    private static final String INSERT = "INSERT INTO SITES (nom_site) VALUES (?)";
+    private static final String SELECT_ALL = "SELECT * FROM SITES";
+
+    /**
+     * Méthode qui permet d'ajouter un site à la table SITES
+     */
+    @Override
+    public void insert(Site site) throws BusinessException {
+        if (site == null)
+        {
+            BusinessException businessException = new BusinessException();
+            businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+            throw businessException;
+        }
+
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, site.getNom());
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            if (rs.next())
+            {
+                site.setIdSite(rs.getInt(1));
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            BusinessException businessException = new BusinessException();
+            businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+            throw businessException;
+        }
+    }
+
+    /**
+     * Méthode qui sélectionne tous les éléments de la table SITES
+     */
+    @Override
+    public List<Site> selectAll() throws BusinessException {
+        List<Site> listeSites = new ArrayList<Site>();
+
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next())
+            {
+                listeSites.add(this.map(rs));
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return listeSites;
+    }
 
     /**
      * Méthode qui récupère tous les éléments de la table SITES pour un ID donné
@@ -33,6 +94,22 @@ public class SiteDAOJdbcImpl implements SiteDAO {
         {
             throw new SQLException(e);
         }
+        return site;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return site
+     * @throws SQLException
+     */
+    private Site map(ResultSet rs) throws SQLException {
+        Site site;
+        site = new Site();
+
+        site.setIdSite(rs.getInt("no_site"));
+        site.setNom(rs.getString("nom_site"));
+
         return site;
     }
 }
