@@ -1,12 +1,11 @@
 <%@ page import="fr.eni.sortir.bo.Participant" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
-<%@ include file="../layout/navbar.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <title>Sortir.com - Gestion du profil</title>
     </head>
     <body>
+    <%@ include file="../layout/navbar.jsp"%>
         <div class="container emp-profile">
             <c:if test="${!empty participant }">
                 <div class="row">

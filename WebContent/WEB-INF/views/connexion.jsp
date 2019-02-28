@@ -1,32 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-
         <title>Sortir.com - Connexion</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffffbd">
-            <a class="navbar-brand" href="/">Sortir.com</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <%--<li class="nav-item active">--%>
-                    <%--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>--%>
-                    <%--</li>--%>
-                    <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="#">Features</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="#">Pricing</a>--%>
-                    <%--</li>--%>
-                </ul>
-                <span class="navbar-text">
-
-                </span>
-            </div>
-        </nav>
+    <%@ include file="../layout/navbar.jsp"%>
         <div class="container">
             <div class="row justify-content-md-center" style="margin-top: 10%;">
                 <div class="col-sm-6">

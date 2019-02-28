@@ -5,25 +5,33 @@
     </head>
     <body>
     <c:if test="${sessionScope.participant != null}">
-        <span>${sessionScope.participant.getNom()}</span>
+        <div class="row">
+            <div class="col-md-4 offset-md-8">
+                <span>AFFICHE DATE DU JOUR</span><br>
+                <span>Participant : ${sessionScope.participant.getPrenom()} ${sessionScope.participant.getNom()}</span>
+            </div>
+        </div>
         <div style="margin-top: 10%;">
-                <%--<div id="toolbar">--%>
-                    <%--<div class="form-inline" role="form">--%>
-                        <%--<div class="form-group">--%>
-                            <%--<span>Offset: </span>--%>
-                            <%--<input name="offset" class="form-control w70" type="number" value="0">--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<span>Limit: </span>--%>
-                            <%--<input name="limit" class="form-control w70" type="number" value="5">--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<input name="search" class="form-control" type="text" placeholder="Search">--%>
-                        <%--</div>--%>
-                        <%--<button id="ok" type="submit" class="btn btn-primary">OK</button>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <table
+            <div id="toolbar">
+
+                <H1>PERSONNE TOUCHE !!!!</H1>
+
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <span>Date debut: </span>
+                        <input name="offset" class="form-control w70" type="date" value="0">
+                    </div>
+                    <div class="form-group">
+                        <span>Date fin: </span>
+                        <input name="limit" class="form-control w70" type="date" value="5">
+                    </div>
+                    <div class="form-group">
+                        <input name="search" class="form-control" type="text" placeholder="Search">
+                    </div>
+                    <button id="ok" type="submit" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+            <table
                         id="table"
                         data-toggle="table"
                         data-toolbar="#toolbar"
@@ -42,7 +50,6 @@
                     </tr>
                     </thead>
                 </table>
-            </div>
         </div>
         <a href="${pageContext.request.contextPath}/sortie/ajouter" class="btn btn-success" style="margin-left: 10px;">Créer une sortie</a>
     </c:if>

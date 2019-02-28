@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
-<%@ include file="../layout/navbar.jsp"%>
+
 <title>Sortir.com - Detail sortie</title>
 </head>
 <body>
+<%@ include file="../layout/navbar.jsp"%>
 <div class="container emp-profile">
     <c:if test="${!empty sortie }">
     <form>
