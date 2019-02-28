@@ -23,8 +23,7 @@ import java.util.List;
 @WebServlet(
         urlPatterns= {
                 "/sortie/ajouter",
-                "/sortie/editer",
-                "/sortie/publier"
+                "/sortie/editer"
         })
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -198,6 +197,7 @@ public class AddSortieServlet extends HttpServlet {
 
 	private Sortie createSortie(HttpServletRequest request, int idEtat) throws UnsupportedEncodingException, ParseException {
 		request.setCharacterEncoding("UTF-8");
+
 		Sortie nouvelleSortie = new Sortie();
 
 		nouvelleSortie.setNom(request.getParameter("nom"));

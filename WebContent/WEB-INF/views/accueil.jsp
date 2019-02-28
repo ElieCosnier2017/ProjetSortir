@@ -50,7 +50,6 @@
                 </table>
         </div>
         <a href="${pageContext.request.contextPath}/sortie/ajouter" class="btn btn-success" style="margin-left: 10px;">Créer une sortie</a>
-        <a href="/sortie/annuler?id=34" class="btn btn-danger">Supprimer sortie</a>
     </c:if>
     <c:if test="${sessionScope.participant == null}">
     <div class="container">
