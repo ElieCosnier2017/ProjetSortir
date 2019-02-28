@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp" %>
 
-<title>Sortir.com - ${title} Créer sortie</title>
+<title>Sortir.com - ${title} une sortie</title>
 <%--<link rel="stylesheet"--%>
       <%--href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
 <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>
@@ -85,28 +85,27 @@
                                     <label>Longitude</label>
                                     <input class="form-control" name="longitude" id="longitude" type="text" readonly>
                                 </div>
-                                <input class="hidden" type="text" id="etat">
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-4 offset-2">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="submit" name="ajouter" class="btn btn-primary btn-block">
+                                    <button type="submit" name="ajouter" class="btn btn-primary ">
                                         Enregistrer
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-md-4 offset-2">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="submit" name="publier" class="btn btn-primary btn-block">
+                                    <button type="submit" name="publier" class="btn btn-success">
                                         Publier Sortie
                                     </button>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <a href="/" name="Annuler" class="btn btn-primary btn-block">
+                                    <a href="/" name="Annuler" class="btn btn-danger">
                                         Annuler
                                     </a>
                                 </div>

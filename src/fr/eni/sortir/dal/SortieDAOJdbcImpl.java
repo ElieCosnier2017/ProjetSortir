@@ -20,13 +20,13 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			"JOIN LIEUX as l ON s.lieux_no_lieu = l.no_lieu " +
 			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
-			"WHERE s.no_sortie = ?" +
-			"ORDER BY datecloture DESC ";
+			"WHERE s.no_sortie = ?";
 	private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descriptioninfos=?, organisateur=?, lieux_no_lieu=?, etats_no_etat=? WHERE no_sortie=?";
 	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
-			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
+			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?" +
+			" ORDER BY s.datecloture DESC ";
 	private static final String CANCEL_SORTIE = "UPDATE SORTIES SET etatsortie=?, etats_no_etat=? WHERE no_sortie=?";
 	private static final String POST_SORTIE = "UPDATE SORTIES SET etats_no_etat=? WHERE no_sortie=?";
 

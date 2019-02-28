@@ -24,8 +24,7 @@ import java.util.List;
         urlPatterns= {
                 "/sortie/ajouter",
                 "/sortie/editer",
-                "/sortie/publier",
-                "/sortie/annuler"
+                "/sortie/publier"
         })
 public class AddSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
