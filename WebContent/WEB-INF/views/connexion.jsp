@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="../layout/entete.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8"
+errorPage="errors.jsp" %>
+<%@ include file="../layout/entete.jsp" %>
         <title>Sortir.com - Connexion</title>
     </head>
     <body>
