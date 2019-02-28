@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffffbd">
     <a class="navbar-brand" href="/">Sortir.com</a>
@@ -5,20 +6,25 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <%--<li class="nav-item active">--%>
-                <%--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>--%>
-            <%--</li>--%>
-            <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="#">Features</a>--%>
-            <%--</li>--%>
-            <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="#">Pricing</a>--%>
-            <%--</li>--%>
-        </ul>
-        <span class="navbar-text">
-            <a href="/inscription" class="float-right btn btn-outline-primary" style="margin-left: 10px;">Inscription</a>
-            <a href="/connexion" class="float-right btn btn-outline-primary">Connexion</a>
-        </span>
+        <c:if test="${sessionScope.participant != null}">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="float-right nav-link" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="float-right nav-link" href="/profil">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="float-right nav-link" href="/deconnexion">Se deconnecter</a>
+                </li>
+            </ul>
+        </c:if>
+        <c:if test="${sessionScope.participant == null}">
+            <span class="navbar-text">
+                <a href="/inscription" class="float-right btn btn-outline-primary" style="margin-left: 10px;">Inscription</a>
+                <a href="/connexion" class="float-right btn btn-outline-primary">Connexion</a>
+            </span>
+        </c:if>
+
     </div>
 </nav>

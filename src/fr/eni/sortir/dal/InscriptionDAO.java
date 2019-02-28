@@ -7,4 +7,6 @@ public interface InscriptionDAO {
     Integer count(int idSortie);
 
     void delete(Integer idSortie, Integer idParticipant) throws BusinessException;
+
+    Boolean estInscrit(int idSortie, int idParticipant);
 }

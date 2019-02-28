@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.sql.SQLException;
 
 /**
  * Servlet implementation class ParticipantServlet
  */
-@WebServlet("/profiltest")
+@WebServlet("/profil")
 public class ProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +30,6 @@ public class ProfilServlet extends HttpServlet {
     public ProfilServlet() {
         super();
 		participantManager = new ParticipantManager();
-
     }
 
 	/**
@@ -39,29 +37,19 @@ public class ProfilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int idparticipant = 0;
+		Participant idparticipant = (Participant) session.getAttribute("participant");
 
-		if(!session.isNew()) {
-			idparticipant = (int) session.getAttribute("idParticipant");
-
-			try {
-				request.setAttribute("participant", participantManager.afficher(idparticipant));
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
-			rd.forward(request, response);
-		} else {
-			System.out.println("pas de connexion");
+		try {
+			request.setAttribute("participant", participantManager.afficher(idparticipant.getIdparticipant()));
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-//		if (idparticipant == 0) {
-//			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-//			response.setHeader("Location", "/connexion");
-//		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -92,9 +80,6 @@ public class ProfilServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-
-
 	}
 
 }

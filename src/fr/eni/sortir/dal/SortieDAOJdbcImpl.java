@@ -10,6 +10,7 @@ import fr.eni.sortir.bo.Site;
 import fr.eni.sortir.bo.Sortie;
 import fr.eni.sortir.bo.Ville;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_ALL = "SELECT * FROM SORTIES";
@@ -20,8 +21,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
 			"WHERE s.no_sortie = ? ";
-    private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descriptioninfos=?, etatsortie=?, organisateur=?, lieux_no_lieu=?, etats_no_etat=?  WHERE idSortie=?";
+	private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descritpionsinfos=?, etatsortie=?, urlPhoto=? WHERE idSortie=?";
 	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
 			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
@@ -30,19 +31,16 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	@Override
 	public List<Sortie> selectAll() {
 		List<Sortie> listeSortie = new ArrayList<Sortie>();
-		try(Connection cnx = ConnectionProvider.getConnection())
-		{
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next())
-			{
-				System.out.println(rs.getString("libelle"));
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+//		try(Connection cnx = ConnectionProvider.getConnection()) {
+//			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+//			ResultSet rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//
+//			}
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		return listeSortie;
 	}
 
@@ -62,7 +60,6 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, sortie.getNom());
-			Timestamp test = new Timestamp(sortie.getDateDebut().getTime());
 			pstmt.setTimestamp(2, new Timestamp(sortie.getDateDebut().getTime()));
 			pstmt.setInt(3, sortie.getDuree());
 			pstmt.setTimestamp(4, new Timestamp(sortie.getDateLimiteInscription().getTime()));
@@ -107,9 +104,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setString(6, sortie.getInfosSortie());
 			pstmt.setString(7, sortie.getEtat());
 			pstmt.setString(8, sortie.getPhoto());
-			pstmt.setInt(9, sortie.getOrganisateur());
-			pstmt.setInt(10, sortie.getIdLieu());
-			pstmt.setInt(11, sortie.getIdEtat());
+			pstmt.setInt(9, sortie.getIdSortie());
 			pstmt.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -212,8 +207,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 
 
 	@Override
-	public JSONArray selectSortiesBySite(int idSite) {
-		JSONArray jsonArray = new JSONArray();
+	public List<Sortie> selectSortiesBySite(int idSite) {
+		List listSortie = new ArrayList();
 
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
@@ -223,14 +218,14 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			while(rs.next())
 			{
 				Sortie sortie = sortieBuilder(rs);
-				jsonArray.add(sortie.toString());
+				listSortie.add(sortie);
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return jsonArray;
+		return listSortie;
 	}
 
 	/**
@@ -250,6 +245,10 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		sortie.setNbInscriptionsMax(rs.getInt("nbinscriptionsmax"));
 		sortie.setInfosSortie(rs.getString("descriptioninfos"));
 		sortie.setEtat(rs.getString("etatsortie"));
+		sortie.setPhoto(rs.getString("urlPhoto"));
+		sortie.setidEtat(rs.getInt("etats_no_etat"));
+		sortie.setIdLieu(rs.getInt("lieux_no_lieu"));
+		sortie.setOrganisateur(rs.getInt("organisateur"));
 		return sortie;
 	}
 }

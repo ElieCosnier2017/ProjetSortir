@@ -20,6 +20,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	private static final String SELECT_ALL="SELECT nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
 	private static final String SELECT_ONE_BY_ID="SELECT no_participant, nom, prenom, telephone,pseudo, mail, administrateur, mot_de_passe, actif, sites_no_site FROM PARTICIPANTS WHERE no_participant=? ";
 	private static final String SELECT_ONE_BY_EMAIL_AND_PASSWORD="SELECT * FROM PARTICIPANTS WHERE (mail=? OR pseudo=?) AND mot_de_passe= ? AND actif = ?";
+	private static final String SELECT_ALL_INFO_PARTICIPANT = "SELECT p.* FROM INSCRIPTIONS i JOIN PARTICIPANTS p ON i.participants_no_participant = p.no_participant WHERE i.sorties_no_sortie = ?";
 
 	/**
 	 * Methode qui permet d'ajouter un participant.
@@ -42,7 +43,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(4, participant.getMail());
 			pstmt.setString(5, participant.getPseudo());
 			pstmt.setString(6, participant.getPassword());
-			pstmt.executeUpdate();
+			pstmt.execute();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
 			if (rs.next())
@@ -93,7 +94,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
 			pstmt.setInt(1, idParticipant);
-			pstmt.executeUpdate();
+			pstmt.execute();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -136,7 +137,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(4, "1");
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
+			while(rs.next()){
 				participant = this.participantBuilder(rs);
 			}
 		} catch (SQLException e) {
@@ -167,6 +168,25 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			throw new SQLException(e);
 		}
 		return participant;
+	}
+
+	@Override
+	public List<Participant> selectAllInfosParticipantBySortie(int idSortie) {
+		List<Participant> participants = new ArrayList<>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_INFO_PARTICIPANT);
+			pstmt.setInt(1, idSortie);
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Participant participant = participantBuilder(rs);
+				participants.add(participant);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return participants;
 	}
 	
 	/**

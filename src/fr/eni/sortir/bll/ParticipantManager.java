@@ -1,6 +1,7 @@
 package fr.eni.sortir.bll;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import fr.eni.sortir.bo.Participant;
 import fr.eni.sortir.dal.DAOFactory;
@@ -32,8 +33,7 @@ public class ParticipantManager {
 		Participant participant = new Participant(nom, prenom, telephone, mail, pseudo, password, admin, actif);
 
 
-		if(!exception.hasErreurs())
-		{
+		if(!exception.hasErreurs()) {
 			this.participantDAO.insert(participant);
 		}
 
@@ -51,5 +51,9 @@ public class ParticipantManager {
 	public void supprimer(int id) throws BusinessException
 	{
 		this.participantDAO.delete(id);
+	}
+
+	public List<Participant> selectAllInfosParticipantBySortie(int idSortie){
+		return this.participantDAO.selectAllInfosParticipantBySortie(idSortie);
 	}
 }

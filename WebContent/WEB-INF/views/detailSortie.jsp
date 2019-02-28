@@ -1,14 +1,13 @@
-<%@ page import="fr.eni.sortir.bo.Sortie" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp"%>
-<%@ include file="../layout/navbar.jsp"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
 <title>Sortir.com - Detail sortie</title>
 </head>
 <body>
+<%@ include file="../layout/navbar.jsp"%>
 <div class="container emp-profile">
     <c:if test="${!empty sortie }">
-    <form method="post">
+    <form>
         <div class="row">
             <div class="col-md-4">
                 <h3>
@@ -101,8 +100,27 @@
                 </div>
             </div>
         </div>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">pseudo</th>
+                    <th scope="col">nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${ participants }" var="participantSortie">
+                        <tr>
+                            <td>
+                                <a href="/profil?id=${participantSortie.idparticipant}">${participantSortie.pseudo}</a>
+                            </td>
+                            <td>${participantSortie.nom}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </form>
-    <a href="/sortie/add" class="float-right btn btn-outline-primary" style="margin-left: 10px;">Créer une sortie</a>
     </c:if>
 </div>
 <%@ include file="../layout/footer.jsp"%>

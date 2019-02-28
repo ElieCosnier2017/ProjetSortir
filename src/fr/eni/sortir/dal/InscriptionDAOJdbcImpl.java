@@ -3,28 +3,27 @@ package fr.eni.sortir.dal;
 import fr.eni.sortir.bll.BusinessException;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Calendar;
+
 
 public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 
-    private static final String INSERT = "INSERT INTO INSCRIPTIONS (date_inscription, sorties_no_sortie, participants_no_participant) VALUES (?,?,?)";
+    private static final String SELECTBYID = "SELECT count(*) as nb FROM INSCRIPTIONS WHERE sorties_no_sortie=? AND participants_no_participant=?";
+    private static final String INSERT = "INSERT INTO INSCRIPTIONS (date_inscription, sorties_no_sortie, participants_no_participant) VALUES (GETDATE(),?,?)";
     private static final String DELETE = "DELETE FROM INSCRIPTIONS WHERE sorties_no_sortie=? AND participants_no_participant=?";
 
-    private static final String COUNT_INSCRIPTION_BY_SORTIE = "COUNT * as nb FROM INSCRIPTIONS WHERE sorties_no_sortie = ?";
+    private static final String COUNT_INSCRIPTION_BY_SORTIE = "SELECT COUNT(*) as nb FROM INSCRIPTIONS WHERE sorties_no_sortie = ?";
 
     @Override
     public void insert(int idSortie, int idParticipant) throws BusinessException {
 
         try (Connection cnx = ConnectionProvider.getConnection())
         {
-            PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setDate(1, new Date(Calendar.getInstance().getTime().getTime()));
+            PreparedStatement pstmt = cnx.prepareStatement(INSERT);
             pstmt.setInt(1, idSortie);
             pstmt.setInt(2, idParticipant);
-            pstmt.executeUpdate();
+            pstmt.execute();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -41,8 +40,8 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
         try (Connection cnx = ConnectionProvider.getConnection()) {
             PreparedStatement pstmt = cnx.prepareStatement(COUNT_INSCRIPTION_BY_SORTIE);
             pstmt.setInt(1, idSortie);
-            pstmt.executeUpdate();
-            ResultSet rs = pstmt.getGeneratedKeys();
+
+            ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 nbPlaceRestante = rs.getInt("nb");
             }
@@ -60,7 +59,7 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
             PreparedStatement pstmt = cnx.prepareStatement(DELETE);
             pstmt.setInt(1, idSortie);
             pstmt.setInt(2, idParticipant);
-            pstmt.executeUpdate();
+            pstmt.execute();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -68,6 +67,28 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
             businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_NULL);
             throw businessException;
         }
+    }
+
+    @Override
+    public Boolean estInscrit(int idSortie, int idParticipant) {
+        Boolean result = false;
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
+            pstmt.setInt(1, idSortie);
+            pstmt.setInt(2, idParticipant);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if(rs.getInt("nb") ==  1) {
+                    result = true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 
