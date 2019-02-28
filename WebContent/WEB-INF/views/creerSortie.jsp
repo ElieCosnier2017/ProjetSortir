@@ -1,5 +1,3 @@
-<%@ page import="fr.eni.sortir.bo.Lieu" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp" %>
 
@@ -13,64 +11,38 @@ title>Sortir.com - ${title} Créer sortie</title>
 </head>
 <body>
 <%@ include file="../layout/navbar.jsp"%>
-
 <div class="container">
     <div class="row justify-content-md-center" style="margin-top: 5%;">
         <div class="col-sm-10">
             <div class="card">
                 <article class="card-body">
-                    <h4 class="card-title mb-4 mt-1">Créer une sortie</h4>
+                    <h4 class="card-title mb-4 mt-1">${title} une sortie</h4>
                     <form method="post">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Nom de la sortie</label>
-                                    <input class="form-control" name="nom" placeholder="Nom" type="text">
+                                    <input class="form-control" name="nom" placeholder="Nom" type="text" value="${sortie.nom}">
                                 </div>
                                 <div class="form-group">
                                     <label>Date et heure de la sortie</label>
-                                    <input class="form-control" name="datedebut" type="datetime-local">
+                                    <input class="form-control" name="datedebut" type="datetime-local" value="${datedebut}">
                                 </div>
                                 <div class="form-group">
                                     <label>Date limite d'inscription</label>
-                                    <input class="form-control" name="datefin" type="date">
+                                    <input class="form-control" name="datefin" type="date" value="${sortie.dateLimiteInscription}">
                                 </div>
-                                <c:choose>
-                                    <c:when test ="${title}== Modifier">
-                                        <div style="display:inline-flex">
-                                            <div class="form-group">
-                                                <label>Nombre d'inscription</label>
-                                                <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Durée (minutes)</label>
-                                                <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>États</label>
-                                            <select id="idEtat" name="etat" class="form-control">
-                                                <c:forEach var="etat" items="${listeEtats}">
-                                                    <option value="${etat.idEtat}">${etat.libelle}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
                                         <div class="form-group">
                                             <label>Nombre d'inscription</label>
-                                            <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em">
+                                            <input class="form-control" name="nbinscription" type="number" min="1" style="width: 5em" value="${sortie.nbInscriptionsMax}">
                                         </div>
                                         <div class="form-group">
                                             <label>Durée (minutes)</label>
-                                            <input class="form-control" min="1" name="duree" type="number" style="width: 5em">
+                                            <input class="form-control" min="1" name="duree" type="number" style="width: 5em" value="${sortie.duree}">
                                         </div>
-                                    </c:otherwise>
-                                </c:choose>
-
                                 <div class="form-group">
                                     <label>Description et infos</label>
-                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;"></textarea>
+                                    <textarea class="form-control" name="infos" type="text" style="height: 128px;">${sortie.infosSortie}</textarea>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -123,7 +95,7 @@ title>Sortir.com - ${title} Créer sortie</title>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">
+                                    <button type="button" href="/" class="btn btn-primary btn-block">
                                         Annuler
                                     </button>
                                 </div>

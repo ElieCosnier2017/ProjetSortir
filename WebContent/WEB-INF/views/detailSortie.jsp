@@ -120,6 +120,7 @@
                 </tbody>
             </table>
         </div>
+        <a href="${pageContext.request.contextPath}/sortie/editer?id=${sortie.idSortie}" class="btn btn-success" style="margin-left: 10px;">Modifier</a>
     </form>
     </c:if>
 </div>

@@ -18,4 +18,9 @@ private LieuDAO lieuDAO;
 	{
 		return this.lieuDAO.selectAll();
 	}
+
+	public Lieu selectById(int idLieu) throws BusinessException
+	{
+		return this.lieuDAO.selectOneById(idLieu);
+	}
 }
