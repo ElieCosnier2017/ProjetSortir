@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -100,7 +101,7 @@ public class AddSortieServlet extends HttpServlet {
 				Sortie sortie = sortieManager.selectById(idSortie);
 				request.setAttribute("sortie", sortie);
 				request.setAttribute("path", "/sortie/editer");
-				String dateDebut = sortie.getDateDebut("dd/MM/yyyy H:m");
+				String dateDebut = sortie.getDateDebut("yyyy-MM-dd'T'hh:mm");
 				request.setAttribute("datedebut", dateDebut);
 				List<Lieu> Lieux = lieuManager.selectAll();
 				request.setAttribute("listeLieux", Lieux);

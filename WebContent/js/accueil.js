@@ -25,13 +25,14 @@ function actionFormatter(value, row, index) {
     if(row['libelleEtat'] == "En création"){
 
         if(row['idOrganisateur'] == row['idConnecter']) {
-            res = '<a href="/sortie/editer?id='+row["no_sortie"]+'">Modifier</a> - <a>Publier</a>';
+            res = '<a href="/sortie/editer?id='+row["no_sortie"]+'">Modifier</a> - ' +
+                '<a href="sortie/publier?id='+row["no_sortie"]+'">Publier</a>';
         } else {
             res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a>';
         }
     } else {
         res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a>';
-        if(row['idEtat'] == 6){
+        if(row['idEtat'] != 6){
             if(row['idOrganisateur'] == row['idConnecter']) {
                 res += ' - <a href="/sortie/annuler?id='+row["no_sortie"]+'">Annuler</a> '
             } else {
