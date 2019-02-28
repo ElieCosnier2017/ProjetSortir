@@ -12,7 +12,7 @@
                     <div class="col-md-4">
                         <img src="">
                     </div>
-                    <div class="col-md-">
+                    <div class="col-md-5">
                         <form method="post">
                             <div class="form-group">
                                 <label>Pseudo</label>

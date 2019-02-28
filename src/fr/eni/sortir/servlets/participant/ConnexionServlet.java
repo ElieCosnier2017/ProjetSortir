@@ -43,8 +43,6 @@ public class ConnexionServlet extends HttpServlet {
 
         for(Cookie cookie : cookies){
             if("loginParticipant".equals(cookie.getName())){
-                System.out.println(cookie.getName());
-                System.out.println("cookie value = " + cookie.getValue());
                 return cookie.getValue();
             }
         }
@@ -61,7 +59,6 @@ public class ConnexionServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("test");
         request.setAttribute("loginParticipant" ,  rememberParticipant(request, response, null));
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
         rd.forward(request, response);

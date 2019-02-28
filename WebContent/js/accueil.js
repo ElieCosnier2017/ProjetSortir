@@ -6,17 +6,14 @@ function inscritPlaceFormatter(value, row, index) {
 
 function nomOrganisateurFormatter(value, row, index) {
     return [
-        '<a href="/detail/profil?id='+row['idParticipant']+'">'+row["nomParticipant"]+' '+row["prenomParticipant"]+'</a>'
+        '<a href="/user/profil?id='+row['idOrganisateur']+'">'+row["prenomOrganisateur"]+' '+row["nomOrganisateur"]+'</a>'
     ].join('')
 }
 
 function isInscritFormatter(value, row, index) {
     var res;
-    // if(row["isInscrit"] == "true") {
-    //     res = '<i class="fas fa-check"></i>';
-    // }
     if(row["isInscrit"] == true) {
-        res = '<i class="fas fa-check"></i>';
+        res = '<i class="fa fa-check"></i>';
     }
     return [
         res
@@ -26,13 +23,25 @@ function isInscritFormatter(value, row, index) {
 function actionFormatter(value, row, index) {
     var res;
     if(row['libelleEtat'] == "En création"){
-        res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Modifier</a> - <a>Publier</a>';
-    } else {
-        res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a> - ';
-        if(row['isInscrit'] == true) {
-            res += '<a href="sortie/desistement?id='+row["no_sortie"]+'">Se désister</a> ';
+
+        if(row['idOrganisateur'] == row['idConnecter']) {
+            res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Modifier</a> - <a>Publier</a>';
         } else {
-            res += '<a href="/sortie/inscription?id='+row["no_sortie"]+'">S\'inscrire</a> '
+            res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a>';
+        }
+    } else {
+        res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a>';
+        if(row['idOrganisateur'] == row['idConnecter']) {
+            res += '<a>Annuler</a> '
+        } else {
+            datelimit = new Date(row['dateLimiteInscription']);
+            if(datelimit > Date.now()) {
+                if(row['isInscrit'] == true) {
+                    res += ' - <a href="sortie/desistement?id='+row["no_sortie"]+'">Se désister</a> ';
+                } else {
+                    res += ' - <a href="/sortie/inscription?id='+row["no_sortie"]+'">S\'inscrire</a> '
+                }
+            }
         }
 
     }

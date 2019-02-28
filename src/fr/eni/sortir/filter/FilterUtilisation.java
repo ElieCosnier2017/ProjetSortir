@@ -54,7 +54,6 @@ public class FilterUtilisation implements Filter {
             }
         }
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        System.out.println(conditionUtilisation);
         if(conditionUtilisation == false) {
             httpResponse.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
             httpResponse.setHeader("Location", "/connexion");

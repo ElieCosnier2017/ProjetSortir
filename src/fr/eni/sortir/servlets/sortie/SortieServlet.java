@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class SortieServlet
  */
-@WebServlet("/sorties")
+@WebServlet("/sortie")
 public class SortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -78,7 +78,6 @@ public class SortieServlet extends HttpServlet {
 				Boolean inscrit = inscriptionManager.isInscrit(sortie.getIdSortie(),connecter.getIdparticipant());
 
 				JSONObject jsonObject = new JSONObject();
-				System.out.println(sortie.toString());
 				jsonObject.put("no_sortie", sortie.getIdSortie());
 				jsonObject.put("nom", sortie.getNom());
 				jsonObject.put("dateDebut", sortie.getDateDebut().toString());
@@ -89,9 +88,10 @@ public class SortieServlet extends HttpServlet {
 				jsonObject.put("idEtat", etatLibelle.getIdEtat());
 				jsonObject.put("libelleEtat", etatLibelle.getLibelle());
 				jsonObject.put("isInscrit", inscrit);
-				jsonObject.put("idParticipant", organisateur.getIdparticipant());
-				jsonObject.put("nomParticipant", organisateur.getNom());
-				jsonObject.put("prenomParticipant", organisateur.getPrenom());
+				jsonObject.put("idConnecter", connecter.getIdparticipant());
+				jsonObject.put("idOrganisateur", organisateur.getIdparticipant());
+				jsonObject.put("nomOrganisateur", organisateur.getNom());
+				jsonObject.put("prenomOrganisateur", organisateur.getPrenom());
 
 
 				jsonArray.add(jsonObject);
