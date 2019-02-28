@@ -27,6 +27,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
 			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
 	private static final String CANCEL_SORTIE = "UPDATE SORTIES SET etatsortie=?, etats_no_etat=? WHERE no_sortie=?";
+	private static final String POST_SORTIE = "UPDATE SORTIES SET etats_no_etat=? WHERE no_sortie=?";
 
 	@Override
 	public List<Sortie> selectAll() {
@@ -197,6 +198,22 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setString(1, motif);
 			pstmt.setInt(2, idEtat);
 			pstmt.setInt(3, idSortie);
+
+			pstmt.executeUpdate();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void postSortie(int idSortie, int idEtat) {
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(POST_SORTIE);
+
+			pstmt.setInt(1, idEtat);
+			pstmt.setInt(2, idSortie);
 
 			pstmt.executeUpdate();
 		} catch (Exception e)
