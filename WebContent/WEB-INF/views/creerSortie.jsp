@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Date et heure de la sortie</label>
-                                    <input class="form-control" name="datedebut" type="datetime-local" value="${datedebut}" required>
+                                    <input class="form-control" name="datedebut" type="datetime-local" value="${sortie.datedebut}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Date limite d'inscription</label>

@@ -31,19 +31,20 @@ function actionFormatter(value, row, index) {
         }
     } else {
         res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a>';
-        if(row['idOrganisateur'] == row['idConnecter']) {
-            res += ' - <a href="/sortie/annuler?id='+row["no_sortie"]+'">Annuler</a> '
-        } else {
-            datelimit = new Date(row['dateLimiteInscription']);
-            if(datelimit > Date.now()) {
-                if(row['isInscrit'] == true) {
-                    res += ' - <a href="sortie/desistement?id='+row["no_sortie"]+'">Se désister</a> ';
-                } else {
-                    res += ' - <a href="/sortie/inscription?id ='+row["no_sortie"]+'">S\'inscrire</a> '
+        if(row['idEtat'] == 6){
+            if(row['idOrganisateur'] == row['idConnecter']) {
+                res += ' - <a href="/sortie/annuler?id='+row["no_sortie"]+'">Annuler</a> '
+            } else {
+                datelimit = new Date(row['dateLimiteInscription']);
+                if(datelimit > Date.now()) {
+                    if(row['isInscrit'] == true) {
+                        res += ' - <a href="sortie/desistement?id='+row["no_sortie"]+'">Se désister</a> ';
+                    } else {
+                        res += ' - <a href="/sortie/inscription?id ='+row["no_sortie"]+'">S\'inscrire</a> '
+                    }
                 }
             }
         }
-
     }
 
     // '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a> '+
