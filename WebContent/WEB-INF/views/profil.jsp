@@ -44,7 +44,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Ville de rattachement</label>
-                                <input class="form-control" name="ville" placeholder="" type="">
+                                <select id="idVille" name="ville" class="form-control" onchange="setCp()">
+                                    <c:forEach var="ville" items="${listeVilles}">
+                                        <option value="${ville.idVille}">${ville.nom}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Photo</label>

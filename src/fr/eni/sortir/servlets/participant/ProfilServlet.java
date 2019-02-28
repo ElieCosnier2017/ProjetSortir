@@ -2,7 +2,9 @@ package fr.eni.sortir.servlets.participant;
 
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ParticipantManager;
+import fr.eni.sortir.bll.VilleManager;
 import fr.eni.sortir.bo.Participant;
+import fr.eni.sortir.bo.Ville;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Servlet implementation class ParticipantServlet
@@ -38,8 +41,11 @@ public class ProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Participant idparticipant = (Participant) session.getAttribute("participant");
+		VilleManager villeManager = new VilleManager();
 
 		try {
+			List<Ville> villeList = villeManager.selectAll();
+			request.setAttribute("listeVilles", villeList);
 			request.setAttribute("participant", participantManager.afficher(idparticipant.getIdparticipant()));
 		} catch (BusinessException e) {
 			e.printStackTrace();
