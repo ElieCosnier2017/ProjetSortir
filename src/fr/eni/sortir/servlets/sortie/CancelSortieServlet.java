@@ -24,8 +24,8 @@ public class CancelSortieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         sortieManager = new SortieManager();
         String motif = request.getParameter("motif");
-        Sortie sortie = (Sortie) request.getAttribute("sortie");
-        sortieManager.cancelSortie(sortie.getIdSortie(), motif);
+        int idSortie = Integer.parseInt(request.getParameter("idSortie"));
+        sortieManager.cancelSortie(idSortie, motif);
         response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", "/");
     }
