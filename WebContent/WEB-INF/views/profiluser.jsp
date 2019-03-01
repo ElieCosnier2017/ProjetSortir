@@ -10,7 +10,7 @@
         <div class="container emp-profile">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="">
+                    <img style="margin-left: 70px;" src="<%=request.getContextPath()%>/vendor/img/img.png">
                 </div>
                 <div class="col-md-5">
                     <h1>${participant.pseudo}</h1>

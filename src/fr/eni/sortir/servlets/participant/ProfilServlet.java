@@ -67,7 +67,7 @@ public class ProfilServlet extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		String confpassword = request.getParameter("confpassword");
-		String idSite = request.getParameter("ville");
+		String idSite = request.getParameter("site");
 
 		if(password.equals("")) {
 			password = participant.getPassword();

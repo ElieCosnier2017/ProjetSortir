@@ -15,25 +15,25 @@
             <div id="toolbar">
                 <div class="col-6">
                     <label>Site: </label>
-                    <select class="selectpicker" id="selectSite">
+                    <select class="selectpicker" id="selectSite" style="margin-top:20px;">
                         <c:forEach var="site" items="${listeSite}">
                             <option value="${site.idSite}">${site.nom}</option>
                         </c:forEach>
                     </select>
                     <br><br>
-                    <div class="form-group">
-                        <input name="search" class="form-control" type="text" placeholder="Search">
-                    </div>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <span>Date debut: </span>
-                            <input name="offset" class="form-control w70" type="date" value="0">
-                        </div>
-                        <div class="form-group">
-                            <span>Date fin: </span>
-                            <input name="limit" class="form-control w70" type="date" value="5">
-                        </div>
-                    </div>
+                    <%--<div class="form-group">--%>
+                        <%--<input name="search" class="form-control" type="text" placeholder="Search">--%>
+                    <%--</div>--%>
+                    <%--<div class="form-inline">--%>
+                        <%--<div class="form-group">--%>
+                            <%--<span>Date debut: </span>--%>
+                            <%--<input name="offset" class="form-control w70" type="date" value="0">--%>
+                        <%--</div>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<span>Date fin: </span>--%>
+                            <%--<input name="limit" class="form-control w70" type="date" value="5">--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 </div>
             </div>
             <table
