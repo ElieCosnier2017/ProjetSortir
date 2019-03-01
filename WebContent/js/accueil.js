@@ -32,7 +32,7 @@ function actionFormatter(value, row, index) {
         }
     } else {
         res = '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a>';
-        if(row['idEtat'] != 6){
+        if(row['idEtat'] != 7){
             if(row['idOrganisateur'] == row['idConnecter']) {
                 res += ' - <a href="/sortie/annuler?id='+row["no_sortie"]+'">Annuler</a> '
             } else {
@@ -47,13 +47,14 @@ function actionFormatter(value, row, index) {
             }
         }
     }
-
-    // '<a href="/sortie/detail?id='+row["no_sortie"]+'">Afficher</a> '+
-    // '<a href="/sortie/detail?id='+row["no_sortie"]+'">Modifier</a> '+
     return [
         res
-        // '<a href="sortie/desistement?id='+row["no_sortie"]+'">Se désister</a> '+
-        // '<a href="/sortie/inscription?id='+row["no_sortie"]+'">S\'inscrire</a> '+
-        // '<a>Annuler</a>'
     ].join('')
 }
+
+$('#selectSite').on('changed.bs.select', function () {
+    var siteselect = $('.selectpicker').val();
+    $('#table').bootstrapTable('refresh', { url: '/sortie?id='+siteselect})
+});
+
+
