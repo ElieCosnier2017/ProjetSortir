@@ -5,6 +5,11 @@ errorPage="errors.jsp" %>
     </head>
     <body>
     <%@ include file="../layout/navbar.jsp"%>
+        <c:if test="${!empty erreur}">
+            <div class="alert alert-danger">
+                <strong>Erreur</strong> ${erreur}
+            </div>
+        </c:if>
         <div class="container">
             <div class="row justify-content-md-center" style="margin-top: 10%;">
                 <div class="col-sm-6">
