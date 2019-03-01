@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -38,6 +40,10 @@ public class HomeServlet extends HttpServlet {
         } catch (BusinessException e) {
             e.printStackTrace();
         }
+        Date aujourdhui = new Date();
+        DateFormat shortDateFormat = DateFormat.getDateInstance(
+                DateFormat.SHORT);
+        request.setAttribute("date", shortDateFormat.format(aujourdhui));
         request.setAttribute("listeSite", sites);
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
         rd.forward(request, response);

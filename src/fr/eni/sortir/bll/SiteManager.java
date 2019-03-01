@@ -24,8 +24,4 @@ public class SiteManager {
     {
         return this.siteDAO.selectById(idSite);
     }
-
-    public List<Site> selectAll(){
-        return this.siteDAO.selectAll();
-    }
 }

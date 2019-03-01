@@ -7,10 +7,11 @@
     <c:if test="${sessionScope.participant != null}">
         <div class="row">
             <div class="col-md-4 offset-md-8">
-                <span>AFFICHE DATE DU JOUR</span><br>
+                <span>Date du jour: ${date}</span><br>
                 <span>Participant : ${sessionScope.participant.getPrenom()} ${sessionScope.participant.getNom()}</span>
             </div>
         </div>
+    <h1>FAIRE REQUEST AJAX</h1>
         <div>
             <div id="toolbar">
                 <div class="col-6">

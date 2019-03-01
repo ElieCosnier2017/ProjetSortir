@@ -77,6 +77,8 @@ public class ProfilServlet extends HttpServlet {
 		try {
 			participant = new Participant(participant.getIdparticipant(), nom, prenom, telephone, mail, pseudo, password, Integer.parseInt(idSite));
 			participantManager.modifier(participant);
+			response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+			response.setHeader("Location", "/profil");
 		} catch (BusinessException | SQLException e) {
 			e.printStackTrace();
 		}
