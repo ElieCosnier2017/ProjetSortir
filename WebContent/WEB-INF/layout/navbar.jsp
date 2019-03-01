@@ -7,6 +7,12 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <c:if test="${sessionScope.participant != null}">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="float-right nav-link" href="/ville/gerer">Villes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="float-right nav-link" href="/site/gerer">Sites</a>
+                </li>
                 <li class="nav-item active">
                     <a class="float-right nav-link" href="/">Accueil</a>
                 </li>

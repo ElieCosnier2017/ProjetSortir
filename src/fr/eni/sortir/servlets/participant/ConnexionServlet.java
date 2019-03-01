@@ -30,9 +30,12 @@ public class ConnexionServlet extends HttpServlet {
                         rememberParticipant(request, response, email);
                    }
                } else {
-                   //TODO afficher message si pas de resultat
+                   request.setCharacterEncoding("UTF-8");
+                   request.setAttribute("erreur" , "Le login / mot de passe n'est pas bon");
+                   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
+                   rd.forward(request, response);
                }
-            } catch (BusinessException e) {
+            } catch (BusinessException | ServletException | IOException e) {
                 e.printStackTrace();
             }
         }
