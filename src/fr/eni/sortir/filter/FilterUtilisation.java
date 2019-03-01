@@ -19,7 +19,11 @@ import java.io.IOException;
         ,
         urlPatterns = {
                 "/sortie/*",
-                "/profil"
+                "/profil",
+                "/ville/*",
+                "/site/*",
+                "/detail",
+                "/user/*"
         })
 public class FilterUtilisation implements Filter {
 
