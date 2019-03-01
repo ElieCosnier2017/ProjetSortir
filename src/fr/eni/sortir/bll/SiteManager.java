@@ -24,4 +24,9 @@ public class SiteManager {
     {
         return this.siteDAO.selectById(idSite);
     }
+
+    public void insert(Site siteNew) throws BusinessException
+    {
+        this.siteDAO.insert(siteNew);
+    }
 }

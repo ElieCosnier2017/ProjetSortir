@@ -11,4 +11,7 @@ public interface SiteDAO {
     Site selectById(int idSite) throws SQLException;
 
     List<Site> selectAll() throws BusinessException;
+
+    void insert(Site site) throws BusinessException;
+
 }

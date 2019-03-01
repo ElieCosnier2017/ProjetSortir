@@ -131,7 +131,7 @@ public class AddSortieServlet extends HttpServlet {
 		if (request.getParameter("ajouter") != null) {
 			try {
 
-				Sortie nouvelleSortie = createSortie(request, 8);
+				Sortie nouvelleSortie = createSortie(request, 1);
 				if (nouvelleSortie != null) {
 					sortie = sortieManager.ajouter(nouvelleSortie);
 					response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
@@ -143,7 +143,7 @@ public class AddSortieServlet extends HttpServlet {
 		} else if (request.getParameter("publier") != null) {
 			try {
 
-				Sortie nouvelleSortie = createSortie(request, 1);
+				Sortie nouvelleSortie = createSortie(request, 2);
 				if (nouvelleSortie != null) {
 					sortie = sortieManager.ajouter(nouvelleSortie);
 					response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
@@ -166,7 +166,7 @@ public class AddSortieServlet extends HttpServlet {
                 Sortie sortie = sortieManager.selectById(idSortie);
 
                 nouvelleSortie.setNom(request.getParameter("nom"));
-                nouvelleSortie.setidEtat(8);
+                nouvelleSortie.setidEtat(1);
                 nouvelleSortie.setIdLieu(Integer.parseInt(request.getParameter("lieu")));
                 nouvelleSortie.setInfosSortie(request.getParameter("infos"));
                 nouvelleSortie.setDuree(Integer.parseInt(request.getParameter("duree")));
