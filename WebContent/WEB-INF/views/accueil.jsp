@@ -60,12 +60,7 @@
             </table>
         </div>
         <a href="${pageContext.request.contextPath}/sortie/ajouter" class="btn btn-success" style="margin-left: 10px;">Créer une sortie</a>
-        <script>
-            $('#selectSite').on('changed.bs.select', function () {
-                var siteselect = $('.selectpicker').val();
-                $('#table').bootstrapTable('refresh', { url: '/sortie?id='+siteselect})
-            });
-        </script>
+
     </c:if>
     <c:if test="${sessionScope.participant == null}">
     <div class="container">
