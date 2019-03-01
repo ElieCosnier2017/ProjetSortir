@@ -4,7 +4,8 @@
 <head>
 	<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap-table.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap-table.min.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
-	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.js"></script>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap-select.min.css">
 
+	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.js"></script>

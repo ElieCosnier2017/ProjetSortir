@@ -41,7 +41,7 @@ function actionFormatter(value, row, index) {
                     if(row['isInscrit'] == true) {
                         res += ' - <a href="sortie/desistement?id='+row["no_sortie"]+'">Se désister</a> ';
                     } else {
-                        res += ' - <a href="/sortie/inscription?id ='+row["no_sortie"]+'">S\'inscrire</a> '
+                        res += ' - <a href="/sortie/inscription?id='+row["no_sortie"]+'">S\'inscrire</a> '
                     }
                 }
             }
