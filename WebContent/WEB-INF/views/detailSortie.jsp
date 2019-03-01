@@ -100,27 +100,28 @@
                 </div>
             </div>
         </div>
-        <div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">pseudo</th>
-                    <th scope="col">nom</th>
-                </tr>
-                </thead>
-                <tbody>
+        <div style="margin-top: 2%">
+            <div class="col-5">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Pseudo</th>
+                        <th scope="col">Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <c:forEach items="${ participants }" var="participantSortie">
                         <tr>
                             <td>
-                                <a href="/profil?id=${participantSortie.idparticipant}">${participantSortie.pseudo}</a>
+                                <a href="/user/profil?id=${participantSortie.idparticipant}">${participantSortie.pseudo}</a>
                             </td>
-                            <td>${participantSortie.nom}</td>
+                            <td>${participantSortie.prenom}  ${participantSortie.nom}</td>
                         </tr>
                     </c:forEach>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <a href="${pageContext.request.contextPath}/sortie/editer?id=${sortie.idSortie}" class="btn btn-success" style="margin-left: 10px;">Modifier</a>
     </form>
     </c:if>
 </div>

@@ -10,7 +10,7 @@ errorPage="errors.jsp" %>
             <c:if test="${!empty participant }">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="">
+                        <img style="margin-left: 70px;" src="<%=request.getContextPath()%>/vendor/img/img.png">
                     </div>
                     <div class="col-md-5">
                         <form method="post">
@@ -50,11 +50,6 @@ errorPage="errors.jsp" %>
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Photo</label>
-                                <input class="form-control" name="photo" placeholder="" type="file">
-                            </div>
-
                             <button type="submit" class="btn btn-success">Modifier</button>
                             <a href="/" class="btn btn-danger">Annuler</a>
                         </form>

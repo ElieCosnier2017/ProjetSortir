@@ -61,9 +61,7 @@ public class InscriptionServlet extends HttpServlet {
 			}
 			if(participant != null){
 				response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-
-				// a changer
-				response.setHeader("Location", "/profilParticipant");
+				response.setHeader("Location", "/");
 
 			} else {
 				//TODO afficher message si pas de resultat
