@@ -72,6 +72,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setInt(9, sortie.getOrganisateur());
 			pstmt.setInt(10, sortie.getIdLieu());
 			pstmt.setInt(11, sortie.getIdEtat());
+
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
