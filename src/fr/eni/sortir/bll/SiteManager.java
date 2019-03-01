@@ -29,4 +29,14 @@ public class SiteManager {
     {
         this.siteDAO.insert(siteNew);
     }
+
+    public Site update(Site site) throws BusinessException, SQLException
+    {
+        return this.siteDAO.update(site);
+    }
+
+    public void delete(int id) throws BusinessException
+    {
+        this.siteDAO.delete(id);
+    }
 }

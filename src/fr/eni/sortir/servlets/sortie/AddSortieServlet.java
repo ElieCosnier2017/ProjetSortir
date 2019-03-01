@@ -202,7 +202,7 @@ public class AddSortieServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else if(request.getServletPath().equals("/sortie/annuler")) {
-			request.setAttribute("title", "/sortie/annuler");
+			request.setAttribute("title", "Annuler");
 			Integer idSortie = lireParametreIdSortie(request);
 
 			try {

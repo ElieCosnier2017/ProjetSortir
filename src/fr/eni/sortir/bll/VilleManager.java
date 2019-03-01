@@ -37,4 +37,14 @@ public class VilleManager {
             throw exception;
         }
     }
+
+    public void delete(int id) throws SQLException, BusinessException
+    {
+        this.villeDAO.delete(id);
+    }
+
+    public Ville update(Ville ville) throws BusinessException, SQLException
+    {
+        return this.villeDAO.update(ville);
+    }
 }

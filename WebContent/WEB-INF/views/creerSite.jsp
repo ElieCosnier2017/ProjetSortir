@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp" %>
 
-title>Sortir.com - Créer un site</title>
+title>Sortir.com - ${title} un site</title>
 <link rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -16,29 +16,31 @@ title>Sortir.com - Créer un site</title>
         <div class="col-sm-6">
             <div class="card">
                 <article class="card-body">
-                    <h4 class="card-title mb-4 mt-1">Créer un site</h4>
-                    <form method="post" action="/site/creerSite">
+                    <h4 class="card-title mb-4 mt-1">${title} un site</h4>
+                    <form method="post">
                         <div style="display: inline-flex">
                             <div>
                                 <div class="form-group">
                                     <label>Nom du site</label>
-                                    <input class="form-control" name="nom" placeholder="Nom" type="text">
+                                    <input class="form-control" name="nom" placeholder="Nom" type="text" value="${site.nom}">
                                 </div>
                             </div>
                         </div>
-                        <div style="display: inline-flex; margin-left: 4em;">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        Enregistrer
-                                    </button>
+                        <div class="row">
+                            <div style="display: inline-flex; margin-left: 4em;">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            ${bouton}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <button type="button" href="/site/gererSite" class="btn btn-primary btn-block">
-                                        Annuler
-                                    </button>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <button type="button" href="/site/gererSite" class="btn btn-primary btn-block">
+                                            Annuler
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

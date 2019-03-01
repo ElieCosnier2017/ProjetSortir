@@ -15,6 +15,43 @@ public class SiteDAOJdbcImpl implements SiteDAO {
     private static final String SELECT_ONE_BY_ID = "SELECT nom_site FROM SITES WHERE no_site=?";
     private static final String INSERT = "INSERT INTO SITES (nom_site) VALUES (?)";
     private static final String SELECT_ALL = "SELECT * FROM SITES";
+    private static final String UPDATE = "UPDATE SITES SET nom_site=? WHERE no_site=?";
+    private static final String DELETE = "DELETE FROM SITES WHERE no_site=?";
+
+    /**
+     * Méthode qui permet de supprimer un élément de la table SITES
+     */
+    @Override
+    public void delete(int idSite) throws BusinessException {
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+            pstmt.setInt(1, idSite);
+            pstmt.executeUpdate();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Méthode qui permet de modifier un site existant dans la table SITES
+     */
+    @Override
+    public Site update(Site site) throws BusinessException {
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
+            pstmt.setString(1, site.getNom());
+            pstmt.setInt(2, site.getIdSite());
+            pstmt.executeUpdate();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return site;
+    }
 
     /**
      * Méthode qui permet d'ajouter un site à la table SITES

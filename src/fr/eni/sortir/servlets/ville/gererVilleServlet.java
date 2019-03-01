@@ -43,37 +43,16 @@ public class gererVilleServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        PrintWriter out = response.getWriter();
 
-        out.println(json_ville().toJSONString());
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gererVille.jsp");
-        rd.forward(request, response);
-    }
-
-    private JSONObject json_ville(){
-        JSONArray jsonArray = new JSONArray();
-        JSONObject finalObject = new JSONObject();
-
-        try {
-            List<Ville> listVille = villeManager.selectAll();
-            for (Ville ville: listVille) {
-                JSONObject jsonObject = new JSONObject();
-                System.out.println(ville.toString());
-                jsonObject.put("no_ville", ville.getIdVille());
-                jsonObject.put("nom", ville.getNom());
-                jsonObject.put("codepostal", ville.getCodePostal());
-
-                jsonArray.add(jsonObject);
-            }
+        try{
+            List<Ville> villes = villeManager.selectAll();
+            request.setAttribute("villes", villes);
         } catch (BusinessException e) {
             e.printStackTrace();
         }
 
-        finalObject.put("rows", jsonArray);
-
-        return finalObject;
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gererVille.jsp");
+        rd.forward(request, response);
     }
 }

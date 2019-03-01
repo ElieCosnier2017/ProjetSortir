@@ -37,43 +37,22 @@ public class gererSiteServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        PrintWriter out = response.getWriter();
 
-        out.println(json_site().toJSONString());
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gererSite.jsp");
-        rd.forward(request, response);
-    }
-
-    private JSONObject json_site(){
-        JSONArray jsonArray = new JSONArray();
-        JSONObject finalObject = new JSONObject();
-
-        try {
-            List<Site> listSite = siteManager.selectAll();
-            for (Site site: listSite) {
-                JSONObject jsonObject = new JSONObject();
-                System.out.println(site.toString());
-                jsonObject.put("no_site", site.getIdSite());
-                jsonObject.put("nom", site.getNom());
-
-                jsonArray.add(jsonObject);
-            }
+        try{
+            List<Site> sites = siteManager.selectAll();
+            request.setAttribute("sites", sites);
         } catch (BusinessException e) {
             e.printStackTrace();
         }
 
-        finalObject.put("rows", jsonArray);
-
-        return finalObject;
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gererSite.jsp");
+        rd.forward(request, response);
     }
 }

@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="../layout/navbar.jsp"%>
-<div style="background-color: #ffffff">
+<div class="col-md-8" style="background-color: #ffffff;margin-left: 25em;">
     <div style="margin-top: 10%;">
         <div id="toolbar">
             <H3>Filtrer les villes</H3>
@@ -22,27 +22,30 @@
                 <button id="ok" type="submit" class="btn btn-primary">OK</button>
             </div>
         </div>
-        <table
-                id="table"
-                data-toggle="table"
-                data-toolbar="#toolbar"
-                data-url="/ville/gererVille"
-                style="background-color:#f7f7f7">
+        <table border="1">
             <thead>
-            <tr>
-                <th data-field="nom" data-align="center">Nom de la ville</th>
-                <th data-field="codepostal" data-align="center">code postal</th>
-                <th data-field="action" data-formatter="actionFormatter">Actions</th>
-            </tr>
+            <td>Nom de la ville</td>
+            <td>Code postal</td>
+            <td>Modifier</td>
+            <td>Supprimer</td>
+            </td>
             </thead>
+            <tbody>
+            <c:forEach items="${villes}" var="ville">
+                <tr>
+                    <td>${ville.nom}</td>
+                    <td>${ville.codePostal}</td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/ville/editerVille?idVille=${ville.idVille}" class="btn btn-lg btn-sortir" title="modifier la ville"><i class="fas fa-edit"></i></a></td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/ville/supprimerVille?idVille=${ville.idVille}" class="btn btn-lg btn-danger" title="supprimer la ville"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
         </table>
     </div>
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">
-                <button type="button" href="/ville/creerVille" class="btn btn-primary btn-block">
-                    Créer une ville
-                </button>
+                <a href="/ville/creerVille" class="btn btn-success" style="margin-left: 10px;">Créer une ville</a>
             </div>
         </div>
         <div class="col-md-2">

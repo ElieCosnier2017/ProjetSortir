@@ -1,5 +1,6 @@
 package fr.eni.sortir.servlets.ville;
 
+import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.VilleManager;
 import fr.eni.sortir.bo.Ville;
 
@@ -10,8 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
-@WebServlet("/ville/creerVille")
+/**
+ * Servlet implementation class Ville
+ */
+@WebServlet(
+        urlPatterns= {
+                "/ville/creerVille",
+                "/ville/editerVille",
+                "/ville/supprimerVille"
+        })
 public class creerVilleServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private VilleManager villeManager;
@@ -29,29 +39,102 @@ public class creerVilleServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        try {
-            request.setCharacterEncoding("UTF-8");
-            Ville nouvelleVille = new Ville();
+        if (request.getServletPath().equals("/ville/creerVille"))
+        {
+            request.setAttribute("title", "Créer");
+            request.setAttribute("path", "/ville/creerVille");
 
-            nouvelleVille.setNom(request.getParameter("nom"));
-            nouvelleVille.setCodePostal(Integer.parseInt(request.getParameter("cp")));
+            try {
+                request.setCharacterEncoding("UTF-8");
+                Ville nouvelleVille = new Ville();
 
-            if (nouvelleVille != null){
-                villeManager.ajouter(nouvelleVille);
+                nouvelleVille.setNom(request.getParameter("nom"));
+                nouvelleVille.setCodePostal(Integer.parseInt(request.getParameter("cp")));
+
+                if (nouvelleVille != null){
+                    villeManager.ajouter(nouvelleVille);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "/ville/gererVille");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/gererVille.jsp");
-        rd.forward(request, response);
+        if (request.getServletPath().equals("/ville/editerVille")){
+
+            request.setCharacterEncoding("UTF-8");
+            Ville villeUpdated = new Ville();
+
+            villeUpdated.setIdVille(Integer.parseInt(request.getParameter("idVille")));
+            villeUpdated.setNom(request.getParameter("nom"));
+            villeUpdated.setCodePostal(Integer.parseInt(request.getParameter("cp")));
+
+            VilleManager villeManager = new VilleManager();
+
+            try {
+                villeManager.update(villeUpdated);
+            } catch (BusinessException | SQLException e)
+            {
+                e.printStackTrace();
+            }
+
+            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "/ville/gererVille");
+        }
     }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerVille.jsp");
-        rd.forward(request, response);
+        if (request.getServletPath().equals("/ville/creerVille"))
+        {
+            request.setAttribute("title", "Créer");
+            request.setAttribute("path", "/ville/creerVille");
+            request.setAttribute("bouton", "Enregistrer");
+
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerVille.jsp");
+            rd.forward(request, response);
+        }
+
+        if (request.getServletPath().equals("/ville/editerVille")) {
+
+            request.setAttribute("title", "Modifier");
+            request.setAttribute("path", "/ville/editerVille");
+            request.setAttribute("bouton", "Modifier");
+
+            int idVille = Integer.parseInt(request.getParameter("idVille"));
+
+            try {
+                VilleManager villeManager = new VilleManager();
+                Ville ville = villeManager.selectById(idVille);
+                request.setAttribute("ville", ville);
+            } catch (BusinessException | SQLException e) {
+                e.printStackTrace();
+            }
+
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerVille.jsp");
+            rd.forward(request, response);
+        }
+
+        if (request.getServletPath().equals("/ville/supprimerVille"))
+        {
+            int idVille = Integer.parseInt(request.getParameter("idVille"));
+
+            try {
+                VilleManager villeManager = new VilleManager();
+                villeManager.delete(idVille);
+            } catch (BusinessException e)
+            {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "/ville/gererVille");
+        }
     }
 }

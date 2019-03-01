@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="../layout/navbar.jsp"%>
-<div style="background-color: #ffffff">
+<div class="col-md-8" style="background-color: #ffffff;margin-left: 25em;">
     <div style="margin-top: 10%;">
         <div id="toolbar">
             <H3>Filtrer les sites</H3>
@@ -22,26 +22,28 @@
                 <button id="ok" type="submit" class="btn btn-primary">OK</button>
             </div>
         </div>
-        <table
-                id="table"
-                data-toggle="table"
-                data-toolbar="#toolbar"
-                data-url="/site/gererSite"
-                style="background-color:#f7f7f7">
+        <table border="1">
             <thead>
-            <tr>
-                <th data-field="nom" data-align="center">Nom du site</th>
-                <th data-field="action" data-formatter="actionFormatter">Actions</th>
-            </tr>
+            <td>Nom du site</td>
+            <td>Modifier</td>
+            <td>Supprimer</td>
+            </td>
             </thead>
+            <tbody>
+            <c:forEach items="${sites}" var="site">
+                <tr>
+                    <td>${site.nom}</td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/site/editerSite?idSite=${site.idSite}" class="btn btn-lg btn-sortir" title="modifier le site"><i class="fas fa-edit"></i></a></td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/site/supprimerSite?idSite=${site.idSite}" class="btn btn-lg btn-danger" title="supprimer le site"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
         </table>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
-                <button type="button" href="/site/creerSite" class="btn btn-primary btn-block">
-                    Créer un site
-                </button>
+                <a href="/site/creerSite" class="btn btn-success" style="margin-left: 10px;">Créer un site</a>
             </div>
         </div>
         <div class="col-md-2">

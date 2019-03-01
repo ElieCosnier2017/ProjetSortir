@@ -13,4 +13,8 @@ public interface SiteDAO {
     List<Site> selectAll() throws BusinessException;
 
     void insert(Site site) throws BusinessException;
+
+    Site update(Site site) throws BusinessException;
+
+    void delete(int idSite) throws BusinessException;
 }

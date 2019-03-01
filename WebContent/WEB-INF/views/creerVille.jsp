@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/entete.jsp" %>
 
-title>Sortir.com - Créer une ville</title>
+title>Sortir.com - ${title} une ville</title>
 <link rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -16,35 +16,37 @@ title>Sortir.com - Créer une ville</title>
         <div class="col-sm-6">
             <div class="card">
                 <article class="card-body">
-                    <h4 class="card-title mb-4 mt-1">Créer une ville</h4>
-                    <form method="post" action="/ville/creerVille">
+                    <h4 class="card-title mb-4 mt-1">${title} une ville</h4>
+                    <form method="post">
                         <div style="display: inline-flex">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Nom de la ville</label>
-                                    <input class="form-control" name="nom" placeholder="Nom" type="text">
+                                    <input class="form-control" name="nom" placeholder="Nom" type="text" value="${ville.nom}">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Code postal</label>
-                                    <input class="form-control" name="cp" placeholder="code postal" type="text">
+                                    <input class="form-control" name="cp" placeholder="code postal" type="text" value="${ville.codePostal}">
                                 </div>
                             </div>
                         </div>
-                        <div style="display: inline-flex; margin-left: 4em;">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        Enregistrer
-                                    </button>
+                        <div class="row">
+                            <div style="display: inline-flex; margin-left: 4em;">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            ${bouton}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <button type="button" href="/ville/gererVille" class="btn btn-primary btn-block">
-                                        Annuler
-                                    </button>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <button type="button" href="/ville/gererVille" class="btn btn-primary btn-block">
+                                            Annuler
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

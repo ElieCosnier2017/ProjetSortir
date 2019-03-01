@@ -13,8 +13,47 @@ import java.util.List;
 public class VilleDAOJdbcImpl implements  VilleDAO {
 
     private static final String SELECT_ALL="SELECT * FROM VILLES";
-    private static final String SELECT_ONE_BY_ID = "SELECT * FROM VILLES WHERE idVille=?";
+    private static final String SELECT_ONE_BY_ID = "SELECT * FROM VILLES WHERE no_ville=?";
     private static final String INSERT = "INSERT INTO VILLES(nom_ville, code_postal) VALUES (?,?)";
+    private static final String UPDATE = "UPDATE VILLES SET nom_ville=?, code_postal=? WHERE no_ville=?";
+    private static final String DELETE = "DELETE FROM VILLES WHERE no_ville=?";
+
+    /**
+     * Méthode qui permet de modifier une ville existant dans la table VILLES
+     */
+    @Override
+    public Ville update(Ville ville) throws SQLException {
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
+            pstmt.setString(1, ville.getNom());
+            pstmt.setInt(2, ville.getCodePostal());
+            pstmt.setInt(3, ville.getIdVille());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e)
+        {
+            throw new SQLException(e);
+        }
+        return ville;
+    }
+
+
+    /**
+     * Méthode qui permet de supprimer un élément de la table VILLES
+     */
+    @Override
+    public void delete(int idVille) throws BusinessException {
+        try (Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+            pstmt.setInt(1, idVille);
+            pstmt.executeUpdate();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Méthode qui permet d'ajouter une ville à la table VILLES
