@@ -15,7 +15,6 @@ errorPage="errors.jsp" %>
                 <div class="col-sm-6">
                     <div class="card">
                         <article class="card-body">
-                            <a href="/inscription" class="float-right btn btn-outline-primary">Inscription</a>
                             <h4 class="card-title mb-4 mt-1">Connexion</h4>
                             <form method="post">
                                 <div class="form-group">
