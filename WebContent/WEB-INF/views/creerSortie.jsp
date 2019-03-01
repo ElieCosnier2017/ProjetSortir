@@ -1,6 +1,7 @@
 <%@ page import="fr.eni.sortir.bo.Lieu" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8"
+    errorPage="errors.jsp" %>
 <%@ include file="../layout/entete.jsp" %>
 
 <title>Sortir.com - ${title} une sortie</title>

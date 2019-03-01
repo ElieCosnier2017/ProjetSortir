@@ -29,7 +29,7 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 
             while(rs.next())
             {
-                sites.add(this.map(rs));
+                sites.add(this.siteBuilder(rs));
             }
         } catch (Exception e)
         {
@@ -69,7 +69,7 @@ public class SiteDAOJdbcImpl implements SiteDAO {
      * @return ville
      * @throws SQLException
      */
-    private Site map(ResultSet rs) throws SQLException {
+    private Site siteBuilder(ResultSet rs) throws SQLException {
         Site site = new Site();
         site.setIdSite(rs.getInt("no_site"));
         site.setNom(rs.getString("nom_site"));

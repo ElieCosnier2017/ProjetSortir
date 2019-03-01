@@ -57,7 +57,7 @@ public class AfficherProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession httpSession = request.getSession();
+/*		HttpSession httpSession = request.getSession();
 		int idparticipant = (int) httpSession.getAttribute("idParticipant");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -80,7 +80,7 @@ public class AfficherProfilServlet extends HttpServlet {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 

@@ -1,5 +1,5 @@
-<%@ page import="fr.eni.sortir.bo.Participant" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8"
+errorPage="errors.jsp" %>
 <%@ include file="../layout/entete.jsp"%>
 
         <title>Sortir.com - Gestion du profil</title>
@@ -44,7 +44,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Ville de rattachement</label>
-                                <input class="form-control" name="ville" placeholder="" type="">
+                                <select id="idVille" name="ville" class="form-control" onchange="setCp()">
+                                    <c:forEach var="ville" items="${listeVilles}">
+                                        <option value="${ville.idSite}">${ville.nom}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Photo</label>

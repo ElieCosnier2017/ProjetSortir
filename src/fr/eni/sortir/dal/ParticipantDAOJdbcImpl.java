@@ -15,7 +15,7 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 	
 	/* REQUETES */
 	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, telephone, mail, pseudo, mot_de_passe, administrateur, actif, sites_no_site) VALUES (?,?,?,?,?,?,0,1,1)";
-	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, mail=?, pseudo=?, mot_de_passe=? WHERE no_participant=?";
+	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, telephone=?, mail=?, pseudo=?, mot_de_passe=?, sites_no_site=? WHERE no_participant=?";
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE idParticipant=?";
 	private static final String SELECT_ALL="SELECT nom, prenom, telephone, mail, administrateur, actif, FROM PARTICIPANTS" ;
 	private static final String SELECT_ONE_BY_ID="SELECT no_participant, nom, prenom, telephone,pseudo, mail, administrateur, mot_de_passe, actif, sites_no_site FROM PARTICIPANTS WHERE no_participant=? ";
@@ -74,7 +74,8 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO{
 			pstmt.setString(4, participant.getMail());
 			pstmt.setString(5, participant.getPseudo());
 			pstmt.setString(6, participant.getPassword());
-			pstmt.setInt(7, participant.getIdparticipant());
+			pstmt.setInt(7, participant.getSite());
+			pstmt.setInt(8, participant.getIdparticipant());
 
 
 			pstmt.executeUpdate();
