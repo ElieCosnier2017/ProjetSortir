@@ -13,7 +13,6 @@
                 <span>Participant : ${sessionScope.participant.getPrenom()} ${sessionScope.participant.getNom()}</span>
             </div>
         </div>
-    <h1>FAIRE REQUEST AJAX</h1>
         <div>
             <div id="toolbar">
                 <div class="col-6">
