@@ -44,9 +44,9 @@ errorPage="errors.jsp" %>
                             </div>
                             <div class="form-group">
                                 <label>Ville de rattachement</label>
-                                <select id="idVille" name="ville" class="form-control" onchange="setCp()">
-                                    <c:forEach var="ville" items="${listeVilles}">
-                                        <option value="${ville.idSite}">${ville.nom}</option>
+                                <select id="idSite" name="site" class="form-control">
+                                    <c:forEach var="site" items="${listeSite}">
+                                        <option value="${site.idSite}">${site.nom}</option>
                                     </c:forEach>
                                 </select>
                             </div>

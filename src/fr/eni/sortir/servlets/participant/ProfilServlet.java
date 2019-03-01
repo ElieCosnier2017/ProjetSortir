@@ -43,7 +43,7 @@ public class ProfilServlet extends HttpServlet {
 
 		try {
 			List<Site> siteList = siteManager.selectAll();
-			request.setAttribute("listeVilles", siteList);
+			request.setAttribute("listeSite", siteList);
 			request.setAttribute("participant", participantManager.afficher(idparticipant.getIdparticipant()));
 		} catch (BusinessException | SQLException e) {
 			e.printStackTrace();
@@ -68,7 +68,6 @@ public class ProfilServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String confpassword = request.getParameter("confpassword");
 		String idSite = request.getParameter("ville");
-		System.out.println(nom + ' '+prenom+' '+mail+' '+telephone+' '+pseudo);
 
 		if(password.equals("")) {
 			password = participant.getPassword();

@@ -26,7 +26,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
 			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?" +
-			" ORDER BY s.datecloture DESC ";
+			" ORDER BY etats_no_etat ASC, s.datecloture DESC";
 	private static final String CANCEL_SORTIE = "UPDATE SORTIES SET etatsortie=?, etats_no_etat=? WHERE no_sortie=?";
 	private static final String POST_SORTIE = "UPDATE SORTIES SET etats_no_etat=? WHERE no_sortie=?";
 
@@ -198,7 +198,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(CANCEL_SORTIE);
 
 			pstmt.setString(1, motif);
-			pstmt.setInt(2, 6);
+			pstmt.setInt(2, 7);
 			pstmt.setInt(3, idSortie);
 
 			pstmt.executeUpdate();

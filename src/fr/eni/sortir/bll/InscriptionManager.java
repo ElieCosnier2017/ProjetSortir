@@ -38,7 +38,7 @@ public class InscriptionManager {
 
     private boolean verifSortieForInscriptionOrDesistement(int idSortie) throws BusinessException {
         Sortie sortie = sortieManager.selectById(idSortie);
-        return 1 == sortie.getIdEtat() && sortie.getDateLimiteInscription().after(new java.sql.Date(new java.util.Date().getTime()));
+        return 2 == sortie.getIdEtat() && sortie.getDateLimiteInscription().after(new java.sql.Date(new java.util.Date().getTime()));
     }
 
     private boolean verifSortieNbInscriptionMax(int idSortie) throws BusinessException {

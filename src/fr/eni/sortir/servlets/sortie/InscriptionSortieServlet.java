@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(
         urlPatterns= {
@@ -31,8 +32,8 @@ public class InscriptionSortieServlet extends HttpServlet {
         if(request.getServletPath().equals("/sortie/inscription")){
             try {
                 inscriptionManager.inscriptionSortie(idSortie, participant.getIdparticipant());
-                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-                response.setHeader("Location", "/");
+                PrintWriter out = response.getWriter();
+                out.println("ok");
             } catch (BusinessException e) {
                 response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
                 response.setHeader("Location", "/");
@@ -43,8 +44,8 @@ public class InscriptionSortieServlet extends HttpServlet {
         else {
             try {
                 inscriptionManager.desistementSortie(idSortie, participant.getIdparticipant());
-                response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-                response.setHeader("Location", "/");
+                PrintWriter out = response.getWriter();
+                out.println("ok");
             } catch (BusinessException e) {
                 response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
                 response.setHeader("Location", "/");
