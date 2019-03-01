@@ -1,6 +1,9 @@
 package fr.eni.sortir.servlets.site;
 
+<<<<<<< HEAD
 import fr.eni.sortir.bll.BusinessException;
+=======
+>>>>>>> origin/developpement
 import fr.eni.sortir.bll.SiteManager;
 import fr.eni.sortir.bo.Site;
 
@@ -19,9 +22,9 @@ import java.sql.SQLException;
  */
 @WebServlet(
         urlPatterns= {
-                "/site/creerSite",
-                "/site/editerSite",
-                "/site/supprimerSite"
+                "/site/creer",
+                "/site/editer",
+                "/site/supprimer"
         })
 public class creerSiteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -40,10 +43,10 @@ public class creerSiteServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getServletPath().equals("/site/creerSite"))
+        if (request.getServletPath().equals("/site/creer"))
         {
             request.setAttribute("title", "Créer");
-            request.setAttribute("path", "/site/creerSite");
+            request.setAttribute("path", "/site/creer");
 
             try {
                 request.setCharacterEncoding("UTF-8");
@@ -59,10 +62,10 @@ public class creerSiteServlet extends HttpServlet {
             }
 
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "/site/gererSite");
+            response.setHeader("Location", "/site/gerer");
         }
 
-        if (request.getServletPath().equals("/site/editerSite")){
+        if (request.getServletPath().equals("/site/editer")){
 
             request.setCharacterEncoding("UTF-8");
             Site siteUpdated = new Site();
@@ -98,10 +101,10 @@ public class creerSiteServlet extends HttpServlet {
             rd.forward(request, response);
         }
 
-        if (request.getServletPath().equals("/site/editerSite")) {
+        if (request.getServletPath().equals("/site/editer")) {
 
             request.setAttribute("title", "Modifier");
-            request.setAttribute("path", "/site/editerSite");
+            request.setAttribute("path", "/site/editer");
             request.setAttribute("bouton", "Modifier");
 
             int idSite = Integer.parseInt(request.getParameter("idSite"));
@@ -119,7 +122,7 @@ public class creerSiteServlet extends HttpServlet {
             rd.forward(request, response);
         }
 
-        if (request.getServletPath().equals("/site/supprimerSite"))
+        if (request.getServletPath().equals("/site/supprimer"))
         {
             int idSite = Integer.parseInt(request.getParameter("idSite"));
 
@@ -132,7 +135,7 @@ public class creerSiteServlet extends HttpServlet {
             }
 
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "/site/gererSite");
+            response.setHeader("Location", "/site/gerer");
         }
     }
 }

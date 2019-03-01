@@ -30,9 +30,12 @@ public class ConnexionServlet extends HttpServlet {
                         rememberParticipant(request, response, email);
                    }
                } else {
-                   //TODO afficher message si pas de resultat
+                   request.setCharacterEncoding("UTF-8");
+                   request.setAttribute("erreur" , "Le login / mot de passe n'est pas bon");
+                   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
+                   rd.forward(request, response);
                }
-            } catch (BusinessException e) {
+            } catch (BusinessException | ServletException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -43,8 +46,6 @@ public class ConnexionServlet extends HttpServlet {
 
         for(Cookie cookie : cookies){
             if("loginParticipant".equals(cookie.getName())){
-                System.out.println(cookie.getName());
-                System.out.println("cookie value = " + cookie.getValue());
                 return cookie.getValue();
             }
         }
@@ -61,7 +62,6 @@ public class ConnexionServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("test");
         request.setAttribute("loginParticipant" ,  rememberParticipant(request, response, null));
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/connexion.jsp");
         rd.forward(request, response);

@@ -2,9 +2,7 @@ package fr.eni.sortir.servlets.participant;
 
 import fr.eni.sortir.bll.BusinessException;
 import fr.eni.sortir.bll.ParticipantManager;
-import fr.eni.sortir.bll.SiteManager;
 import fr.eni.sortir.bo.Participant;
-import fr.eni.sortir.bo.Site;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,20 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Servlet implementation class ParticipantServlet
  */
-@WebServlet("/profil")
-public class ProfilServlet extends HttpServlet {
+@WebServlet("/user/profil")
+public class AfficherProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	private ParticipantManager participantManager;
+	private Participant participant;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfilServlet() {
+    public AfficherProfilServlet() {
         super();
 		participantManager = new ParticipantManager();
     }
@@ -37,19 +36,19 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Participant idparticipant = (Participant) session.getAttribute("participant");
-		SiteManager siteManager = new SiteManager();
+		Integer idParticipant = lireParametreIdUser(request);
 
 		try {
-			List<Site> siteList = siteManager.selectAll();
-			request.setAttribute("listeSite", siteList);
-			request.setAttribute("participant", participantManager.afficher(idparticipant.getIdparticipant()));
-		} catch (BusinessException | SQLException e) {
+			Participant participant = participantManager.afficher(idParticipant);
+			System.out.println(participant);
+			request.setAttribute("participant", participant);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/profiluser.jsp");
 		rd.forward(request, response);
 
 	}
@@ -58,8 +57,8 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession httpSession = request.getSession();
-		Participant participant = (Participant) httpSession.getAttribute("participant");
+/*		HttpSession httpSession = request.getSession();
+		int idparticipant = (int) httpSession.getAttribute("idParticipant");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String mail = request.getParameter("email");
@@ -67,20 +66,29 @@ public class ProfilServlet extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		String confpassword = request.getParameter("confpassword");
-		String idSite = request.getParameter("ville");
+		System.out.println(nom + ' '+prenom+' '+mail+' '+telephone+' '+pseudo);
 
-		if(password.equals("")) {
-			password = participant.getPassword();
+		if(password == null) {
+			Participant oldparticipant = (Participant) request.getAttribute("participant");
+			password = oldparticipant.getPassword();
 		}
 
 		try {
-			participant = new Participant(participant.getIdparticipant(), nom, prenom, telephone, mail, pseudo, password, Integer.parseInt(idSite));
+			participant = new Participant(idparticipant, nom, prenom, telephone, mail, pseudo, password);
 			participantManager.modifier(participant);
-			response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-			response.setHeader("Location", "/profil");
-		} catch (BusinessException | SQLException e) {
+		} catch (BusinessException e) {
 			e.printStackTrace();
-		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}*/
 	}
 
+
+	private int lireParametreIdUser(HttpServletRequest request) {
+		Integer idSortie = null;
+		if(request.getParameter("id")!=null) {
+			idSortie = Integer.parseInt(request.getParameter("id"));
+		}
+		return idSortie;
+	}
 }

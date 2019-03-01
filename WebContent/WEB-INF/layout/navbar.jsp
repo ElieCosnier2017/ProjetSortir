@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffffbd">
     <a class="navbar-brand" href="/">Sortir.com</a>
@@ -8,11 +7,17 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <c:if test="${sessionScope.participant != null}">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="float-right nav-link" href="/ville/gerer">Villes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="float-right nav-link" href="/site/gerer">Sites</a>
+                </li>
                 <li class="nav-item active">
                     <a class="float-right nav-link" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="float-right nav-link" href="/profil">Mon profil</a>
+                    <a class="float-right nav-link" href="/profil?id=${sessionScope.participant.idparticipant}">Mon profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="float-right nav-link" href="/deconnexion">Se deconnecter</a>

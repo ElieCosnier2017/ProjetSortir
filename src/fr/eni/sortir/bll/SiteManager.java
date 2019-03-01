@@ -5,7 +5,6 @@ import fr.eni.sortir.dal.DAOFactory;
 import fr.eni.sortir.dal.SiteDAO;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class SiteManager {
     private SiteDAO siteDAO;
@@ -15,14 +14,14 @@ public class SiteManager {
         this.siteDAO= DAOFactory.getSiteDAO();
     }
 
-    public Site selectById(int idSite) throws BusinessException, SQLException
-    {
-        return this.siteDAO.selectById(idSite);
-    }
-
     public List<Site> selectAll() throws BusinessException
     {
         return this.siteDAO.selectAll();
+    }
+
+    public Site selectById(int idSite) throws BusinessException, SQLException
+    {
+        return this.siteDAO.selectById(idSite);
     }
 
     public void insert(Site siteNew) throws BusinessException

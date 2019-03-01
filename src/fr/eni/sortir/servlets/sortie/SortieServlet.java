@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class SortieServlet
  */
-@WebServlet("/sorties")
+@WebServlet("/sortie")
 public class SortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,16 +40,14 @@ public class SortieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			response.setContentType("application/json");
-			response.setCharacterEncoding("utf-8");
-			PrintWriter out = response.getWriter();
-			HttpSession session = request.getSession();
-			Participant connecter = (Participant) session.getAttribute("participant");
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		Participant connecter = (Participant) session.getAttribute("participant");
+		Integer idSite = lireParametreIdSite(request);
 
-
-			out.println(json_sortie(1, connecter).toJSONString());
-
-
+		out.println(json_sortie(idSite, connecter).toJSONString());
 	}
 
 	/**
@@ -78,7 +76,6 @@ public class SortieServlet extends HttpServlet {
 				Boolean inscrit = inscriptionManager.isInscrit(sortie.getIdSortie(),connecter.getIdparticipant());
 
 				JSONObject jsonObject = new JSONObject();
-				System.out.println(sortie.toString());
 				jsonObject.put("no_sortie", sortie.getIdSortie());
 				jsonObject.put("nom", sortie.getNom());
 				jsonObject.put("dateDebut", sortie.getDateDebut().toString());
@@ -89,9 +86,10 @@ public class SortieServlet extends HttpServlet {
 				jsonObject.put("idEtat", etatLibelle.getIdEtat());
 				jsonObject.put("libelleEtat", etatLibelle.getLibelle());
 				jsonObject.put("isInscrit", inscrit);
-				jsonObject.put("idParticipant", organisateur.getIdparticipant());
-				jsonObject.put("nomParticipant", organisateur.getNom());
-				jsonObject.put("prenomParticipant", organisateur.getPrenom());
+				jsonObject.put("idConnecter", connecter.getIdparticipant());
+				jsonObject.put("idOrganisateur", organisateur.getIdparticipant());
+				jsonObject.put("nomOrganisateur", organisateur.getNom());
+				jsonObject.put("prenomOrganisateur", organisateur.getPrenom());
 
 
 				jsonArray.add(jsonObject);
@@ -105,5 +103,13 @@ public class SortieServlet extends HttpServlet {
 		finalObject.put("rows", jsonArray);
 
 		return finalObject;
+	}
+
+	private int lireParametreIdSite(HttpServletRequest request) {
+		Integer idSite = null;
+		if(request.getParameter("id")!=null) {
+			idSite = Integer.parseInt(request.getParameter("id"));
+		}
+		return idSite;
 	}
 }

@@ -67,7 +67,7 @@ public class EtatDAOJdbcImpl implements  EtatDAO {
      */
     @Override
     public Etat selectByLibelle(String libelleEtat) {
-        Etat etat = null;
+        Etat etat = new Etat();
 
         try (Connection cnx = ConnectionProvider.getConnection())
         {
@@ -78,7 +78,8 @@ public class EtatDAOJdbcImpl implements  EtatDAO {
 
             if(rs.next())
             {
-                etat = this.map(rs);
+                etat.setIdEtat(rs.getInt("no_etat"));
+                etat.setLibelle(rs.getString("libelle"));
             }
         } catch (Exception e)
         {

@@ -1,5 +1,5 @@
-<%@ page import="fr.eni.sortir.bo.Participant" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8"
+errorPage="errors.jsp" %>
 <%@ include file="../layout/entete.jsp"%>
 
         <title>Sortir.com - Gestion du profil</title>
@@ -10,9 +10,9 @@
             <c:if test="${!empty participant }">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="">
+                        <img style="margin-left: 70px;" src="<%=request.getContextPath()%>/vendor/img/img.png">
                     </div>
-                    <div class="col-md-">
+                    <div class="col-md-5">
                         <form method="post">
                             <div class="form-group">
                                 <label>Pseudo</label>
@@ -44,13 +44,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Ville de rattachement</label>
-                                <input class="form-control" name="ville" placeholder="" type="">
+                                <select id="idSite" name="site" class="form-control">
+                                    <c:forEach var="site" items="${listeSite}">
+                                        <option value="${site.idSite}">${site.nom}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label>Photo</label>
-                                <input class="form-control" name="photo" placeholder="" type="file">
-                            </div>
-
                             <button type="submit" class="btn btn-success">Modifier</button>
                             <a href="/" class="btn btn-danger">Annuler</a>
                         </form>

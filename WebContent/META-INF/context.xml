@@ -8,9 +8,10 @@
 			url="jdbc:sqlserver://44-UC45-15:1433;databaseName=SORTIR"
 			username="sa"
 			password="Pa$$w0rd"
-
 			maxTotal="100"
 			maxIdle="30"
 			maxWaitMillis="10000"
 	/>
-</Context>
+</Context>	<!--url="jdbc:sqlserver://44-UC45-15:1433;databaseName=SORTIR"-->
+		<!--username="sa"-->
+		<!--password="Pa$$w0rd"-->

@@ -2,12 +2,19 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>ProjetSortir</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>/WEB-INF/views/accueil.jsp</welcome-file>
-    <!--<welcome-file>/WEB-INF/views/test.html</welcome-file>-->
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
+    <welcome-file>index</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>fr.eni.sortir.servlets.HomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/errors.jsp</location> <!-- /src/main/webapp/error-404.html-->
+  </error-page>
 </web-app>

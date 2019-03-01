@@ -20,13 +20,15 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			"JOIN LIEUX as l ON s.lieux_no_lieu = l.no_lieu " +
 			"JOIN VILLES as v ON l.villes_no_ville = v.no_ville " +
 			"JOIN SITES as si ON p.sites_no_site = si.no_site " +
-			"WHERE s.no_sortie = ? ";
+			"WHERE s.no_sortie = ?";
 	private static final String INSERT="INSERT INTO SORTIES (nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descriptioninfos=?, organisateur=?, lieux_no_lieu=?, etats_no_etat=? WHERE no_sortie=?";
 	private static final String DELETE="DELETE FROM SORTIES WHERE idSortie=?";
 	private static final String SELECT_SORTIE_BY_SITE = "SELECT s.* FROM SORTIES As s JOIN " +
-			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?";
+			" PARTICIPANTS AS p ON s.organisateur = p.no_participant WHERE p.sites_no_site = ?" +
+			" ORDER BY etats_no_etat ASC, s.datecloture DESC";
 	private static final String CANCEL_SORTIE = "UPDATE SORTIES SET etatsortie=?, etats_no_etat=? WHERE no_sortie=?";
+	private static final String POST_SORTIE = "UPDATE SORTIES SET etats_no_etat=? WHERE no_sortie=?";
 
 	@Override
 	public List<Sortie> selectAll() {
@@ -70,6 +72,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setInt(9, sortie.getOrganisateur());
 			pstmt.setInt(10, sortie.getIdLieu());
 			pstmt.setInt(11, sortie.getIdEtat());
+
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
@@ -190,14 +193,30 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	}
 
 	@Override
-	public void cancelSortie(int idSortie, int idEtat, String motif) {
+	public void cancelSortie(int idSortie, String motif) {
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(CANCEL_SORTIE);
 
 			pstmt.setString(1, motif);
-			pstmt.setInt(2, idEtat);
+			pstmt.setInt(2, 7);
 			pstmt.setInt(3, idSortie);
+
+			pstmt.executeUpdate();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void postSortie(int idSortie, int idEtat) {
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(POST_SORTIE);
+
+			pstmt.setInt(1, idEtat);
+			pstmt.setInt(2, idSortie);
 
 			pstmt.executeUpdate();
 		} catch (Exception e)
