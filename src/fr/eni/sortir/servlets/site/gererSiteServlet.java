@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/site/gererSite")
+@WebServlet("/site/gerer")
 public class gererSiteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private SiteManager siteManager;

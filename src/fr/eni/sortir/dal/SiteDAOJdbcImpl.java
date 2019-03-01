@@ -33,7 +33,7 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 
             while(rs.next())
             {
-                sites.add(this.siteBuilder(rs));
+                sites.add(this.map(rs));
             }
         } catch (Exception e)
         {
@@ -133,6 +133,22 @@ public class SiteDAOJdbcImpl implements SiteDAO {
             businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
             throw businessException;
         }
+    }
+
+    /**
+     *
+     * @param rs
+     * @return site
+     * @throws SQLException
+     */
+    private Site map(ResultSet rs) throws SQLException {
+        Site site;
+        site = new Site();
+
+        site.setIdSite(rs.getInt("no_site"));
+        site.setNom(rs.getString("nom_site"));
+
+        return site;
     }
 
 

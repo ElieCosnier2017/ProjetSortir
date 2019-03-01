@@ -35,8 +35,8 @@
                 <tr>
                     <td>${ville.nom}</td>
                     <td>${ville.codePostal}</td>
-                    <td width="5%"><a href="${pageContext.request.contextPath}/ville/editerVille?idVille=${ville.idVille}" class="btn btn-lg btn-sortir" title="modifier la ville"><i class="fas fa-edit"></i></a></td>
-                    <td width="5%"><a href="${pageContext.request.contextPath}/ville/supprimerVille?idVille=${ville.idVille}" class="btn btn-lg btn-danger" title="supprimer la ville"><i class="fas fa-trash-alt"></i></a></td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/ville/editer?idVille=${ville.idVille}" class="btn btn-lg btn-sortir" title="modifier la ville"><i class="fas fa-edit"></i></a></td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/ville/supprimer?idVille=${ville.idVille}" class="btn btn-lg btn-danger" title="supprimer la ville"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -45,7 +45,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">
-                <a href="/ville/creerVille" class="btn btn-success" style="margin-left: 10px;">Créer une ville</a>
+                <a href="/ville/creer" class="btn btn-success" style="margin-left: 10px;">Créer une ville</a>
             </div>
         </div>
         <div class="col-md-2">

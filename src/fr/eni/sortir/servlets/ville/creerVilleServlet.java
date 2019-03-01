@@ -18,9 +18,9 @@ import java.sql.SQLException;
  */
 @WebServlet(
         urlPatterns= {
-                "/ville/creerVille",
-                "/ville/editerVille",
-                "/ville/supprimerVille"
+                "/ville/creer",
+                "/ville/editer",
+                "/ville/supprimer"
         })
 public class creerVilleServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -39,10 +39,10 @@ public class creerVilleServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getServletPath().equals("/ville/creerVille"))
+        if (request.getServletPath().equals("/ville/creer"))
         {
             request.setAttribute("title", "Créer");
-            request.setAttribute("path", "/ville/creerVille");
+            request.setAttribute("path", "/ville/creer");
 
             try {
                 request.setCharacterEncoding("UTF-8");
@@ -59,10 +59,10 @@ public class creerVilleServlet extends HttpServlet {
             }
 
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "/ville/gererVille");
+            response.setHeader("Location", "/ville/gerer");
         }
 
-        if (request.getServletPath().equals("/ville/editerVille")){
+        if (request.getServletPath().equals("/ville/editer")){
 
             request.setCharacterEncoding("UTF-8");
             Ville villeUpdated = new Ville();
@@ -81,7 +81,7 @@ public class creerVilleServlet extends HttpServlet {
             }
 
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "/ville/gererVille");
+            response.setHeader("Location", "/ville/gerer");
         }
     }
 
@@ -89,20 +89,20 @@ public class creerVilleServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getServletPath().equals("/ville/creerVille"))
+        if (request.getServletPath().equals("/ville/creer"))
         {
             request.setAttribute("title", "Créer");
-            request.setAttribute("path", "/ville/creerVille");
+            request.setAttribute("path", "/ville/creer");
             request.setAttribute("bouton", "Enregistrer");
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerVille.jsp");
             rd.forward(request, response);
         }
 
-        if (request.getServletPath().equals("/ville/editerVille")) {
+        if (request.getServletPath().equals("/ville/editer")) {
 
             request.setAttribute("title", "Modifier");
-            request.setAttribute("path", "/ville/editerVille");
+            request.setAttribute("path", "/ville/editer");
             request.setAttribute("bouton", "Modifier");
 
             int idVille = Integer.parseInt(request.getParameter("idVille"));
@@ -119,7 +119,7 @@ public class creerVilleServlet extends HttpServlet {
             rd.forward(request, response);
         }
 
-        if (request.getServletPath().equals("/ville/supprimerVille"))
+        if (request.getServletPath().equals("/ville/supprimer"))
         {
             int idVille = Integer.parseInt(request.getParameter("idVille"));
 
@@ -134,7 +134,7 @@ public class creerVilleServlet extends HttpServlet {
             }
 
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "/ville/gererVille");
+            response.setHeader("Location", "/ville/gerer");
         }
     }
 }

@@ -1,9 +1,6 @@
 package fr.eni.sortir.servlets.site;
 
-<<<<<<< HEAD
 import fr.eni.sortir.bll.BusinessException;
-=======
->>>>>>> origin/developpement
 import fr.eni.sortir.bll.SiteManager;
 import fr.eni.sortir.bo.Site;
 
@@ -82,7 +79,7 @@ public class creerSiteServlet extends HttpServlet {
                 e.printStackTrace();
             }
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            response.setHeader("Location", "/site/gererSite");
+            response.setHeader("Location", "/site/gerer");
         }
     }
 
@@ -91,10 +88,10 @@ public class creerSiteServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getServletPath().equals("/site/creerSite"))
+        if (request.getServletPath().equals("/site/creer"))
         {
             request.setAttribute("title", "Créer");
-            request.setAttribute("path", "/site/creerSite");
+            request.setAttribute("path", "/site/creer");
             request.setAttribute("bouton", "Enregistrer");
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/creerSite.jsp");

@@ -4,9 +4,9 @@
         <title>Sortir.com - Accueil</title>
     </head>
     <body>
-    <a href="/ville/gererVille" class="btn btn-success" style="margin-left: 10px;">Créer une ville</a>
-    <a href="/site/gererSite" class="btn btn-success" style="margin-left: 10px;">Créer un site</a>
     <c:if test="${sessionScope.participant != null}">
+    <a href="/ville/gerer" class="btn btn-success" style="margin-left: 10px;">Créer une ville</a>
+    <a href="/site/gerer" class="btn btn-success" style="margin-left: 10px;">Créer un site</a>
         <div class="row">
             <div class="col-md-4 offset-md-8">
                 <span>Date du jour: ${date}</span><br>

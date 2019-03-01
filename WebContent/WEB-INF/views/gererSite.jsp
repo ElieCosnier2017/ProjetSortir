@@ -33,8 +33,8 @@
             <c:forEach items="${sites}" var="site">
                 <tr>
                     <td>${site.nom}</td>
-                    <td width="5%"><a href="${pageContext.request.contextPath}/site/editerSite?idSite=${site.idSite}" class="btn btn-lg btn-sortir" title="modifier le site"><i class="fas fa-edit"></i></a></td>
-                    <td width="5%"><a href="${pageContext.request.contextPath}/site/supprimerSite?idSite=${site.idSite}" class="btn btn-lg btn-danger" title="supprimer le site"><i class="fas fa-trash-alt"></i></a></td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/site/editer?idSite=${site.idSite}" class="btn btn-lg btn-sortir" title="modifier le site"><i class="fas fa-edit"></i></a></td>
+                    <td width="5%"><a href="${pageContext.request.contextPath}/site/supprimer?idSite=${site.idSite}" class="btn btn-lg btn-danger" title="supprimer le site"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <a href="/site/creerSite" class="btn btn-success" style="margin-left: 10px;">Créer un site</a>
+                <a href="/site/creer" class="btn btn-success" style="margin-left: 10px;">Créer un site</a>
             </div>
         </div>
         <div class="col-md-2">
